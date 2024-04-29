@@ -113,33 +113,9 @@
     "type": "String",
     "placeholders": {}
   },
-  "onboardingItemFirstNumberTitle": "1 OF 2",
-  "@onboardingItemFirstNumberTitle": {
-    "description": "Text of the first number page in the onboarding.",
-    "type": "String",
-    "placeholders": {}
-  },
   "onboardingItemSecondNumberTitle": "2 OF 2",
   "@onboardingItemSecondNumberTitle": {
     "description": "Text of the second number page in the onboarding.",
-    "type": "String",
-    "placeholders": {}
-  },
-  "onboardingItemFirstTitle": "ADD YOUR TITLE FOR\nAD TRACKING PERMISSIONS",
-  "@onboardingItemFirstTitle": {
-    "description": "Text of the first page title of the onboarding.",
-    "type": "String",
-    "placeholders": {}
-  },
-  "onboardingItemFirstSubtitleTitle": "ADD YOUR DESCRIPTION FOR\nAD TRACKING PERMISSIONS",
-  "@onboardingItemFirstSubtitleTitle": {
-    "description": "Text of the first page subtitle of the onboarding.",
-    "type": "String",
-    "placeholders": {}
-  },
-  "onboardingItemFirstButtonTitle": "ADD YOUR CALL TO ACTION",
-  "@onboardingItemFirstButtonTitle": {
-    "description": "Text of the primary button on the first page of the onboarding.",
     "type": "String",
     "placeholders": {}
   },
@@ -614,6 +590,30 @@
   "networkErrorButton": "Try Again",
   "@networkErrorButton": {
     "description": "Text displayed on the refresh button when a network error occurs.",
+    "type": "String",
+    "placeholders": {}
+  },
+  "deleteAccountDialogCancelButtonText": "Cancel",
+  "@deleteAccountDialogCancelButtonText": {
+    "description": "Delete account dialog cancel button text",
+    "type": "String",
+    "placeholders": {}
+  },
+  "deleteAccountDialogSubtitle": "ADD YOUR DELETE DIALOG SUBTITLE",
+  "@deleteAccountDialogSubtitle": {
+    "description": "Delete account dialog subtitle",
+    "type": "String",
+    "placeholders": {}
+  },
+  "deleteAccountDialogTitle": "ADD YOUR DELETE DIALOG TITLE",
+  "@deleteAccountDialogTitle": {
+    "description": "Delete account dialog title",
+    "type": "String",
+    "placeholders": {}
+  },
+  "userProfileDeleteAccountButton": "Delete account",
+  "@userProfileDeleteAccountButton": {
+    "description": "User profile delete account button title",
     "type": "String",
     "placeholders": {}
   }

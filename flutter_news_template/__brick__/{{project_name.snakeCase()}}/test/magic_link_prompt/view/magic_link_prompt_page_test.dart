@@ -52,6 +52,7 @@ void main() {
       testWidgets('back when pressed on close icon', (tester) async {
         final navigator = MockNavigator();
 
+        when(navigator.canPop).thenReturn(true);
         when(() => navigator.popUntil(any())).thenAnswer((_) async {});
         await tester.pumpApp(
           const MagicLinkPromptPage(email: testEmail),
@@ -66,6 +67,7 @@ void main() {
       testWidgets('back when leading button is pressed.', (tester) async {
         final navigator = MockNavigator();
 
+        when(navigator.canPop).thenReturn(true);
         when(() => navigator.popUntil(any())).thenAnswer((_) async {});
         await tester.pumpApp(
           const MagicLinkPromptPage(email: testEmail),

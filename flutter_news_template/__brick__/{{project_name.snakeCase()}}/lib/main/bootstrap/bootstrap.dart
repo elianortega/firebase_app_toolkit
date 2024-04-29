@@ -9,7 +9,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:{{project_name.snakeCase()}}/main/bootstrap/app_bloc_observer.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,21 +38,19 @@ Future<void> bootstrap(AppBuilder builder) async {
 
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack);
+    return true;
+  };
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
-  await runZonedGuarded<Future<void>>(
-    () async {
-      unawaited(MobileAds.instance.initialize());
-      runApp(
-        await builder(
-          FirebaseDynamicLinks.instance,
-          FirebaseMessaging.instance,
-          sharedPreferences,
-          analyticsRepository,
-        ),
-      );
-    },
-    FirebaseCrashlytics.instance.recordError,
+  runApp(
+    await builder(
+      FirebaseDynamicLinks.instance,
+      FirebaseMessaging.instance,
+      sharedPreferences,
+      analyticsRepository,
+    ),
   );
 }
