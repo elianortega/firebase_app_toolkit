@@ -254,14 +254,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
-  dart_frog:
-    dependency: transitive
-    description:
-      name: dart_frog
-      sha256: a5da81b1ea4f3e8f03dfcd0bc9b44ba83a6576ce6dae1bb138a6a8f7b70fe727
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   dart_style:
     dependency: transitive
     description:
@@ -467,13 +459,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.5.18"
-  firebase_notifications_client:
-    dependency: "direct main"
-    description:
-      path: "packages/notifications_client/firebase_notifications_client"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   fixnum:
     dependency: transitive
     description:
@@ -532,13 +517,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_news_example_api:
-    dependency: "direct main"
-    description:
-      path: api
-      relative: true
-    source: path
-    version: "0.1.0+1"
   flutter_secure_storage:
     dependency: transitive
     description:
@@ -716,14 +694,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.3"
-  hotreloader:
-    dependency: transitive
-    description:
-      name: hotreloader
-      sha256: ed56fdc1f3a8ac924e717257621d09e9ec20e308ab6352a73a50a1d7a4d9158e
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.2.0"
   http:
     dependency: transitive
     description:
@@ -732,14 +702,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-  http_methods:
-    dependency: transitive
-    description:
-      name: http_methods
-      sha256: "6bccce8f1ec7b5d701e7921dca35e202d425b57e317ba1a37f2638590e29e566"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
   http_multi_server:
     dependency: transitive
     description:
@@ -876,13 +838,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  news_blocks:
-    dependency: transitive
-    description:
-      path: "api/packages/news_blocks"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   node_preamble:
     dependency: transitive
     description:
@@ -891,20 +846,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
-  notifications_client:
-    dependency: transitive
-    description:
-      path: "packages/notifications_client/notifications_client"
-      relative: true
-    source: path
-    version: "1.0.0+1"
-  notifications_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/notifications_repository"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   package_config:
     dependency: transitive
     description:
@@ -1205,14 +1146,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.1"
-  shelf_hotreload:
-    dependency: transitive
-    description:
-      name: shelf_hotreload
-      sha256: d7099618b18d3c63ba5272491c1812c306629495129ef9996115f0417902f963
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.5.0"
   shelf_packages_handler:
     dependency: transitive
     description:
