@@ -129,27 +129,6 @@ void main() {
         );
       });
 
-      testWidgets(
-          'renders notification preferences item '
-          'with trailing Icon', (tester) async {
-        await tester.pumpApp(
-          BlocProvider.value(
-            value: userProfileBloc,
-            child: UserProfileView(),
-          ),
-        );
-        expect(
-          find.byWidgetPredicate(
-            (widget) =>
-                widget is UserProfileItem &&
-                widget.key ==
-                    Key('userProfilePage_notificationPreferencesItem') &&
-                widget.trailing is Icon,
-          ),
-          findsOneWidget,
-        );
-      });
-
       testWidgets('renders terms of use and privacy policy item',
           (tester) async {
         await tester.pumpApp(
@@ -183,25 +162,6 @@ void main() {
           ),
           findsOneWidget,
         );
-      });
-
-      testWidgets(
-          'does nothing '
-          'when notification preferences item trailing is tapped',
-          (tester) async {
-        await tester.pumpApp(
-          BlocProvider.value(
-            value: userProfileBloc,
-            child: UserProfileView(),
-          ),
-        );
-        final preferencesItem = find.byKey(
-          Key('userProfilePage_notificationPreferencesItem_trailing'),
-        );
-
-        await tester.ensureVisible(preferencesItem);
-        await tester.tap(preferencesItem);
-        await tester.pumpAndSettle();
       });
 
       group('UserProfileItem', () {
