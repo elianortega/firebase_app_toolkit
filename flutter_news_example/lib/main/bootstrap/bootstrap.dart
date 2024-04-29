@@ -9,7 +9,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_news_example/main/bootstrap/app_bloc_observer.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,7 +43,6 @@ Future<void> bootstrap(AppBuilder builder) async {
 
   await runZonedGuarded<Future<void>>(
     () async {
-      unawaited(MobileAds.instance.initialize());
       runApp(
         await builder(
           FirebaseDynamicLinks.instance,

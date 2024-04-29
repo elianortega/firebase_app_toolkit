@@ -5,10 +5,11 @@
          In most cases you can leave this as-is, but you if you want to provide
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <!--Required for Android 13 or above-->
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--Required
+    for Android 13 or above-->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
         android:name="${applicationName}"
@@ -28,34 +29,34 @@
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-              />
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+            />
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter> 
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <!-- Registered callback URL for deep linking -->
-                <data
-                    android:host="@string/flavor_deep_link_domain"
-                    android:scheme="https"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                
+
+                <!-- Registered callback URL for deep linking -->
+                <data
+                    android:host="@string/flavor_deep_link_domain"
+                    android:scheme="https" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
                 <!-- Registered callback URL for Twitter authentication -->
                 <data android:scheme="@string/twitter_redirect_uri_scheme" />
-            </intent-filter>  
+            </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
@@ -63,19 +64,12 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        <!-- Facebook authentication meta-data -->    
+        <!-- Facebook authentication meta-data -->
         <meta-data
-           android:name="com.facebook.sdk.ApplicationId"
-           android:value="@string/facebook_app_id" />
-        <meta-data 
-           android:name="com.facebook.sdk.ClientToken" 
-           android:value="@string/facebook_client_token"/>
-        <!-- Google AdMob meta-data -->    
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admob_app_id"/>
-        <meta-data
-            android:name="io.flutter.plugins.googlemobileads.FLUTTER_NEWS_TEMPLATE_VERSION"
-            android:value="1.0.0"/>
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
     </application>
 </manifest>
