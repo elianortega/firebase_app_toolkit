@@ -14,14 +14,6 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/api"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
-    directory: "/flutter_news_example/api/packages/news_blocks"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/flutter_news_example/packages/permission_client"
     schedule:
       interval: "daily"
@@ -46,10 +38,6 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/news_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/flutter_news_example/packages/share_launcher"
     schedule:
       interval: "daily"
@@ -70,14 +58,6 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/in_app_purchase_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/article_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/flutter_news_example/packages/package_info_client"
     schedule:
       interval: "daily"
@@ -90,22 +70,10 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/purchase_client"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/flutter_news_example/packages/deep_link_client"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/notifications_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/flutter_news_example/packages/analytics_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/news_blocks_ui"
     schedule:
       interval: "daily"
