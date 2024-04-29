@@ -6,8 +6,6 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
   flutter: ">=3.7.6"
 dependencies:
-  ads_consent_client:
-    path: packages/ads_consent_client
   analytics_repository:
     path: packages/analytics_repository
   app_ui:

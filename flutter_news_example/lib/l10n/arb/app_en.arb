@@ -113,33 +113,9 @@
     "type": "String",
     "placeholders": {}
   },
-  "onboardingItemFirstNumberTitle": "1 OF 2",
-  "@onboardingItemFirstNumberTitle": {
-    "description": "Text of the first number page in the onboarding.",
-    "type": "String",
-    "placeholders": {}
-  },
   "onboardingItemSecondNumberTitle": "2 OF 2",
   "@onboardingItemSecondNumberTitle": {
     "description": "Text of the second number page in the onboarding.",
-    "type": "String",
-    "placeholders": {}
-  },
-  "onboardingItemFirstTitle": "ADD YOUR TITLE FOR\nAD TRACKING PERMISSIONS",
-  "@onboardingItemFirstTitle": {
-    "description": "Text of the first page title of the onboarding.",
-    "type": "String",
-    "placeholders": {}
-  },
-  "onboardingItemFirstSubtitleTitle": "ADD YOUR DESCRIPTION FOR\nAD TRACKING PERMISSIONS",
-  "@onboardingItemFirstSubtitleTitle": {
-    "description": "Text of the first page subtitle of the onboarding.",
-    "type": "String",
-    "placeholders": {}
-  },
-  "onboardingItemFirstButtonTitle": "ADD YOUR CALL TO ACTION",
-  "@onboardingItemFirstButtonTitle": {
-    "description": "Text of the primary button on the first page of the onboarding.",
     "type": "String",
     "placeholders": {}
   },

@@ -11,18 +11,6 @@ class OnboardingInitial extends OnboardingState {
   const OnboardingInitial();
 }
 
-class EnablingAdTracking extends OnboardingState {
-  const EnablingAdTracking();
-}
-
-class EnablingAdTrackingSucceeded extends OnboardingState {
-  const EnablingAdTrackingSucceeded();
-}
-
-class EnablingAdTrackingFailed extends OnboardingState {
-  const EnablingAdTrackingFailed();
-}
-
 class EnablingNotifications extends OnboardingState {
   const EnablingNotifications();
 }
