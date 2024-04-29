@@ -34,6 +34,7 @@ void main() {
       testWidgets('when the close icon button is pressed', (tester) async {
         final navigator = MockNavigator();
         when(navigator.pop).thenAnswer((_) async {});
+        when(navigator.canPop).thenReturn(true);
         await tester.pumpApp(
           TermsOfServiceModal(),
           navigator: navigator,

@@ -34,6 +34,7 @@ void main() {
 
     testWidgets('closes dialog when cancel button is pressed', (tester) async {
       final navigator = MockNavigator();
+      when(navigator.canPop).thenReturn(true);
       when(navigator.pop).thenAnswer((_) async {});
 
       await tester.pumpApp(

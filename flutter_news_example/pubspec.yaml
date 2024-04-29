@@ -4,7 +4,7 @@ publish_to: none
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.7.6"
+  flutter: 3.16.9
 dependencies:
   analytics_repository:
     path: packages/analytics_repository
@@ -43,7 +43,7 @@ dependencies:
   hydrated_bloc: ^9.0.0
   intl: ^0.19.0
   json_annotation: ^4.7.0
-  mockingjay: ^0.4.0
+  mockingjay: ^0.5.0
   package_info_client:
     path: packages/package_info_client
   path_provider: ^2.0.2
