@@ -2,11 +2,9 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:{{project_name.snakeCase()}}/app/app.dart';
-import 'package:{{project_name.snakeCase()}}/feed/feed.dart';
 import 'package:{{project_name.snakeCase()}}/home/home.dart';
 import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:{{project_name.snakeCase()}}/navigation/navigation.dart';
-import 'package:{{project_name.snakeCase()}}/search/search.dart';
 import 'package:{{project_name.snakeCase()}}/user_profile/user_profile.dart';
 
 class HomeView extends StatelessWidget {
@@ -47,8 +45,8 @@ class HomeView extends StatelessWidget {
         body: IndexedStack(
           index: selectedTab,
           children: const [
-            FeedView(),
-            SearchPage(),
+            Center(child: Text('Feed')),
+            Center(child: Text('Search')),
           ],
         ),
         bottomNavigationBar: BottomNavBar(

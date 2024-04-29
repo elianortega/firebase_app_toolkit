@@ -6,14 +6,6 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/api"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
-    directory: "/api/packages/news_blocks"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/packages/permission_client"
     schedule:
       interval: "daily"
@@ -38,14 +30,6 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/packages/news_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
-    directory: "/packages/share_launcher"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/packages/form_inputs"
     schedule:
       interval: "daily"
@@ -62,18 +46,6 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/packages/ads_consent_client"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
-    directory: "/packages/in_app_purchase_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
-    directory: "/packages/article_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/packages/package_info_client"
     schedule:
       interval: "daily"
@@ -86,22 +58,10 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/packages/purchase_client"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/packages/deep_link_client"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/packages/notifications_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
     directory: "/packages/analytics_repository"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "pub"
-    directory: "/packages/news_blocks_ui"
     schedule:
       interval: "daily"

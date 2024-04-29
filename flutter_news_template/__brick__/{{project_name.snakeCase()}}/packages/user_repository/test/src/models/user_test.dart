@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:authentication_client/authentication_client.dart';
-import 'package:{{project_name.snakeCase()}}_api/api.dart' hide User;
 import 'package:test/test.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -10,18 +9,13 @@ void main() {
     group('fromAuthenticationUser', () {
       test('initializes correctly', () {
         final authenticationUser = AuthenticationUser(id: 'id');
-        const subscriptionPlan = SubscriptionPlan.premium;
 
         expect(
           User.fromAuthenticationUser(
             authenticationUser: authenticationUser,
-            subscriptionPlan: subscriptionPlan,
           ),
           equals(
-            User(
-              id: 'id',
-              subscriptionPlan: subscriptionPlan,
-            ),
+            User(id: 'id'),
           ),
         );
       });

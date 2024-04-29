@@ -1,18 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ads_consent_client/ads_consent_client.dart';
 import 'package:analytics_repository/analytics_repository.dart';
-import 'package:article_repository/article_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:{{project_name.snakeCase()}}/analytics/analytics.dart' as analytics;
 import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:{{project_name.snakeCase()}}/home/home.dart';
-import 'package:{{project_name.snakeCase()}}/onboarding/onboarding.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:in_app_purchase_repository/in_app_purchase_repository.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:news_repository/news_repository.dart';
-import 'package:notifications_repository/notifications_repository.dart';
 import 'package:user_repository/user_repository.dart';
 
 import '../../helpers/helpers.dart';
@@ -22,19 +16,7 @@ class MockUser extends Mock implements User {}
 
 class MockUserRepository extends Mock implements UserRepository {}
 
-class MockNewsRepository extends Mock implements NewsRepository {}
-
-class MockNotificationsRepository extends Mock
-    implements NotificationsRepository {}
-
-class MockArticleRepository extends Mock implements ArticleRepository {}
-
-class MockInAppPurchaseRepository extends Mock
-    implements InAppPurchaseRepository {}
-
 class MockAnalyticsRepository extends Mock implements AnalyticsRepository {}
-
-class MockAdsConsentClient extends Mock implements AdsConsentClient {}
 
 class MockAppBloc extends MockBloc<AppEvent, AppState> implements AppBloc {}
 
@@ -47,23 +29,15 @@ void main() {
 
   group('App', () {
     late UserRepository userRepository;
-    late NewsRepository newsRepository;
-    late NotificationsRepository notificationsRepository;
-    late ArticleRepository articleRepository;
-    late InAppPurchaseRepository inAppPurchaseRepository;
+
     late AnalyticsRepository analyticsRepository;
-    late AdsConsentClient adsConsentClient;
     late User user;
 
     setUp(() {
       userRepository = MockUserRepository();
       user = User.anonymous;
-      newsRepository = MockNewsRepository();
-      notificationsRepository = MockNotificationsRepository();
-      articleRepository = MockArticleRepository();
-      inAppPurchaseRepository = MockInAppPurchaseRepository();
+
       analyticsRepository = MockAnalyticsRepository();
-      adsConsentClient = MockAdsConsentClient();
 
       when(() => userRepository.user).thenAnswer((_) => const Stream.empty());
       when(() => userRepository.incomingEmailLinks)
@@ -78,12 +52,7 @@ void main() {
       await tester.pumpWidget(
         App(
           userRepository: userRepository,
-          newsRepository: newsRepository,
-          notificationsRepository: notificationsRepository,
-          articleRepository: articleRepository,
-          inAppPurchaseRepository: inAppPurchaseRepository,
           analyticsRepository: analyticsRepository,
-          adsConsentClient: adsConsentClient,
           user: user,
         ),
       );
@@ -101,19 +70,6 @@ void main() {
       appBloc = MockAppBloc();
       analyticsBloc = MockAnalyticsBloc();
       userRepository = MockUserRepository();
-    });
-
-    testWidgets('navigates to OnboardingPage when onboardingRequired',
-        (tester) async {
-      final user = MockUser();
-      when(() => appBloc.state).thenReturn(AppState.onboardingRequired(user));
-      await tester.pumpApp(
-        const AppView(),
-        appBloc: appBloc,
-        userRepository: userRepository,
-      );
-      await tester.pumpAndSettle();
-      expect(find.byType(OnboardingPage), findsOneWidget);
     });
 
     testWidgets('navigates to HomePage when unauthenticated', (tester) async {

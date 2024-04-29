@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors
 import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:in_app_purchase_repository/in_app_purchase_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -13,7 +12,6 @@ void main() {
 
     setUp(() {
       user = MockUser();
-      when(() => user.subscriptionPlan).thenReturn(SubscriptionPlan.none);
     });
 
     group('unauthenticated', () {
@@ -32,41 +30,14 @@ void main() {
       });
     });
 
-    group('onboardingRequired', () {
-      test('has correct status', () {
-        final state = AppState.onboardingRequired(user);
-        expect(state.status, AppStatus.onboardingRequired);
-        expect(state.user, user);
-      });
-    });
-
-    group('isUserSubscribed', () {
-      test('returns true when userSubscriptionPlan is not null and not none',
-          () {
-        when(() => user.subscriptionPlan).thenReturn(SubscriptionPlan.premium);
-        expect(
-          AppState.authenticated(user).isUserSubscribed,
-          isTrue,
-        );
-      });
-
-      test('returns false when userSubscriptionPlan is none', () {
-        expect(
-          AppState.authenticated(user).isUserSubscribed,
-          isFalse,
-        );
-      });
-    });
-
     group('AppStatus', () {
       test(
-          'authenticated and onboardingRequired are the only statuses '
+          'authenticated is the only statuses '
           'where loggedIn is true', () {
         expect(
           AppStatus.values.where((e) => e.isLoggedIn).toList(),
           equals(
             [
-              AppStatus.onboardingRequired,
               AppStatus.authenticated,
             ],
           ),
@@ -89,11 +60,11 @@ void main() {
           'when status is passed', () {
         expect(
           AppState.unauthenticated().copyWith(
-            status: AppStatus.onboardingRequired,
+            status: AppStatus.authenticated,
           ),
           equals(
             AppState(
-              status: AppStatus.onboardingRequired,
+              status: AppStatus.authenticated,
             ),
           ),
         );

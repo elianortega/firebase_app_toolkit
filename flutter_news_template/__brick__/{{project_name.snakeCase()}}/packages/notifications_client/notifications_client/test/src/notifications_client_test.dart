@@ -10,18 +10,4 @@ void main() {
   test('NotificationsClient can be implemented', () {
     expect(FakeNotificationsClient.new, returnsNormally);
   });
-
-  test('exports SubscribeToCategoryFailure', () {
-    expect(
-      () => SubscribeToCategoryFailure('oops'),
-      returnsNormally,
-    );
-  });
-
-  test('exports UnsubscribeFromCategoryFailure', () {
-    expect(
-      () => UnsubscribeFromCategoryFailure('oops'),
-      returnsNormally,
-    );
-  });
 }

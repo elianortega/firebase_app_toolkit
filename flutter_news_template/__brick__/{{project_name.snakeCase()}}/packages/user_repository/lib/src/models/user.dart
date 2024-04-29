@@ -1,5 +1,4 @@
 import 'package:authentication_client/authentication_client.dart';
-import 'package:{{project_name.snakeCase()}}_api/client.dart';
 
 /// {@template user}
 /// User model represents the current user with subscription plan.
@@ -7,7 +6,6 @@ import 'package:{{project_name.snakeCase()}}_api/client.dart';
 class User extends AuthenticationUser {
   /// {@macro user}
   const User({
-    required this.subscriptionPlan,
     required super.id,
     super.email,
     super.name,
@@ -15,10 +13,9 @@ class User extends AuthenticationUser {
     super.isNewUser,
   });
 
-  /// Converts [AuthenticationUser] to [User] with [SubscriptionPlan].
+  /// Converts [AuthenticationUser] to [User].
   factory User.fromAuthenticationUser({
     required AuthenticationUser authenticationUser,
-    required SubscriptionPlan subscriptionPlan,
   }) =>
       User(
         email: authenticationUser.email,
@@ -26,7 +23,6 @@ class User extends AuthenticationUser {
         name: authenticationUser.name,
         photo: authenticationUser.photo,
         isNewUser: authenticationUser.isNewUser,
-        subscriptionPlan: subscriptionPlan,
       );
 
   /// Whether the current user is anonymous.
@@ -36,9 +32,5 @@ class User extends AuthenticationUser {
   /// Anonymous user which represents an unauthenticated user.
   static const User anonymous = User(
     id: '',
-    subscriptionPlan: SubscriptionPlan.none,
   );
-
-  /// The current user's subscription plan.
-  final SubscriptionPlan subscriptionPlan;
 }
