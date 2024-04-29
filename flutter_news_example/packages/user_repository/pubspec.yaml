@@ -11,8 +11,6 @@ dependencies:
   deep_link_client:
     path: ../deep_link_client
   equatable: ^2.0.3
-  flutter_news_example_api:
-    path: ../../api
   package_info_client:
     path: ../package_info_client
   rxdart: ^0.27.5

@@ -1,15 +1,11 @@
 import 'package:app_ui/app_ui.dart'
-    show AppBackButton, AppButton, AppColors, AppSpacing, AppSwitch, Assets;
+    show AppBackButton, AppButton, AppColors, AppSpacing, Assets;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_news_example/analytics/analytics.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/l10n/l10n.dart';
-import 'package:flutter_news_example/notification_preferences/notification_preferences.dart';
-import 'package:flutter_news_example/subscriptions/subscriptions.dart';
 import 'package:flutter_news_example/terms_of_service/terms_of_service.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
-import 'package:notifications_repository/notifications_repository.dart';
 import 'package:user_repository/user_repository.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -24,7 +20,6 @@ class UserProfilePage extends StatelessWidget {
     return BlocProvider(
       create: (_) => UserProfileBloc(
         userRepository: context.read<UserRepository>(),
-        notificationsRepository: context.read<NotificationsRepository>(),
       ),
       child: const UserProfileView(),
     );
@@ -45,17 +40,6 @@ class _UserProfileViewState extends State<UserProfileView>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    context.read<UserProfileBloc>().add(const FetchNotificationsEnabled());
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Fetch current notification status each time a user enters the app.
-    // This may happen when a user changes permissions in app settings.
-    if (state == AppLifecycleState.resumed) {
-      WidgetsFlutterBinding.ensureInitialized();
-      context.read<UserProfileBloc>().add(const FetchNotificationsEnabled());
-    }
   }
 
   @override
@@ -67,138 +51,80 @@ class _UserProfileViewState extends State<UserProfileView>
   @override
   Widget build(BuildContext context) {
     final user = context.select((UserProfileBloc bloc) => bloc.state.user);
-    final notificationsEnabled = context
-        .select((UserProfileBloc bloc) => bloc.state.notificationsEnabled);
-    final isUserSubscribed = context.select<AppBloc, bool>(
-      (bloc) => bloc.state.isUserSubscribed,
-    );
 
     final l10n = context.l10n;
 
-    return BlocListener<UserProfileBloc, UserProfileState>(
+    return BlocListener<AppBloc, AppState>(
       listener: (context, state) {
-        if (state.status == UserProfileStatus.togglingNotificationsSucceeded &&
-            state.notificationsEnabled) {
-          context
-              .read<AnalyticsBloc>()
-              .add(TrackAnalyticsEvent(PushNotificationSubscriptionEvent()));
+        if (state.status == AppStatus.unauthenticated) {
+          Navigator.of(context).pop();
         }
       },
-      child: BlocListener<AppBloc, AppState>(
-        listener: (context, state) {
-          if (state.status == AppStatus.unauthenticated) {
-            Navigator.of(context).pop();
-          }
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            leading: const AppBackButton(),
-          ),
-          body: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const UserProfileTitle(),
-                    if (!user.isAnonymous) ...[
-                      UserProfileItem(
-                        key: const Key('userProfilePage_userItem'),
-                        leading: Assets.icons.profileIcon.svg(),
-                        title: user.email ?? '',
-                      ),
-                      const UserProfileLogoutButton(),
-                    ],
-                    const SizedBox(height: AppSpacing.lg),
-                    const _UserProfileDivider(),
-                    UserProfileSubtitle(
-                      subtitle: l10n.userProfileSubscriptionDetailsSubtitle,
-                    ),
-                    if (isUserSubscribed)
-                      UserProfileItem(
-                        key: const Key('userProfilePage_subscriptionItem'),
-                        title: l10n.manageSubscriptionTile,
-                        trailing: const Icon(Icons.chevron_right),
-                        onTap: () => Navigator.of(context).push(
-                          ManageSubscriptionPage.route(),
-                        ),
-                      )
-                    else
-                      UserProfileSubscribeBox(
-                        onSubscribePressed: () =>
-                            showPurchaseSubscriptionDialog(context: context),
-                      ),
-                    const _UserProfileDivider(),
-                    UserProfileSubtitle(
-                      subtitle: l10n.userProfileSettingsSubtitle,
-                    ),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: const AppBackButton(),
+        ),
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const UserProfileTitle(),
+                  if (!user.isAnonymous) ...[
                     UserProfileItem(
-                      key: const Key('userProfilePage_notificationsItem'),
-                      leading: Assets.icons.notificationsIcon.svg(),
-                      title: l10n.userProfileSettingsNotificationsTitle,
-                      trailing: AppSwitch(
-                        onText: l10n.checkboxOnTitle,
-                        offText: l10n.userProfileCheckboxOffTitle,
-                        value: notificationsEnabled,
-                        onChanged: (_) => context
-                            .read<UserProfileBloc>()
-                            .add(const ToggleNotifications()),
-                      ),
+                      key: const Key('userProfilePage_userItem'),
+                      leading: Assets.icons.profileIcon.svg(),
+                      title: user.email ?? '',
                     ),
-                    UserProfileItem(
-                      key: const Key(
-                        'userProfilePage_notificationPreferencesItem',
-                      ),
-                      title: l10n.notificationPreferencesTitle,
-                      trailing: const Icon(
-                        Icons.chevron_right,
-                        key: Key(
-                          '''userProfilePage_notificationPreferencesItem_trailing''',
-                        ),
-                      ),
-                      onTap: () => Navigator.of(context).push(
-                        NotificationPreferencesPage.route(),
-                      ),
-                    ),
-                    const _UserProfileDivider(),
-                    UserProfileSubtitle(
-                      subtitle: l10n.userProfileLegalSubtitle,
-                    ),
-                    UserProfileItem(
-                      key: const Key('userProfilePage_termsOfServiceItem'),
-                      leading: Assets.icons.termsOfUseIcon.svg(),
-                      title:
-                          l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
-                      onTap: () => Navigator.of(context)
-                          .push<void>(TermsOfServicePage.route()),
-                    ),
-                    UserProfileItem(
-                      key: const Key('userProfilePage_aboutItem'),
-                      leading: Assets.icons.aboutIcon.svg(),
-                      title: l10n.userProfileLegalAboutTitle,
-                    ),
-                    Align(
-                      child: AppButton.smallTransparent(
-                        key: const Key('userProfilePage_deleteAccountButton'),
-                        onPressed: () {
-                          showDialog<void>(
-                            context: context,
-                            builder: (_) =>
-                                const UserProfileDeleteAccountDialog(),
-                          );
-                        },
-                        child: Text(
-                          l10n.userProfileDeleteAccountButton,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.lg),
+                    const UserProfileLogoutButton(),
                   ],
-                ),
+                  const SizedBox(height: AppSpacing.lg),
+                  const _UserProfileDivider(),
+                  UserProfileSubtitle(
+                    subtitle: l10n.userProfileSubscriptionDetailsSubtitle,
+                  ),
+                  const _UserProfileDivider(),
+                  UserProfileSubtitle(
+                    subtitle: l10n.userProfileSettingsSubtitle,
+                  ),
+                  const _UserProfileDivider(),
+                  UserProfileSubtitle(
+                    subtitle: l10n.userProfileLegalSubtitle,
+                  ),
+                  UserProfileItem(
+                    key: const Key('userProfilePage_termsOfServiceItem'),
+                    leading: Assets.icons.termsOfUseIcon.svg(),
+                    title: l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
+                    onTap: () => Navigator.of(context)
+                        .push<void>(TermsOfServicePage.route()),
+                  ),
+                  UserProfileItem(
+                    key: const Key('userProfilePage_aboutItem'),
+                    leading: Assets.icons.aboutIcon.svg(),
+                    title: l10n.userProfileLegalAboutTitle,
+                  ),
+                  Align(
+                    child: AppButton.smallTransparent(
+                      key: const Key('userProfilePage_deleteAccountButton'),
+                      onPressed: () {
+                        showDialog<void>(
+                          context: context,
+                          builder: (_) =>
+                              const UserProfileDeleteAccountDialog(),
+                        );
+                      },
+                      child: Text(
+                        l10n.userProfileDeleteAccountButton,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

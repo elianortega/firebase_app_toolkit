@@ -1,8 +1,5 @@
 import 'package:app_ui/app_ui.dart' show AppColors, AppLogo, AppSpacing;
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_news_example/app/app.dart';
-import 'package:flutter_news_example/navigation/navigation.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
@@ -11,9 +8,6 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isUserSubscribed =
-        context.select((AppBloc bloc) => bloc.state.isUserSubscribed);
-
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topRight: Radius.circular(AppSpacing.lg),
@@ -41,11 +35,6 @@ class NavDrawer extends StatelessWidget {
               ),
             ),
             const _NavDrawerDivider(),
-            const NavDrawerSections(),
-            if (!isUserSubscribed) ...[
-              const _NavDrawerDivider(),
-              const NavDrawerSubscribe(),
-            ],
           ],
         ),
       ),

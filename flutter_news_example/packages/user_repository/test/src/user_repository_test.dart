@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:authentication_client/authentication_client.dart';
 import 'package:deep_link_client/deep_link_client.dart';
-import 'package:flutter_news_example_api/client.dart' as api;
+
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_client/package_info_client.dart';
 import 'package:test/test.dart';
@@ -19,9 +19,6 @@ class MockDeepLinkClient extends Mock implements DeepLinkClient {}
 class MockUserStorage extends Mock implements UserStorage {}
 
 class MockUser extends Mock implements AuthenticationUser {}
-
-class MockFlutterNewsExampleApiClient extends Mock
-    implements api.FlutterNewsExampleApiClient {}
 
 class FakeLogInWithAppleFailure extends Fake implements LogInWithAppleFailure {}
 
@@ -61,7 +58,6 @@ void main() {
     late UserStorage storage;
     late StreamController<Uri> deepLinkClientController;
     late UserRepository userRepository;
-    late MockFlutterNewsExampleApiClient apiClient;
 
     setUp(() {
       authenticationClient = MockAuthenticationClient();
@@ -69,31 +65,15 @@ void main() {
       deepLinkClient = MockDeepLinkClient();
       storage = MockUserStorage();
       deepLinkClientController = StreamController<Uri>.broadcast();
-      apiClient = MockFlutterNewsExampleApiClient();
 
       when(() => deepLinkClient.deepLinkStream)
           .thenAnswer((_) => deepLinkClientController.stream);
 
       userRepository = UserRepository(
-        apiClient: apiClient,
         authenticationClient: authenticationClient,
         packageInfoClient: packageInfoClient,
         deepLinkClient: deepLinkClient,
         storage: storage,
-      );
-    });
-
-    test(
-        'currentSubscriptionPlan emits none '
-        'when initialized and authenticationClient.user is anonymous',
-        () async {
-      when(() => authenticationClient.user).thenAnswer(
-        (invocation) => Stream.value(AuthenticationUser.anonymous),
-      );
-      final response = await userRepository.user.first;
-      expect(
-        response.subscriptionPlan,
-        equals(api.SubscriptionPlan.none),
       );
     });
 
@@ -465,7 +445,6 @@ void main() {
         when(storage.fetchAppOpenedCount).thenAnswer((_) async => 1);
 
         final result = await UserRepository(
-          apiClient: apiClient,
           authenticationClient: authenticationClient,
           packageInfoClient: packageInfoClient,
           deepLinkClient: deepLinkClient,
@@ -481,7 +460,6 @@ void main() {
 
         expect(
           UserRepository(
-            apiClient: apiClient,
             authenticationClient: authenticationClient,
             packageInfoClient: packageInfoClient,
             deepLinkClient: deepLinkClient,
@@ -502,7 +480,6 @@ void main() {
 
         await expectLater(
           UserRepository(
-            apiClient: apiClient,
             authenticationClient: authenticationClient,
             packageInfoClient: packageInfoClient,
             deepLinkClient: deepLinkClient,
@@ -521,38 +498,12 @@ void main() {
 
         expect(
           UserRepository(
-            apiClient: apiClient,
             authenticationClient: authenticationClient,
             packageInfoClient: packageInfoClient,
             deepLinkClient: deepLinkClient,
             storage: storage,
           ).incrementAppOpenedCount(),
           throwsA(isA<IncrementAppOpenedCountFailure>()),
-        );
-      });
-    });
-
-    group('updateSubscriptionPlan', () {
-      test('calls getCurrentUser on ApiClient', () async {
-        when(() => apiClient.getCurrentUser()).thenAnswer(
-          (_) async => api.CurrentUserResponse(
-            user: api.User(
-              id: 'id',
-              subscription: api.SubscriptionPlan.none,
-            ),
-          ),
-        );
-        await userRepository.updateSubscriptionPlan();
-        verify(() => apiClient.getCurrentUser()).called(1);
-      });
-
-      test('throws FetchCurrentSubscriptionFailure on failure', () async {
-        when(
-          () => apiClient.getCurrentUser(),
-        ).thenThrow(Exception());
-        expect(
-          () => userRepository.updateSubscriptionPlan(),
-          throwsA(isA<FetchCurrentSubscriptionFailure>()),
         );
       });
     });

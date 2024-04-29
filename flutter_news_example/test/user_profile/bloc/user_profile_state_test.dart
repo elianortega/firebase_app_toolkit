@@ -31,39 +31,6 @@ void main() {
       });
 
       test(
-          'returns object with updated status '
-          'when status is passed', () {
-        expect(
-          UserProfileState.initial().copyWith(
-            status: UserProfileStatus.fetchingNotificationsEnabled,
-          ),
-          equals(
-            UserProfileState(
-              user: User.anonymous,
-              status: UserProfileStatus.fetchingNotificationsEnabled,
-            ),
-          ),
-        );
-      });
-
-      test(
-          'returns object with updated notificationsEnabled '
-          'when notificationsEnabled is passed', () {
-        expect(
-          UserProfileState.initial().copyWith(
-            notificationsEnabled: true,
-          ),
-          equals(
-            UserProfileState(
-              user: User.anonymous,
-              status: UserProfileStatus.initial,
-              notificationsEnabled: true,
-            ),
-          ),
-        );
-      });
-
-      test(
           'returns object with updated user '
           'when user is passed', () {
         expect(

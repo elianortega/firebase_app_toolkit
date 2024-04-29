@@ -24,10 +24,6 @@ class AppUserChanged extends AppEvent {
   List<Object> get props => [user];
 }
 
-class AppOnboardingCompleted extends AppEvent {
-  const AppOnboardingCompleted();
-}
-
 class AppOpened extends AppEvent {
   const AppOpened();
 }

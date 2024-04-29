@@ -4,15 +4,10 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:in_app_purchase_repository/in_app_purchase_repository.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:notifications_repository/notifications_repository.dart';
 import 'package:user_repository/user_repository.dart';
 
 class MockUserRepository extends Mock implements UserRepository {}
-
-class MockNotificationsRepository extends Mock
-    implements NotificationsRepository {}
 
 class MockUser extends Mock implements User {}
 
@@ -20,25 +15,20 @@ void main() {
   group('AppBloc', () {
     late User user;
     late UserRepository userRepository;
-    late NotificationsRepository notificationsRepository;
 
     setUp(() {
       userRepository = MockUserRepository();
-      notificationsRepository = MockNotificationsRepository();
       user = MockUser();
 
       when(() => userRepository.user).thenAnswer((_) => Stream.empty());
       when(() => user.isNewUser).thenReturn(User.anonymous.isNewUser);
       when(() => user.id).thenReturn(User.anonymous.id);
-      when(() => user.subscriptionPlan)
-          .thenReturn(User.anonymous.subscriptionPlan);
     });
 
     test('initial state is unauthenticated when user is anonymous', () {
       expect(
         AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: User.anonymous,
         ).state.status,
         equals(AppStatus.unauthenticated),
@@ -54,11 +44,8 @@ void main() {
         newUser = MockUser();
         when(() => returningUser.isNewUser).thenReturn(false);
         when(() => returningUser.id).thenReturn('id');
-        when(() => returningUser.subscriptionPlan)
-            .thenReturn(SubscriptionPlan.none);
         when(() => newUser.isNewUser).thenReturn(true);
         when(() => newUser.id).thenReturn('id');
-        when(() => newUser.subscriptionPlan).thenReturn(SubscriptionPlan.none);
       });
 
       blocTest<AppBloc, AppState>(
@@ -71,43 +58,10 @@ void main() {
         },
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         seed: AppState.unauthenticated,
         expect: () => <AppState>[],
-      );
-
-      blocTest<AppBloc, AppState>(
-        'emits unauthenticated when '
-        'state is onboardingRequired and user is anonymous',
-        setUp: () {
-          when(() => userRepository.user).thenAnswer(
-            (_) => Stream.value(User.anonymous),
-          );
-        },
-        build: () => AppBloc(
-          userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
-          user: user,
-        ),
-        seed: () => AppState.onboardingRequired(user),
-        expect: () => <AppState>[AppState.unauthenticated()],
-      );
-
-      blocTest<AppBloc, AppState>(
-        'emits onboardingRequired when user is new and not anonymous',
-        setUp: () {
-          when(() => userRepository.user).thenAnswer(
-            (_) => Stream.value(newUser),
-          );
-        },
-        build: () => AppBloc(
-          userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
-          user: user,
-        ),
-        expect: () => [AppState.onboardingRequired(newUser)],
       );
 
       blocTest<AppBloc, AppState>(
@@ -119,7 +73,6 @@ void main() {
         },
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         expect: () => [AppState.authenticated(returningUser)],
@@ -136,36 +89,9 @@ void main() {
         seed: () => AppState.authenticated(user),
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         expect: () => [AppState.authenticated(returningUser)],
-      );
-
-      blocTest<AppBloc, AppState>(
-        'emits authenticated when '
-        'user is not anonymous and onboarding is complete',
-        build: () => AppBloc(
-          userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
-          user: user,
-        ),
-        seed: () => AppState.onboardingRequired(user),
-        act: (bloc) => bloc.add(AppOnboardingCompleted()),
-        expect: () => [AppState.authenticated(user)],
-      );
-
-      blocTest<AppBloc, AppState>(
-        'emits unauthenticated when '
-        'user is anonymous and onboarding is complete',
-        build: () => AppBloc(
-          userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
-          user: User.anonymous,
-        ),
-        seed: () => AppState.onboardingRequired(User.anonymous),
-        act: (bloc) => bloc.add(AppOnboardingCompleted()),
-        expect: () => [AppState.unauthenticated()],
       );
 
       blocTest<AppBloc, AppState>(
@@ -177,7 +103,6 @@ void main() {
         },
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         expect: () => [AppState.unauthenticated()],
@@ -193,7 +118,6 @@ void main() {
         },
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         seed: AppState.unauthenticated,
@@ -203,35 +127,13 @@ void main() {
 
     group('AppLogoutRequested', () {
       setUp(() {
-        when(
-          () => notificationsRepository.toggleNotifications(
-            enable: any(named: 'enable'),
-          ),
-        ).thenAnswer((_) async {});
-
         when(() => userRepository.logOut()).thenAnswer((_) async {});
       });
-
-      blocTest<AppBloc, AppState>(
-        'calls toggleNotifications off on NotificationsRepository',
-        build: () => AppBloc(
-          userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
-          user: user,
-        ),
-        act: (bloc) => bloc.add(AppLogoutRequested()),
-        verify: (_) {
-          verify(
-            () => notificationsRepository.toggleNotifications(enable: false),
-          ).called(1);
-        },
-      );
 
       blocTest<AppBloc, AppState>(
         'calls logOut on UserRepository',
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         act: (bloc) => bloc.add(AppLogoutRequested()),
@@ -243,36 +145,14 @@ void main() {
 
     group('AppDeleteAccountRequested', () {
       setUp(() {
-        when(
-          () => notificationsRepository.toggleNotifications(
-            enable: any(named: 'enable'),
-          ),
-        ).thenAnswer((_) async {});
-
         when(() => userRepository.deleteAccount()).thenAnswer((_) async {});
         when(() => userRepository.logOut()).thenAnswer((_) async {});
       });
 
       blocTest<AppBloc, AppState>(
-        'calls toggleNotifications off on NotificationsRepository',
-        build: () => AppBloc(
-          userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
-          user: user,
-        ),
-        act: (bloc) => bloc.add(AppDeleteAccountRequested()),
-        verify: (_) {
-          verify(
-            () => notificationsRepository.toggleNotifications(enable: false),
-          ).called(1);
-        },
-      );
-
-      blocTest<AppBloc, AppState>(
         'calls deleteAccount on UserRepository',
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         act: (bloc) => bloc.add(AppDeleteAccountRequested()),
@@ -288,7 +168,6 @@ void main() {
         },
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         act: (bloc) => bloc.add(AppDeleteAccountRequested()),
@@ -313,7 +192,6 @@ void main() {
         'cancels UserRepository.user subscription',
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         tearDown: () => expect(userController.hasListener, isFalse),
@@ -334,7 +212,6 @@ void main() {
         },
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         act: (bloc) => bloc.add(AppOpened()),
@@ -364,7 +241,6 @@ void main() {
         },
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         act: (bloc) => bloc.add(AppOpened()),
@@ -387,7 +263,6 @@ void main() {
         },
         build: () => AppBloc(
           userRepository: userRepository,
-          notificationsRepository: notificationsRepository,
           user: user,
         ),
         act: (bloc) => bloc.add(AppOpened()),

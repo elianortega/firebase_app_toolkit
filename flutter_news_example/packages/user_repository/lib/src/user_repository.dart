@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:authentication_client/authentication_client.dart';
 import 'package:deep_link_client/deep_link_client.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_news_example_api/client.dart' hide User;
 import 'package:package_info_client/package_info_client.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:storage/storage.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -41,54 +39,32 @@ class IncrementAppOpenedCountFailure extends UserFailure {
   const IncrementAppOpenedCountFailure(super.error);
 }
 
-/// {@template fetch_current_subscription_failure}
-/// An exception thrown when fetching current subscription fails.
-/// {@endtemplate}
-class FetchCurrentSubscriptionFailure extends UserFailure {
-  /// {@macro fetch_current_subscription_failure}
-  const FetchCurrentSubscriptionFailure(super.error);
-}
-
 /// {@template user_repository}
 /// Repository which manages the user domain.
 /// {@endtemplate}
 class UserRepository {
   /// {@macro user_repository}
   UserRepository({
-    required FlutterNewsExampleApiClient apiClient,
     required AuthenticationClient authenticationClient,
     required PackageInfoClient packageInfoClient,
     required DeepLinkClient deepLinkClient,
     required UserStorage storage,
-  })  : _apiClient = apiClient,
-        _authenticationClient = authenticationClient,
+  })  : _authenticationClient = authenticationClient,
         _packageInfoClient = packageInfoClient,
         _deepLinkClient = deepLinkClient,
         _storage = storage;
 
-  final FlutterNewsExampleApiClient _apiClient;
   final AuthenticationClient _authenticationClient;
   final PackageInfoClient _packageInfoClient;
   final DeepLinkClient _deepLinkClient;
   final UserStorage _storage;
 
-  /// Stream of [User] which will emit the current user when
-  /// the authentication state or the subscription plan changes.
-  ///
-  Stream<User> get user =>
-      Rx.combineLatest2<AuthenticationUser, SubscriptionPlan, User>(
-        _authenticationClient.user,
-        _currentSubscriptionPlanSubject.stream,
-        (authenticationUser, subscriptionPlan) => User.fromAuthenticationUser(
+  /// Stream of [User] which will emit the current user
+  Stream<User> get user => _authenticationClient.user.map((authenticationUser) {
+        return User.fromAuthenticationUser(
           authenticationUser: authenticationUser,
-          subscriptionPlan: authenticationUser != AuthenticationUser.anonymous
-              ? subscriptionPlan
-              : SubscriptionPlan.none,
-        ),
-      ).asBroadcastStream();
-
-  final BehaviorSubject<SubscriptionPlan> _currentSubscriptionPlanSubject =
-      BehaviorSubject.seeded(SubscriptionPlan.none);
+        );
+      });
 
   /// A stream of incoming email links used to authenticate the user.
   ///
@@ -244,19 +220,6 @@ class UserRepository {
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
         IncrementAppOpenedCountFailure(error),
-        stackTrace,
-      );
-    }
-  }
-
-  /// Updates the current subscription plan of the user.
-  Future<void> updateSubscriptionPlan() async {
-    try {
-      final response = await _apiClient.getCurrentUser();
-      _currentSubscriptionPlanSubject.add(response.user.subscription);
-    } catch (error, stackTrace) {
-      Error.throwWithStackTrace(
-        FetchCurrentSubscriptionFailure(error),
         stackTrace,
       );
     }

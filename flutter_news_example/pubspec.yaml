@@ -10,8 +10,6 @@ dependencies:
     path: packages/analytics_repository
   app_ui:
     path: packages/app_ui
-  article_repository:
-    path: packages/article_repository
   authentication_client:
     path: packages/authentication_client/authentication_client
   bloc: ^8.1.0
@@ -31,35 +29,21 @@ dependencies:
   firebase_crashlytics: ^3.0.3
   firebase_dynamic_links: ^5.0.3
   firebase_messaging: ^14.0.3
-  firebase_notifications_client:
-    path: packages/notifications_client/firebase_notifications_client
   flow_builder: ^0.0.7
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_localizations:
     sdk: flutter
-  flutter_news_example_api:
-    path: api
   flutter_svg: ^2.0.5
   font_awesome_flutter: ^10.1.0
   form_inputs:
     path: packages/form_inputs
   google_mobile_ads: ^4.0.0
   hydrated_bloc: ^9.0.0
-  in_app_purchase_repository:
-    path: packages/in_app_purchase_repository
   intl: ^0.19.0
   json_annotation: ^4.7.0
   mockingjay: ^0.4.0
-  news_blocks:
-    path: api/packages/news_blocks
-  news_blocks_ui:
-    path: packages/news_blocks_ui
-  news_repository:
-    path: packages/news_repository
-  notifications_repository:
-    path: packages/notifications_repository
   package_info_client:
     path: packages/package_info_client
   path_provider: ^2.0.2
@@ -68,8 +52,6 @@ dependencies:
   persistent_storage:
     path: packages/storage/persistent_storage
   platform: ^3.0.2
-  purchase_client:
-    path: packages/purchase_client
   share_launcher:
     path: packages/share_launcher
   shared_preferences: ^2.0.15

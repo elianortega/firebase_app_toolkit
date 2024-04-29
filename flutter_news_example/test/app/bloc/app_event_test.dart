@@ -19,15 +19,6 @@ void main() {
       });
     });
 
-    group('AppOnboardingCompleted', () {
-      test('supports value comparisons', () {
-        expect(
-          AppOnboardingCompleted(),
-          AppOnboardingCompleted(),
-        );
-      });
-    });
-
     group('AppLogoutRequested', () {
       test('supports value comparisons', () {
         expect(
