@@ -583,14 +583,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  font_awesome_flutter:
-    dependency: "direct main"
-    description:
-      name: font_awesome_flutter
-      sha256: "52671aea66da73b58d42ec6d0912b727a42248dd9a7c76d6c20f275783c48c08"
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.6.0"
   form_inputs:
     dependency: "direct main"
     description:
@@ -996,7 +988,7 @@ packages:
     source: hosted
     version: "11.0.1"
   platform:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: platform
       sha256: "0a279f0707af40c890e80b1e9df8bb761694c074ba7e1d4ab1bc4b728e200b59"
@@ -1199,14 +1191,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  sliver_tools:
-    dependency: "direct main"
-    description:
-      name: sliver_tools
-      sha256: eae28220badfb9d0559207badcbbc9ad5331aac829a88cb0964d330d2a4636a6
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.12"
   source_gen:
     dependency: transitive
     description:
@@ -1279,7 +1263,7 @@ packages:
     source: hosted
     version: "2.1.2"
   stream_transform:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: stream_transform
       sha256: "14a00e794c7c11aa145a170587321aedce29769c08d7f58b1d141da75e3b1c6f"
@@ -1484,22 +1468,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
-  video_player_platform_interface:
-    dependency: "direct main"
-    description:
-      name: video_player_platform_interface
-      sha256: be72301bf2c0150ab35a8c34d66e5a99de525f6de1e8d27c0672b836fe48f73a
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.2.1"
-  visibility_detector:
-    dependency: "direct main"
-    description:
-      name: visibility_detector
-      sha256: dd5cc11e13494f432d15939c3aa8ae76844c42b723398643ce9addb88a5ed420
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.0+2"
   vm_service:
     dependency: transitive
     description:
