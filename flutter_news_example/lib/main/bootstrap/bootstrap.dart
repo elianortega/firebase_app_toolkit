@@ -38,20 +38,19 @@ Future<void> bootstrap(AppBuilder builder) async {
 
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack);
+    return true;
+  };
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
-  await runZonedGuarded<Future<void>>(
-    () async {
-      runApp(
-        await builder(
-          FirebaseDynamicLinks.instance,
-          FirebaseMessaging.instance,
-          sharedPreferences,
-          analyticsRepository,
-        ),
-      );
-    },
-    FirebaseCrashlytics.instance.recordError,
+  runApp(
+    await builder(
+      FirebaseDynamicLinks.instance,
+      FirebaseMessaging.instance,
+      sharedPreferences,
+      analyticsRepository,
+    ),
   );
 }
