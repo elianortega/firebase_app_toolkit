@@ -1,3 +1,6 @@
+// TODO(any): Migrate firebase dynamic links to another package
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 
 import 'package:analytics_repository/analytics_repository.dart';

@@ -104,6 +104,37 @@ void main() {
 
       expect(find.byType(LoginModal), findsOneWidget);
     });
+
+    testWidgets('verify hasFocus after HomeState changes',
+        (widgetTester) async {
+      when(() => cubit.state).thenReturn(HomeState.topStories);
+      whenListen(
+        cubit,
+        Stream.fromIterable([
+          HomeState.topStories,
+          HomeState.search,
+        ]),
+      );
+      await pumpHomeView(
+        tester: widgetTester,
+        cubit: cubit,
+      );
+      await widgetTester.pumpAndSettle();
+      expect(FocusManager.instance.primaryFocus, isNotNull);
+    });
+
+    testWidgets('tapping on BottomNavBar changes tab', (tester) async {
+      final button = find.byKey(const Key('bottomNavBar_topStories'));
+      when(() => cubit.state).thenReturn(HomeState.topStories);
+      when(() => cubit.setTab(0)).thenReturn(null);
+      await pumpHomeView(
+        tester: tester,
+        cubit: cubit,
+      );
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+      verify(() => cubit.setTab(0)).called(1);
+    });
   });
 }
 
