@@ -85,6 +85,18 @@ void main() {
         userRepository.user;
         verify(() => authenticationClient.user).called(1);
       });
+
+      test('verify it returns the  correct User', () {
+        final authUser = AuthenticationUser(id: 'id');
+        when(() => authenticationClient.user).thenAnswer(
+          (_) => Stream.value(authUser),
+        );
+        userRepository.user.listen(
+          expectAsync1((event) {
+            expect(event, isA<User>());
+          }),
+        );
+      });
     });
 
     group('incomingEmailLinks', () {
