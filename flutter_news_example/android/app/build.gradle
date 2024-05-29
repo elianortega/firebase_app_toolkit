@@ -53,7 +53,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.flutter.news.example"
+        applicationId "com.somnio.app.example"
         minSdkVersion 24
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
