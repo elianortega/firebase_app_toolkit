@@ -122,6 +122,19 @@ void main() {
       await widgetTester.pumpAndSettle();
       expect(FocusManager.instance.primaryFocus, isNotNull);
     });
+
+    testWidgets('tapping on BottomNavBar changes tab', (tester) async {
+      final button = find.byKey(const Key('bottomNavBar_topStories'));
+      when(() => cubit.state).thenReturn(HomeState.topStories);
+      when(() => cubit.setTab(0)).thenReturn(null);
+      await pumpHomeView(
+        tester: tester,
+        cubit: cubit,
+      );
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+      verify(() => cubit.setTab(0)).called(1);
+    });
   });
 }
 

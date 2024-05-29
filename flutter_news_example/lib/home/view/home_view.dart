@@ -51,7 +51,9 @@ class HomeView extends StatelessWidget {
         ),
         bottomNavigationBar: BottomNavBar(
           currentIndex: selectedTab,
-          onTap: (value) => context.read<HomeCubit>().setTab(value),
+          onTap: (value) {
+            context.read<HomeCubit>().setTab(value);
+          },
         ),
       ),
     );

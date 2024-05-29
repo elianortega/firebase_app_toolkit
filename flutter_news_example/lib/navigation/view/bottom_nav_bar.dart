@@ -17,6 +17,7 @@ class BottomNavBar extends StatelessWidget {
     return BottomNavigationBar(
       items: [
         BottomNavigationBarItem(
+          key: const Key('bottomNavBar_topStories'),
           icon: const Icon(Icons.home_outlined),
           label: context.l10n.bottomNavBarTopStories,
         ),
