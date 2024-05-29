@@ -104,6 +104,24 @@ void main() {
 
       expect(find.byType(LoginModal), findsOneWidget);
     });
+
+    testWidgets('verify hasFocus after HomeState changes',
+        (widgetTester) async {
+      when(() => cubit.state).thenReturn(HomeState.topStories);
+      whenListen(
+        cubit,
+        Stream.fromIterable([
+          HomeState.topStories,
+          HomeState.search,
+        ]),
+      );
+      await pumpHomeView(
+        tester: widgetTester,
+        cubit: cubit,
+      );
+      await widgetTester.pumpAndSettle();
+      expect(FocusManager.instance.primaryFocus, isNotNull);
+    });
   });
 }
 
