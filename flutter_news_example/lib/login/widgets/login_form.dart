@@ -201,9 +201,7 @@ class _ContinueWithEmailLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppButton.outlinedTransparentDarkAqua(
       key: const Key('loginForm_emailLogin_appButton'),
-      onPressed: () => Navigator.of(context).push<void>(
-        LoginWithEmailPage.route(),
-      ),
+      onPressed: () {},
       textStyle: Theme.of(context).textTheme.titleMedium,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,5 @@
 import 'package:analytics_repository/analytics_repository.dart';
 import 'package:app_ui/app_ui.dart';
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/analytics/analytics.dart';
@@ -65,17 +64,15 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      themeMode: ThemeMode.light,
-      theme: const AppTheme().themeData,
-      darkTheme: const AppDarkTheme().themeData,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: AuthenticatedUserListener(
-        child: FlowBuilder<AppStatus>(
-          state: context.select((AppBloc bloc) => bloc.state.status),
-          onGeneratePages: onGenerateAppViewPages,
-        ),
+    return RedirectStreamScope(
+      appBloc: context.read<AppBloc>(),
+      child: MaterialApp.router(
+        themeMode: ThemeMode.light,
+        theme: const AppTheme().themeData,
+        darkTheme: const AppDarkTheme().themeData,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        routerConfig: AppRouter.router(),
       ),
     );
   }

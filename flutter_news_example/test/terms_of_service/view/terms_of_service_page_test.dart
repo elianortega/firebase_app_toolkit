@@ -23,8 +23,7 @@ void main() {
               builder: (context) {
                 return ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context)
-                        .push<void>(TermsOfServicePage.route());
+                    {}
                   },
                   child: const Text(tapMeText),
                 );

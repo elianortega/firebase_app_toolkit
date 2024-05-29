@@ -97,8 +97,7 @@ class _UserProfileViewState extends State<UserProfileView>
                     key: const Key('userProfilePage_termsOfServiceItem'),
                     leading: Assets.icons.termsOfUseIcon.svg(),
                     title: l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
-                    onTap: () => Navigator.of(context)
-                        .push<void>(TermsOfServicePage.route()),
+                    onTap: () {},
                   ),
                   UserProfileItem(
                     key: const Key('userProfilePage_aboutItem'),

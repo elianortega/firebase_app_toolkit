@@ -7,9 +7,9 @@ import 'package:user_repository/user_repository.dart';
 class LoginWithEmailPage extends StatelessWidget {
   const LoginWithEmailPage({super.key});
 
-  static Route<void> route() =>
-      MaterialPageRoute<void>(builder: (_) => const LoginWithEmailPage());
-
+  static Page<void> route() =>
+      const MaterialPage<void>(child: LoginWithEmailPage());
+  static const String name = '/loginWithEmail';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -23,7 +23,7 @@ class LoginWithEmailPage extends StatelessWidget {
             IconButton(
               key: const Key('loginWithEmailPage_closeIcon'),
               icon: const Icon(Icons.close),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {},
             ),
           ],
         ),
