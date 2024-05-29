@@ -2,6 +2,7 @@ import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/home/home.dart';
 import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_news_example/terms_of_service/view/view.dart';
+import 'package:flutter_news_example/user_profile/user_profile.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -13,6 +14,7 @@ class AppRouter {
   /// Only routes that are accessible for authenticated users
   static const onlyAuthenticatedUserRoutes = <String>[
     HomePage.name,
+    UserProfilePage.name,
   ];
 
   static GoRouter router() {

@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/l10n/l10n.dart';
-import 'package:flutter_news_example/terms_of_service/terms_of_service.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
 import 'package:user_repository/user_repository.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
 
-  static MaterialPageRoute<void> route() {
-    return MaterialPageRoute(builder: (_) => const UserProfilePage());
+  static Page<void> route() {
+    return const MaterialPage<void>(
+      child: UserProfilePage(),
+    );
   }
+  static const String name = '/userProfile';
 
   @override
   Widget build(BuildContext context) {
@@ -54,77 +56,69 @@ class _UserProfileViewState extends State<UserProfileView>
 
     final l10n = context.l10n;
 
-    return BlocListener<AppBloc, AppState>(
-      listener: (context, state) {
-        if (state.status == AppStatus.unauthenticated) {
-          Navigator.of(context).pop();
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          leading: const AppBackButton(),
-        ),
-        body: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const UserProfileTitle(),
-                  if (!user.isAnonymous) ...[
-                    UserProfileItem(
-                      key: const Key('userProfilePage_userItem'),
-                      leading: Assets.icons.profileIcon.svg(),
-                      title: user.email ?? '',
-                    ),
-                    const UserProfileLogoutButton(),
-                  ],
-                  const SizedBox(height: AppSpacing.lg),
-                  const _UserProfileDivider(),
-                  UserProfileSubtitle(
-                    subtitle: l10n.userProfileSubscriptionDetailsSubtitle,
-                  ),
-                  const _UserProfileDivider(),
-                  UserProfileSubtitle(
-                    subtitle: l10n.userProfileSettingsSubtitle,
-                  ),
-                  const _UserProfileDivider(),
-                  UserProfileSubtitle(
-                    subtitle: l10n.userProfileLegalSubtitle,
-                  ),
+    return Scaffold(
+      appBar: AppBar(
+        leading: const AppBackButton(),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const UserProfileTitle(),
+                if (!user.isAnonymous) ...[
                   UserProfileItem(
-                    key: const Key('userProfilePage_termsOfServiceItem'),
-                    leading: Assets.icons.termsOfUseIcon.svg(),
-                    title: l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
-                    onTap: () {},
+                    key: const Key('userProfilePage_userItem'),
+                    leading: Assets.icons.profileIcon.svg(),
+                    title: user.email ?? '',
                   ),
-                  UserProfileItem(
-                    key: const Key('userProfilePage_aboutItem'),
-                    leading: Assets.icons.aboutIcon.svg(),
-                    title: l10n.userProfileLegalAboutTitle,
-                  ),
-                  Align(
-                    child: AppButton.smallTransparent(
-                      key: const Key('userProfilePage_deleteAccountButton'),
-                      onPressed: () {
-                        showDialog<void>(
-                          context: context,
-                          builder: (_) =>
-                              const UserProfileDeleteAccountDialog(),
-                        );
-                      },
-                      child: Text(
-                        l10n.userProfileDeleteAccountButton,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.lg),
+                  const UserProfileLogoutButton(),
                 ],
-              ),
+                const SizedBox(height: AppSpacing.lg),
+                const _UserProfileDivider(),
+                UserProfileSubtitle(
+                  subtitle: l10n.userProfileSubscriptionDetailsSubtitle,
+                ),
+                const _UserProfileDivider(),
+                UserProfileSubtitle(
+                  subtitle: l10n.userProfileSettingsSubtitle,
+                ),
+                const _UserProfileDivider(),
+                UserProfileSubtitle(
+                  subtitle: l10n.userProfileLegalSubtitle,
+                ),
+                UserProfileItem(
+                  key: const Key('userProfilePage_termsOfServiceItem'),
+                  leading: Assets.icons.termsOfUseIcon.svg(),
+                  title: l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
+                  onTap: () {},
+                ),
+                UserProfileItem(
+                  key: const Key('userProfilePage_aboutItem'),
+                  leading: Assets.icons.aboutIcon.svg(),
+                  title: l10n.userProfileLegalAboutTitle,
+                ),
+                Align(
+                  child: AppButton.smallTransparent(
+                    key: const Key('userProfilePage_deleteAccountButton'),
+                    onPressed: () {
+                      showDialog<void>(
+                        context: context,
+                        builder: (_) => const UserProfileDeleteAccountDialog(),
+                      );
+                    },
+                    child: Text(
+                      l10n.userProfileDeleteAccountButton,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.lg),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
