@@ -20,6 +20,7 @@ class AppRouter {
   static GoRouter router() {
     return GoRouter(
       initialLocation: HomePage.name,
+
       redirect: (context, state) {
         final path = state.uri.path;
 
@@ -45,6 +46,10 @@ class AppRouter {
         GoRoute(
           path: TermsOfServicePage.name,
           pageBuilder: (context, state) => TermsOfServicePage.route(),
+        ),
+        GoRoute(
+          path: UserProfilePage.name,
+          pageBuilder: (context, state) => UserProfilePage.route(),
         ),
       ],
     );

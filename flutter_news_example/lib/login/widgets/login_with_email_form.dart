@@ -28,33 +28,7 @@ class LoginWithEmailForm extends StatelessWidget {
             );
         }
       },
-      child: const CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                AppSpacing.xlg,
-                AppSpacing.lg,
-                AppSpacing.xlg,
-                AppSpacing.xxlg,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _HeaderTitle(),
-                  SizedBox(height: AppSpacing.xxxlg),
-                  _EmailInput(),
-                  _TermsAndPrivacyPolicyLinkTexts(),
-                  Spacer(),
-                  _NextButton(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      child: const LoginForm(),
     );
   }
 }
