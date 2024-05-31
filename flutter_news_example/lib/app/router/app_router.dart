@@ -17,15 +17,14 @@ class AppRouter {
     UserProfilePage.name,
   ];
 
-  static GoRouter router() {
+  static GoRouter router(AppStatusStream appStatusStream) {
     return GoRouter(
       initialLocation: HomePage.name,
-
+      refreshListenable: appStatusStream,
       redirect: (context, state) {
         final path = state.uri.path;
-
-        final isAuthenticated = RedirectStreamScope.of(context).isSignedIn;
-        final isUnauthenticated = RedirectStreamScope.of(context).isSignedOut;
+        final isUnauthenticated = appStatusStream.isSignedOut;
+        final isAuthenticated = appStatusStream.isSignedIn;
         if (onlyUnauthenticatedUserRoutes.contains(path) && isAuthenticated) {
           return HomePage.name;
         }

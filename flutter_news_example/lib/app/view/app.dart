@@ -64,15 +64,15 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RedirectStreamScope(
-      appBloc: context.read<AppBloc>(),
-      child: MaterialApp.router(
-        themeMode: ThemeMode.light,
-        theme: const AppTheme().themeData,
-        darkTheme: const AppDarkTheme().themeData,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        routerConfig: AppRouter.router(),
+    final appBloc = context.read<AppBloc>();
+    return MaterialApp.router(
+      themeMode: ThemeMode.light,
+      theme: const AppTheme().themeData,
+      darkTheme: const AppDarkTheme().themeData,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      routerConfig: AppRouter.router(
+        AppStatusStream(appBloc, appBloc.stream),
       ),
     );
   }
