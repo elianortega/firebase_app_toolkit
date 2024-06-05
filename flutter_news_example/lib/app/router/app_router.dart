@@ -50,8 +50,9 @@ class AppRouter {
         GoRoute(
           path: LoginPage.path,
           name: LoginPage.path,
-          pageBuilder: (context, state) =>
-              const MaterialPage<void>(child: LoginPage()),
+          pageBuilder: (context, state) => const MaterialPage<void>(
+            child: LoginPage(),
+          ),
         ),
         GoRoute(
           path: LoginWithEmailPage.name,

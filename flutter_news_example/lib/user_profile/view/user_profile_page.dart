@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/l10n/l10n.dart';
+import 'package:flutter_news_example/terms_of_service/view/terms_of_service_page.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
+import 'package:go_router/go_router.dart';
 import 'package:user_repository/user_repository.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -88,7 +90,9 @@ class _UserProfileViewState extends State<UserProfileView>
                   key: const Key('userProfilePage_termsOfServiceItem'),
                   leading: Assets.icons.termsOfUseIcon.svg(),
                   title: l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
-                  onTap: () {},
+                  onTap: () {
+                    context.push<void>(TermsOfServicePage.path);
+                  },
                 ),
                 UserProfileItem(
                   key: const Key('userProfilePage_aboutItem'),

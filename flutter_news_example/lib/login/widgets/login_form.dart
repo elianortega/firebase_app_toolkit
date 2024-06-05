@@ -99,7 +99,7 @@ class _LoginTitleAndCloseButton extends StatelessWidget {
           key: const Key('loginForm_closeModal_iconButton'),
           constraints: const BoxConstraints.tightFor(width: 24, height: 36),
           padding: EdgeInsets.zero,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
           icon: const Icon(Icons.close),
         ),
       ],
@@ -203,7 +203,7 @@ class _ContinueWithEmailLoginButton extends StatelessWidget {
     return AppButton.outlinedTransparentDarkAqua(
       key: const Key('loginForm_emailLogin_appButton'),
       onPressed: () {
-        context.push(LoginWithEmailPage.name);
+        context.push<void>(LoginWithEmailPage.name);
       },
       textStyle: Theme.of(context).textTheme.titleMedium,
       child: Row(

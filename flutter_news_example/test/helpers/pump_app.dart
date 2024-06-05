@@ -11,6 +11,7 @@ import 'package:mockingjay/mockingjay.dart'
     show MockNavigator, MockNavigatorProvider;
 import 'package:mocktail/mocktail.dart';
 import 'package:user_repository/user_repository.dart';
+import 'helpers.dart';
 
 class MockAppBloc extends MockBloc<AppEvent, AppState> implements AppBloc {
   @override
@@ -44,7 +45,13 @@ extension AppTester on WidgetTester {
     ThemeModeBloc? themeModeBloc,
     NavigatorObserver? navigatorObserver,
     MockNavigator? navigator,
+    MockGoRouter? router,
   }) async {
+    assert(
+      navigator == null || router == null,
+      'Cannot provide both navigator and router',
+    );
+    final widget = Scaffold(body: widgetUnderTest);
     await pumpWidget(
       MultiRepositoryProvider(
         providers: [
@@ -68,12 +75,22 @@ extension AppTester on WidgetTester {
             ],
             home: Theme(
               data: ThemeData(platform: platform),
-              child: navigator == null
-                  ? Scaffold(body: widgetUnderTest)
-                  : MockNavigatorProvider(
+              child: Builder(
+                builder: (context) {
+                  if (router != null) {
+                    return MockGoRouterProvider(
+                      goRouter: router,
+                      child: widget,
+                    );
+                  } else if (navigator != null) {
+                    return MockNavigatorProvider(
                       navigator: navigator,
-                      child: Scaffold(body: widgetUnderTest),
-                    ),
+                      child: widget,
+                    );
+                  }
+                  return widget;
+                },
+              ),
             ),
             navigatorObservers: [
               if (navigatorObserver != null) navigatorObserver,

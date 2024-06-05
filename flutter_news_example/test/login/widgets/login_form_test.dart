@@ -153,13 +153,15 @@ void main() {
     group('navigates', () {
       testWidgets('to LoginWithEmailPage when Continue with email is pressed',
           (tester) async {
+        final mockRouter = MockGoRouter();
+        when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
         await tester.pumpApp(
           BlocProvider.value(value: loginBloc, child: const LoginForm()),
+          router: mockRouter,
         );
         await tester.ensureVisible(find.byKey(loginButtonKey));
         await tester.tap(find.byKey(loginButtonKey));
-        await tester.pumpAndSettle();
-        expect(find.byType(LoginWithEmailPage), findsOneWidget);
+        verify(() => mockRouter.push<void>(LoginWithEmailPage.name)).called(1);
       });
     });
 
