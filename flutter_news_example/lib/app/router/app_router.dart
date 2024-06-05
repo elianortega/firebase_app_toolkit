@@ -17,18 +17,20 @@ class AppRouter {
     UserProfilePage.name,
   ];
 
-  static GoRouter router(AppStatusStream appStatusStream) {
+  static GoRouter router({
+    required AppBloc appBloc,
+  }) {
+    final appBlocListenable = AppBlocListenable(appBloc);
     return GoRouter(
       initialLocation: HomePage.name,
-      refreshListenable: appStatusStream,
+      refreshListenable: appBlocListenable,
       redirect: (context, state) {
         final path = state.uri.path;
-        final isUnauthenticated = appStatusStream.isSignedOut;
-        final isAuthenticated = appStatusStream.isSignedIn;
+        final isAuthenticated = appBloc.state.isAuthenticated;
         if (onlyUnauthenticatedUserRoutes.contains(path) && isAuthenticated) {
           return HomePage.name;
         }
-        if (onlyAuthenticatedUserRoutes.contains(path) && isUnauthenticated) {
+        if (onlyAuthenticatedUserRoutes.contains(path) && !isAuthenticated) {
           return LoginWithEmailPage.name;
         }
         return null;

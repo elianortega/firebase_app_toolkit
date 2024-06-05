@@ -64,7 +64,6 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appBloc = context.read<AppBloc>();
     return MaterialApp.router(
       themeMode: ThemeMode.light,
       theme: const AppTheme().themeData,
@@ -72,7 +71,7 @@ class AppView extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: AppRouter.router(
-        AppStatusStream(appBloc, appBloc.stream),
+        appBloc: context.read<AppBloc>(),
       ),
     );
   }
