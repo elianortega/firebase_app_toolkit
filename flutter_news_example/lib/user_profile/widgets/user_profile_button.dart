@@ -1,9 +1,8 @@
-import 'package:app_ui/app_ui.dart' show AppSpacing, Assets, showAppModal;
+import 'package:app_ui/app_ui.dart' show AppSpacing, Assets;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/l10n/l10n.dart';
-import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,11 +35,7 @@ class LoginButton extends StatelessWidget {
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),
-      onPressed: () => showAppModal<void>(
-        context: context,
-        builder: (context) => const LoginModal(),
-        routeSettings: const RouteSettings(name: LoginModal.name),
-      ),
+      onPressed: () {},
       tooltip: context.l10n.loginTooltip,
     );
   }
@@ -59,7 +54,7 @@ class OpenProfileButton extends StatelessWidget {
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),
-      onPressed: () => context.push(UserProfilePage.path),
+      onPressed: () => context.push<void>(UserProfilePage.path),
       tooltip: context.l10n.openProfileTooltip,
     );
   }
