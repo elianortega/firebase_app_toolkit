@@ -10,10 +10,6 @@ void main() {
   const closeIcon = Key('loginWithEmailPage_closeIcon');
 
   group('LoginWithEmailPage', () {
-    test('has a route', () {
-      expect(LoginWithEmailPage.route(), isA<MaterialPageRoute<void>>());
-    });
-
     testWidgets('renders LoginWithEmailForm', (tester) async {
       await tester.pumpApp(const LoginWithEmailPage());
       expect(find.byType(LoginWithEmailForm), findsOneWidget);

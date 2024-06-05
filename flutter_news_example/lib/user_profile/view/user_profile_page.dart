@@ -10,12 +10,7 @@ import 'package:user_repository/user_repository.dart';
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
 
-  static Page<void> route() {
-    return const MaterialPage<void>(
-      child: UserProfilePage(),
-    );
-  }
-  static const String name = '/userProfile';
+  static const String path = '/user-profile';
 
   @override
   Widget build(BuildContext context) {

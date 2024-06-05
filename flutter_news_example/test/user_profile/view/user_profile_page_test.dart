@@ -26,10 +26,6 @@ void main() {
   const termsOfServiceItemKey = Key('userProfilePage_termsOfServiceItem');
 
   group('UserProfilePage', () {
-    test('has a route', () {
-      expect(UserProfilePage.route(), isA<MaterialPageRoute<void>>());
-    });
-
     testWidgets('renders UserProfileView', (tester) async {
       await tester.pumpApp(UserProfilePage());
       expect(find.byType(UserProfileView), findsOneWidget);

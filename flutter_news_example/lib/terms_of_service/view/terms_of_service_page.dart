@@ -8,7 +8,7 @@ class TermsOfServicePage extends StatelessWidget {
 
   static Page<void> route() =>
       const MaterialPage<void>(child: TermsOfServicePage());
-  static const String name = '/termsOfService';
+  static const String path = '/termsOfService';
 
   @override
   Widget build(BuildContext context) {

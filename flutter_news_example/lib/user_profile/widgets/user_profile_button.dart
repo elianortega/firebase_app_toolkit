@@ -59,7 +59,7 @@ class OpenProfileButton extends StatelessWidget {
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),
-      onPressed: () => context.push(UserProfilePage.name),
+      onPressed: () => context.push(UserProfilePage.path),
       tooltip: context.l10n.openProfileTooltip,
     );
   }

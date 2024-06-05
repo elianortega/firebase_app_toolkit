@@ -3,20 +3,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/login/login.dart';
 import 'package:user_repository/user_repository.dart';
 
-class LoginWithEmailPage extends StatelessWidget {
-  const LoginWithEmailPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
-  static const String name = '/login-with-email';
+  static const path = '/login';
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => LoginBloc(
         userRepository: context.read<UserRepository>(),
       ),
-      child: Scaffold(
-        appBar: AppBar(),
-        body: const LoginWithEmailForm(),
-      ),
+      child: const LoginView(),
+    );
+  }
+}
+
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(child: LoginForm()),
     );
   }
 }
