@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/home/home.dart';
-import 'package:flutter_news_example/landing/view/landing_page.dart';
+import 'package:flutter_news_example/landing/landing.dart';
 import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_news_example/terms_of_service/view/view.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
