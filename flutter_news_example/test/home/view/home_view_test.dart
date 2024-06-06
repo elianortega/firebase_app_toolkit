@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/home/home.dart';
-import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_news_example/navigation/navigation.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -84,25 +83,6 @@ void main() {
       await tester.pump();
 
       expect(find.byType(NavDrawer), findsOneWidget);
-    });
-
-    testWidgets('shows LoginOverlay when showLoginOverlay is true',
-        (tester) async {
-      whenListen(
-        appBloc,
-        Stream.fromIterable([
-          AppState(status: AppStatus.unauthenticated, showLoginOverlay: false),
-          AppState(status: AppStatus.unauthenticated, showLoginOverlay: true),
-        ]),
-      );
-
-      await pumpHomeView(
-        tester: tester,
-        cubit: cubit,
-        appBloc: appBloc,
-      );
-
-      expect(find.byType(LoginModal), findsOneWidget);
     });
 
     testWidgets('verify hasFocus after HomeState changes',

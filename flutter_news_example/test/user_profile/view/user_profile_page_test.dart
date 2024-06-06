@@ -26,10 +26,6 @@ void main() {
   const termsOfServiceItemKey = Key('userProfilePage_termsOfServiceItem');
 
   group('UserProfilePage', () {
-    test('has a route', () {
-      expect(UserProfilePage.route(), isA<MaterialPageRoute<void>>());
-    });
-
     testWidgets('renders UserProfileView', (tester) async {
       await tester.pumpApp(UserProfilePage());
       expect(find.byType(UserProfileView), findsOneWidget);
@@ -78,22 +74,6 @@ void main() {
         );
 
         await tester.tap(find.byType(AppBackButton));
-        await tester.pumpAndSettle();
-
-        expect(find.byType(UserProfileView), findsNothing);
-      });
-
-      testWidgets(
-          'navigates back '
-          'when user is unauthenticated', (tester) async {
-        await tester.pumpApp(
-          BlocProvider.value(
-            value: userProfileBloc,
-            child: UserProfileView(),
-          ),
-          appBloc: appBloc,
-        );
-
         await tester.pumpAndSettle();
 
         expect(find.byType(UserProfileView), findsNothing);
@@ -239,11 +219,14 @@ void main() {
       group('navigates', () {
         testWidgets('when tapped on Terms of User & Privacy Policy',
             (tester) async {
+          final mockRouter = MockGoRouter();
+          when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
           await tester.pumpApp(
             BlocProvider.value(
               value: userProfileBloc,
               child: UserProfileView(),
             ),
+            router: mockRouter,
           );
 
           final termsOfService = find.byKey(termsOfServiceItemKey);
@@ -257,9 +240,9 @@ void main() {
           await tester.pumpAndSettle();
           await tester.ensureVisible(termsOfService);
           await tester.tap(termsOfService);
-          await tester.pumpAndSettle();
-
-          expect(find.byType(TermsOfServicePage), findsOneWidget);
+          verify(
+            () => mockRouter.push<void>(TermsOfServicePage.path),
+          ).called(1);
         });
       });
 

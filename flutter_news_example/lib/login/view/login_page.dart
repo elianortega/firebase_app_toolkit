@@ -3,13 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/login/login.dart';
 import 'package:user_repository/user_repository.dart';
 
-class LoginModal extends StatelessWidget {
-  const LoginModal({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
-  static Route<void> route() =>
-      MaterialPageRoute<void>(builder: (_) => const LoginModal());
-
-  static const String name = '/loginModal';
+  static const path = '/login';
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +14,18 @@ class LoginModal extends StatelessWidget {
       create: (_) => LoginBloc(
         userRepository: context.read<UserRepository>(),
       ),
-      child: const LoginForm(),
+      child: const LoginView(),
+    );
+  }
+}
+
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(child: LoginForm()),
     );
   }
 }
