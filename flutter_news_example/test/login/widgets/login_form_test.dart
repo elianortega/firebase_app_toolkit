@@ -16,6 +16,7 @@ class MockLoginBloc extends MockBloc<LoginEvent, LoginState>
     implements LoginBloc {}
 
 void main() {
+  const loginFormCloseIconButton = Key('loginForm_closeModal_iconButton');
   const loginButtonKey = Key('loginForm_emailLogin_appButton');
   const signInWithGoogleButtonKey = Key('loginForm_googleLogin_appButton');
   const signInWithAppleButtonKey = Key('loginForm_appleLogin_appButton');
@@ -139,6 +140,18 @@ void main() {
     });
 
     group('navigates', () {
+      testWidgets('pop when close icon is pressed', (tester) async {
+        final mockRouter = MockGoRouter();
+        when(() => mockRouter.pop<void>(any())).thenAnswer((_) async {});
+        await tester.pumpApp(
+          BlocProvider.value(value: loginBloc, child: const LoginForm()),
+          router: mockRouter,
+        );
+        await tester.ensureVisible(find.byKey(loginFormCloseIconButton));
+        await tester.tap(find.byKey(loginFormCloseIconButton));
+        verify(() => mockRouter.pop<void>()).called(1);
+      });
+
       testWidgets('to LoginWithEmailPage when Continue with email is pressed',
           (tester) async {
         final mockRouter = MockGoRouter();
@@ -149,7 +162,7 @@ void main() {
         );
         await tester.ensureVisible(find.byKey(loginButtonKey));
         await tester.tap(find.byKey(loginButtonKey));
-        verify(() => mockRouter.push<void>(LoginWithEmailPage.name)).called(1);
+        verify(() => mockRouter.push<void>(LoginWithEmailPage.path)).called(1);
       });
     });
   });

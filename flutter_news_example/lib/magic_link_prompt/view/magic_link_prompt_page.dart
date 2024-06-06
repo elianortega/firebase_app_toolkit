@@ -18,13 +18,6 @@ class MagicLinkPromptPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const AppBackButton(),
-        actions: [
-          IconButton(
-            key: const Key('magicLinkPrompt_closeIcon'),
-            icon: const Icon(Icons.close),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: MagicLinkPromptView(
         email: email,

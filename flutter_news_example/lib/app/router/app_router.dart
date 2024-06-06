@@ -12,13 +12,59 @@ class AppRouter {
   static const onlyUnauthenticatedUserRoutes = <String>[
     LandingPage.path,
     LoginPage.path,
-    LoginWithEmailPage.name,
+    LoginWithEmailPage.path,
   ];
 
   /// Only routes that are accessible for authenticated users
   static const onlyAuthenticatedUserRoutes = <String>[
     HomePage.path,
     UserProfilePage.path,
+  ];
+
+  @visibleForTesting
+  static final routes = [
+    GoRoute(
+      path: LandingPage.path,
+      name: LandingPage.path,
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        child: LandingPage(),
+      ),
+    ),
+    GoRoute(
+      path: LoginPage.path,
+      name: LoginPage.path,
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        child: LoginPage(),
+      ),
+    ),
+    GoRoute(
+      path: LoginWithEmailPage.path,
+      name: LoginWithEmailPage.path,
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        child: LoginWithEmailPage(),
+      ),
+    ),
+    GoRoute(
+      path: HomePage.path,
+      name: HomePage.path,
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        child: HomePage(),
+      ),
+    ),
+    GoRoute(
+      path: TermsOfServicePage.path,
+      name: TermsOfServicePage.path,
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        child: TermsOfServicePage(),
+      ),
+    ),
+    GoRoute(
+      path: UserProfilePage.path,
+      name: UserProfilePage.path,
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        child: UserProfilePage(),
+      ),
+    ),
   ];
 
   static GoRouter router({
@@ -39,50 +85,7 @@ class AppRouter {
         }
         return null;
       },
-      routes: [
-        GoRoute(
-          path: LandingPage.path,
-          name: LandingPage.path,
-          pageBuilder: (context, state) => const MaterialPage<void>(
-            child: LandingPage(),
-          ),
-        ),
-        GoRoute(
-          path: LoginPage.path,
-          name: LoginPage.path,
-          pageBuilder: (context, state) => const MaterialPage<void>(
-            child: LoginPage(),
-          ),
-        ),
-        GoRoute(
-          path: LoginWithEmailPage.name,
-          name: LoginWithEmailPage.name,
-          pageBuilder: (context, state) => const MaterialPage<void>(
-            child: LoginWithEmailPage(),
-          ),
-        ),
-        GoRoute(
-          path: HomePage.path,
-          name: HomePage.path,
-          pageBuilder: (context, state) => const MaterialPage<void>(
-            child: HomePage(),
-          ),
-        ),
-        GoRoute(
-          path: TermsOfServicePage.path,
-          name: TermsOfServicePage.path,
-          pageBuilder: (context, state) => const MaterialPage<void>(
-            child: TermsOfServicePage(),
-          ),
-        ),
-        GoRoute(
-          path: UserProfilePage.path,
-          name: UserProfilePage.path,
-          pageBuilder: (context, state) => const MaterialPage<void>(
-            child: UserProfilePage(),
-          ),
-        ),
-      ],
+      routes: routes,
     );
   }
 }

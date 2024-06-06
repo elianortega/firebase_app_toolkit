@@ -16,15 +16,17 @@ class LandingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppButton.black(
+              key: const Key('landingPage_login_button'),
               onPressed: () {
-                context.push(LoginPage.path);
+                context.push<void>(LoginPage.path);
               },
               child: const Text('Login'),
             ),
             const SizedBox(height: AppSpacing.md),
             AppButton.black(
+              key: const Key('landingPage_signUp_button'),
               onPressed: () {
-                context.push(LoginPage.path);
+                context.push<void>(LoginPage.path);
               },
               child: const Text('Sign Up'),
             ),

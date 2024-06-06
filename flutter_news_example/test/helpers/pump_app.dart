@@ -7,6 +7,7 @@ import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/l10n/l10n.dart';
 import 'package:flutter_news_example/theme_selector/theme_selector.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mockingjay/mockingjay.dart'
     show MockNavigator, MockNavigatorProvider;
 import 'package:mocktail/mocktail.dart';
@@ -94,6 +95,42 @@ extension AppTester on WidgetTester {
             ),
             navigatorObservers: [
               if (navigatorObserver != null) navigatorObserver,
+            ],
+          ),
+        ),
+      ),
+    );
+    await pump();
+  }
+
+  Future<void> pumpAppRouter({
+    AppBloc? appBloc,
+    AnalyticsBloc? analyticsBloc,
+    UserRepository? userRepository,
+    ThemeModeBloc? themeModeBloc,
+    GoRouter? router,
+  }) async {
+    await pumpWidget(
+      MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider.value(
+            value: userRepository ?? MockUserRepository(),
+          ),
+        ],
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: appBloc ?? MockAppBloc()),
+            BlocProvider.value(value: analyticsBloc ?? MockAnalyticsBloc()),
+            BlocProvider.value(value: themeModeBloc ?? MockThemeModeBloc()),
+          ],
+          child: MaterialApp.router(
+            routerConfig: router,
+            title: 'Flutter News Example',
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
           ),
         ),

@@ -47,6 +47,8 @@ void main() {
       );
 
       expect(find.byType(LoginButton), findsOneWidget);
+      await tester.tap(find.byType(LoginButton));
+      await tester.pump();
       expect(find.byType(OpenProfileButton), findsNothing);
     });
 
