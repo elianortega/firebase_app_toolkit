@@ -4,20 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_example/app/app.dart';
 
 class AppBlocListenable extends ChangeNotifier {
-  AppBlocListenable(AppBloc appBloc) : _appBloc = appBloc {
-    appBlocSubscription = _appBloc.stream.listen(_onStreamChange);
+  AppBlocListenable({
+    required AppBloc appBloc,
+    this.onChange,
+  }) : _appBloc = appBloc {
+    _appBlocSubscription = _appBloc.stream.listen(_onStreamChange);
   }
 
   final AppBloc _appBloc;
-  late final StreamSubscription<AppState> appBlocSubscription;
+  final VoidCallback? onChange;
+  late final StreamSubscription<AppState> _appBlocSubscription;
 
   @override
   void dispose() {
-    appBlocSubscription.cancel();
+    _appBlocSubscription.cancel();
     super.dispose();
   }
 
   void _onStreamChange(event) {
     notifyListeners();
+    onChange?.call();
   }
 }

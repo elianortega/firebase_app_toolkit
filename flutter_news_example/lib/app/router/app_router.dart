@@ -24,7 +24,7 @@ class AppRouter {
   static GoRouter router({
     required AppBloc appBloc,
   }) {
-    final appBlocListenable = AppBlocListenable(appBloc);
+    final appBlocListenable = AppBlocListenable(appBloc: appBloc);
     return GoRouter(
       initialLocation: LandingPage.path,
       refreshListenable: appBlocListenable,
