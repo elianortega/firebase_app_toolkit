@@ -1,3 +1,5 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/home/home.dart';
@@ -33,8 +35,12 @@ class AppRouter {
     GoRoute(
       path: LoginPage.path,
       name: LoginPage.path,
-      pageBuilder: (context, state) => const MaterialPage<void>(
-        child: LoginPage(),
+      builder: (context, state) => SignInScreen(
+        providers: [
+          EmailAuthProvider(),
+          // TODO(any): add client id to enable desktop login
+          GoogleProvider(clientId: ''),
+        ],
       ),
     ),
     GoRoute(
