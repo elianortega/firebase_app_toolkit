@@ -1,3 +1,4 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/landing/landing.dart';
@@ -15,6 +16,9 @@ class MockAppBloc extends Mock implements AppBloc {}
 class MockAppBlocListenable extends Mock implements AppBlocListenable {}
 
 void main() {
+  setUpAll(() {
+    setFirebaseUiIsTestMode(true);
+  });
   group('AppRouter', () {
     GoRouter buildRouter(String initialLocation) => GoRouter(
           initialLocation: initialLocation,
@@ -23,7 +27,7 @@ void main() {
 
     final pages = {
       LandingPage.path: LandingPage,
-      LoginPage.path: LoginPage,
+      LoginPage.path: SignInScreen,
       LoginWithEmailPage.path: LoginWithEmailPage,
       TermsOfServicePage.path: TermsOfServicePage,
       UserProfilePage.path: UserProfilePage,
