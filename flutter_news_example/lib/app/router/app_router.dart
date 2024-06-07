@@ -33,9 +33,7 @@ class AppRouter {
     GoRoute(
       path: LandingPage.path,
       name: LandingPage.path,
-      pageBuilder: (context, state) => const MaterialPage<void>(
-        child: LandingPage(),
-      ),
+      builder: (context, state) => const LandingPage(),
     ),
     GoRoute(
       path: LoginPage.path,
@@ -54,30 +52,22 @@ class AppRouter {
     GoRoute(
       path: LoginWithEmailPage.path,
       name: LoginWithEmailPage.path,
-      pageBuilder: (context, state) => const MaterialPage<void>(
-        child: LoginWithEmailPage(),
-      ),
+      builder: (context, state) => const LoginWithEmailPage(),
     ),
     GoRoute(
       path: HomePage.path,
       name: HomePage.path,
-      pageBuilder: (context, state) => const MaterialPage<void>(
-        child: HomePage(),
-      ),
+      builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       path: TermsOfServicePage.path,
       name: TermsOfServicePage.path,
-      pageBuilder: (context, state) => const MaterialPage<void>(
-        child: TermsOfServicePage(),
-      ),
+      builder: (context, state) => const TermsOfServicePage(),
     ),
     GoRoute(
       path: UserProfilePage.path,
       name: UserProfilePage.path,
-      pageBuilder: (context, state) => const MaterialPage<void>(
-        child: UserProfilePage(),
-      ),
+      builder: (context, state) => const UserProfilePage(),
     ),
   ];
 
