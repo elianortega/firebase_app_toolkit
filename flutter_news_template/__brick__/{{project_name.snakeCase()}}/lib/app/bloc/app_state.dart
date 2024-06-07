@@ -27,12 +27,7 @@ class AppState extends Equatable {
   final User user;
   final bool showLoginOverlay;
 
-  @override
-  List<Object?> get props => [
-        status,
-        user,
-        showLoginOverlay,
-      ];
+  bool get isAuthenticated => status == AppStatus.authenticated;
 
   AppState copyWith({
     AppStatus? status,
@@ -45,4 +40,11 @@ class AppState extends Equatable {
       showLoginOverlay: showLoginOverlay ?? this.showLoginOverlay,
     );
   }
+
+  @override
+  List<Object> get props => [
+        status,
+        user,
+        showLoginOverlay,
+      ];
 }

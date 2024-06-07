@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:{{project_name.snakeCase()}}/login/login.dart';
+import 'package:user_repository/user_repository.dart';
+
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  static const path = '/login';
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => LoginBloc(
+        userRepository: context.read<UserRepository>(),
+      ),
+      child: const LoginView(),
+    );
+  }
+}
+
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(child: LoginForm()),
+    );
+  }
+}

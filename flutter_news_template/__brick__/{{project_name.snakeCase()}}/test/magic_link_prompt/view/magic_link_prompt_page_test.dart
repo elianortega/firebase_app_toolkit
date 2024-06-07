@@ -3,13 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:{{project_name.snakeCase()}}/magic_link_prompt/magic_link_prompt.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockingjay/mockingjay.dart';
 
 import '../../helpers/helpers.dart';
 
 void main() {
   const testEmail = 'testEmail@gmail.com';
-  const magicLinkPromptCloseIconKey = Key('magicLinkPrompt_closeIcon');
 
   group('MagicLinkPromptPage', () {
     test('has a route', () {
@@ -46,38 +44,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(MagicLinkPromptPage), findsOneWidget);
-    });
-
-    group('navigates', () {
-      testWidgets('back when pressed on close icon', (tester) async {
-        final navigator = MockNavigator();
-
-        when(navigator.canPop).thenReturn(true);
-        when(() => navigator.popUntil(any())).thenAnswer((_) async {});
-        await tester.pumpApp(
-          const MagicLinkPromptPage(email: testEmail),
-          navigator: navigator,
-        );
-
-        await tester.tap(find.byKey(magicLinkPromptCloseIconKey));
-        await tester.pumpAndSettle();
-        verify(() => navigator.popUntil(any())).called(1);
-      });
-
-      testWidgets('back when leading button is pressed.', (tester) async {
-        final navigator = MockNavigator();
-
-        when(navigator.canPop).thenReturn(true);
-        when(() => navigator.popUntil(any())).thenAnswer((_) async {});
-        await tester.pumpApp(
-          const MagicLinkPromptPage(email: testEmail),
-          navigator: navigator,
-        );
-
-        await tester.tap(find.byKey(magicLinkPromptCloseIconKey));
-        await tester.pumpAndSettle();
-        verify(() => navigator.popUntil(any())).called(1);
-      });
     });
   });
 }

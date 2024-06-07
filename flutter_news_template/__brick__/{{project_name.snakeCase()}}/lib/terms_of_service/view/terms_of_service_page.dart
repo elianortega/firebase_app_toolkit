@@ -6,9 +6,7 @@ import 'package:{{project_name.snakeCase()}}/terms_of_service/terms_of_service.d
 class TermsOfServicePage extends StatelessWidget {
   const TermsOfServicePage({super.key});
 
-  static Route<void> route() => MaterialPageRoute<void>(
-        builder: (_) => const TermsOfServicePage(),
-      );
+  static const String path = '/terms-of-service';
 
   @override
   Widget build(BuildContext context) {
