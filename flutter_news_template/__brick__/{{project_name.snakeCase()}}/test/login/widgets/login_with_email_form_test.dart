@@ -145,28 +145,6 @@ void main() {
           expect(find.byType(SnackBar), findsOneWidget);
         });
 
-        testWidgets(
-            'TermsOfServiceModal when tapped on '
-            'Terms of Use and Privacy Policy text', (tester) async {
-          await tester.pumpApp(
-            BlocProvider.value(
-              value: loginBloc,
-              child: const LoginWithEmailForm(),
-            ),
-          );
-          final richText = tester.widget<RichText>(
-            find.byKey(loginWithEmailFormTermsAndPrivacyPolicyKey),
-          );
-
-          tapTextSpan(
-            richText,
-            'Terms of Use and Privacy Policy',
-          );
-
-          await tester.pumpAndSettle();
-          expect(find.byType(TermsOfServiceModal), findsOneWidget);
-        });
-
         testWidgets('disabled next button when status is not validated',
             (tester) async {
           when(() => loginBloc.state).thenReturn(
@@ -219,6 +197,30 @@ void main() {
     });
 
     group('navigates', () {
+      testWidgets(
+          'to TermsOfServicePage when tapped on '
+          'Terms of Use and Privacy Policy text', (tester) async {
+        final mockRouter = MockGoRouter();
+        when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
+        await tester.pumpApp(
+          BlocProvider.value(
+            value: loginBloc,
+            child: const LoginWithEmailForm(),
+          ),
+          router: mockRouter,
+        );
+        final richText = tester.widget<RichText>(
+          find.byKey(loginWithEmailFormTermsAndPrivacyPolicyKey),
+        );
+
+        tapTextSpan(
+          richText,
+          'Terms of Use and Privacy Policy',
+        );
+
+        await tester.pumpAndSettle();
+        verify(() => mockRouter.push<void>(TermsOfServicePage.path)).called(1);
+      });
       testWidgets('to MagicLinkPromptPage when submission is success',
           (tester) async {
         whenListen(

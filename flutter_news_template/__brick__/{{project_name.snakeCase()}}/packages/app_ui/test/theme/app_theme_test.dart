@@ -49,7 +49,7 @@ void main() {
                   .themeData
                   .switchTheme
                   .thumbColor
-                  ?.resolve({MaterialState.selected}),
+                  ?.resolve({WidgetState.selected}),
               equals(AppColors.darkAqua),
             );
           });
@@ -69,7 +69,7 @@ void main() {
                   .themeData
                   .switchTheme
                   .trackColor
-                  ?.resolve({MaterialState.selected}),
+                  ?.resolve({WidgetState.selected}),
               equals(AppColors.primaryContainer),
             );
           });
@@ -123,7 +123,7 @@ void main() {
 
         test('background is grey.shade900', () {
           expect(
-            const AppDarkTheme().themeData.colorScheme.background,
+            const AppDarkTheme().themeData.colorScheme.surface,
             AppColors.grey.shade900,
           );
         });

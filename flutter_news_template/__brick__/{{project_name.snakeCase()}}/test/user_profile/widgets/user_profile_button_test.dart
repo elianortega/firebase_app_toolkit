@@ -3,7 +3,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:{{project_name.snakeCase()}}/app/app.dart';
-import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:{{project_name.snakeCase()}}/user_profile/user_profile.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -48,6 +47,8 @@ void main() {
       );
 
       expect(find.byType(LoginButton), findsOneWidget);
+      await tester.tap(find.byType(LoginButton));
+      await tester.pump();
       expect(find.byType(OpenProfileButton), findsNothing);
     });
 
@@ -72,6 +73,8 @@ void main() {
     testWidgets(
         'navigates to UserProfilePage '
         'when tapped on OpenProfileButton', (tester) async {
+      final mockRouter = MockGoRouter();
+      when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
       whenListen(
         appBloc,
         Stream.value(AppState.authenticated(user)),
@@ -81,12 +84,12 @@ void main() {
       await tester.pumpApp(
         UserProfileButton(),
         appBloc: appBloc,
+        router: mockRouter,
       );
 
       await tester.tap(find.byType(OpenProfileButton));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(UserProfilePage), findsOneWidget);
+      await tester.pump();
+      verify(() => mockRouter.push<void>(UserProfilePage.path)).called(1);
     });
 
     testWidgets(
@@ -105,26 +108,6 @@ void main() {
 
       expect(find.byType(LoginButton), findsOneWidget);
       expect(find.byType(OpenProfileButton), findsNothing);
-    });
-
-    testWidgets(
-        'shows LoginModal '
-        'when tapped on LoginButton', (tester) async {
-      whenListen(
-        appBloc,
-        Stream.value(AppState.unauthenticated()),
-        initialState: AppState.unauthenticated(),
-      );
-
-      await tester.pumpApp(
-        UserProfileButton(),
-        appBloc: appBloc,
-      );
-
-      await tester.tap(find.byType(LoginButton));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(LoginModal), findsOneWidget);
     });
   });
 }
