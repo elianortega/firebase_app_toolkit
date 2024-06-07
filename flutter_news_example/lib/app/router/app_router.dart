@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart' as fba;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +12,7 @@ import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_news_example/terms_of_service/view/view.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mockingjay/mockingjay.dart';
 
 class AppRouter {
   /// Only routes that are accessible to unauthenticated users
@@ -36,6 +41,9 @@ class AppRouter {
       path: LoginPage.path,
       name: LoginPage.path,
       builder: (context, state) => SignInScreen(
+        auth: Platform.environment.containsKey('FLUTTER_TEST')
+            ? MockAuth()
+            : null,
         providers: [
           EmailAuthProvider(),
           // TODO(any): add client id to enable desktop login
@@ -94,4 +102,11 @@ class AppRouter {
       routes: routes,
     );
   }
+}
+
+class MockFirebaseApp extends Mock implements FirebaseApp {}
+
+class MockAuth extends Mock implements fba.FirebaseAuth {
+  @override
+  FirebaseApp get app => MockFirebaseApp();
 }
