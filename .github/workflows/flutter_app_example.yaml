@@ -1,20 +1,20 @@
-name: flutter_news_example
+name: flutter_app_example
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 on:
-  schedule:
-    - cron: "0 0 * * *"
+  # schedule:
+  #   - cron: "0 0 * * *"
   pull_request:
     paths:
-      - "flutter_news_example/api/**"
-      - "flutter_news_example/lib/**"
-      - "flutter_news_example/test/**"
-      - "flutter_news_example/packages/**"
-      - "flutter_news_example/pubspec.yaml"
-      - ".github/workflows/flutter_news_example.yaml"
+      - "flutter_app_example/api/**"
+      - "flutter_app_example/lib/**"
+      - "flutter_app_example/test/**"
+      - "flutter_app_example/packages/**"
+      - "flutter_app_example/pubspec.yaml"
+      - ".github/workflows/flutter_app_example.yaml"
     branches:
       - main
 
@@ -22,7 +22,7 @@ jobs:
   build:
     defaults:
       run:
-        working-directory: flutter_news_example
+        working-directory: flutter_app_example
 
     runs-on: ubuntu-latest
 
@@ -60,7 +60,7 @@ jobs:
         uses: VeryGoodOpenSource/very_good_coverage@v3
         with:
           exclude: "**/*.g.dart **/*.gen.dart **/l10n/*.dart **/l10n/**/*.dart **/main/bootstrap.dart"
-          path: flutter_news_example/coverage/lcov.info
+          path: flutter_app_example/coverage/lcov.info
 
       - name: Generate Visual Architecture
         env:
@@ -76,4 +76,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: visual-architecture-report
-          path: ./flutter_news_example/pubviz.html
+          path: ./flutter_app_example/pubviz.html
