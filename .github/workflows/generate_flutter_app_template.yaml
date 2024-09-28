@@ -1,10 +1,10 @@
-name: generate_flutter_news_template
+name: generate_flutter_app_template
 
 on:
   push:
     paths:
       - tool/generator/**
-      - flutter_news_example/**
+      - flutter_app_example/**
     branches:
       - main
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
       - name: Generate Template
         run: dart ./tool/generator/main.dart
 
-      - name: Stash New Template Version  
+      - name: Stash New Template Version
         # Save the new version of the template to apply the changes later.
         run: git stash -u
 
@@ -38,8 +38,8 @@ jobs:
         with:
           ref: templates
 
-      - name: Clean Up Current Template 
-        # Delete the current version of the template using git to keep 
+      - name: Clean Up Current Template
+        # Delete the current version of the template using git to keep
         # track of all changes afterwards.
         run: git rm -r --ignore-unmatch flutter_news_template/__brick__
 
@@ -51,9 +51,9 @@ jobs:
       - name: Create Pull Request With Required Changes
         uses: peter-evans/create-pull-request@v7.0.5
         with:
-          branch: chore/generate-flutter-news-template
-          commit-message: "chore: generate flutter_news_template"
-          title: "chore: generate flutter_news_template"
+          branch: chore/generate-flutter-app-template
+          commit-message: "chore: generate flutter_app_template"
+          title: "chore: generate flutter_app_template"
           body: Please squash and merge me!
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           reviewers: felangel

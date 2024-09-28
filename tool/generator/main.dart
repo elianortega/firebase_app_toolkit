@@ -69,7 +69,7 @@ final _blackList = <String>[
     _targetPath,
     '.github',
     'workflows',
-    'generate_flutter_news_template.yaml',
+    'generate_flutter_app_template.yaml',
   ),
   path.join(
     _targetPath,
