@@ -7,7 +7,7 @@ concurrency:
 on:
   pull_request:
     paths:
-      - "flutter_news_example/packages/form_inputs/**"
+      - "flutter_app_example/packages/form_inputs/**"
       - ".github/workflows/form_inputs.yaml"
     branches:
       - main
@@ -17,4 +17,4 @@ jobs:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@v1
     with:
       dart_sdk: 3.5.2
-      working_directory: flutter_news_example/packages/form_inputs
+      working_directory: flutter_app_example/packages/form_inputs
