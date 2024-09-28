@@ -20,7 +20,6 @@ typedef AppBuilder = Future<Widget> Function(
   // Ignore, as we currently only use dynamic links for e-mail login.
   // e-mail login will be replaced but not deprecated.
   // source:https://firebase.google.com/support/dynamic-links-faq#im_currently_using_or_need_to_use_dynamic_links_for_email_link_authentication_in_firebase_authentication_will_this_feature_continue_to_work_after_the_sunset
-  // ignore: deprecated_member_use
   FirebaseDynamicLinks firebaseDynamicLinks,
   FirebaseMessaging firebaseMessaging,
   SharedPreferences sharedPreferences,

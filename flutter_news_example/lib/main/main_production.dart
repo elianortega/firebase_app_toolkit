@@ -1,7 +1,6 @@
 import 'package:deep_link_client/deep_link_client.dart';
 import 'package:firebase_authentication_client/firebase_authentication_client.dart';
 import 'package:firebase_deep_link_client/firebase_deep_link_client.dart';
-import 'package:firebase_notifications_client/firebase_notifications_client.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/main/bootstrap/bootstrap.dart';
 import 'package:flutter_news_example/src/version.dart';
