@@ -1,10 +1,11 @@
 import 'package:app_ui/app_ui.dart' show AppButton, AppSpacing, Assets;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:{{project_name.snakeCase()}}/app/app.dart';
+import 'package:{{project_name.snakeCase()}}/app/router/app_router.dart';
 import 'package:{{project_name.snakeCase()}}/l10n/l10n.dart';
 import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:form_inputs/form_inputs.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -12,27 +13,17 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return BlocListener<AppBloc, AppState>(
+    return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        if (state.status.isLoggedIn) {
-          // Pop all routes on top of [LoginModal], then pop the modal itself.
-          Navigator.of(context)
-              .popUntil((route) => route.settings.name == LoginModal.name);
-          Navigator.of(context).pop();
+        if (state.status.isFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text(l10n.authenticationFailure)),
+            );
         }
       },
-      child: BlocListener<LoginBloc, LoginState>(
-        listener: (context, state) {
-          if (state.status.isFailure) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(content: Text(l10n.authenticationFailure)),
-              );
-          }
-        },
-        child: const _LoginContent(),
-      ),
+      child: const _LoginContent(),
     );
   }
 }
@@ -98,7 +89,7 @@ class _LoginTitleAndCloseButton extends StatelessWidget {
           key: const Key('loginForm_closeModal_iconButton'),
           constraints: const BoxConstraints.tightFor(width: 24, height: 36),
           padding: EdgeInsets.zero,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop<void>(),
           icon: const Icon(Icons.close),
         ),
       ],
@@ -201,9 +192,9 @@ class _ContinueWithEmailLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppButton.outlinedTransparentDarkAqua(
       key: const Key('loginForm_emailLogin_appButton'),
-      onPressed: () => Navigator.of(context).push<void>(
-        LoginWithEmailPage.route(),
-      ),
+      onPressed: () {
+        const LoginWithEmailPageRoute().go(context);
+      },
       textStyle: Theme.of(context).textTheme.titleMedium,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

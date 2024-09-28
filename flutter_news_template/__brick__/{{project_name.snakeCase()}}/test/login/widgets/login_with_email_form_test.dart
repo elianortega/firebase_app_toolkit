@@ -5,9 +5,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:{{project_name.snakeCase()}}/magic_link_prompt/magic_link_prompt.dart';
-import 'package:{{project_name.snakeCase()}}/terms_of_service/terms_of_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:mockingjay/mockingjay.dart';
@@ -145,28 +145,6 @@ void main() {
           expect(find.byType(SnackBar), findsOneWidget);
         });
 
-        testWidgets(
-            'TermsOfServiceModal when tapped on '
-            'Terms of Use and Privacy Policy text', (tester) async {
-          await tester.pumpApp(
-            BlocProvider.value(
-              value: loginBloc,
-              child: const LoginWithEmailForm(),
-            ),
-          );
-          final richText = tester.widget<RichText>(
-            find.byKey(loginWithEmailFormTermsAndPrivacyPolicyKey),
-          );
-
-          tapTextSpan(
-            richText,
-            'Terms of Use and Privacy Policy',
-          );
-
-          await tester.pumpAndSettle();
-          expect(find.byType(TermsOfServiceModal), findsOneWidget);
-        });
-
         testWidgets('disabled next button when status is not validated',
             (tester) async {
           when(() => loginBloc.state).thenReturn(
@@ -219,6 +197,31 @@ void main() {
     });
 
     group('navigates', () {
+      testWidgets(
+          'to TermsOfServicePage when tapped on '
+          'Terms of Use and Privacy Policy text', (tester) async {
+        final mockRouter = MockGoRouter();
+        when(() => mockRouter.go(any())).thenAnswer((_) async {});
+        await tester.pumpApp(
+          BlocProvider.value(
+            value: loginBloc,
+            child: const LoginWithEmailForm(),
+          ),
+          router: mockRouter,
+        );
+        final richText = tester.widget<RichText>(
+          find.byKey(loginWithEmailFormTermsAndPrivacyPolicyKey),
+        );
+
+        tapTextSpan(
+          richText,
+          'Terms of Use and Privacy Policy',
+        );
+
+        await tester.pumpAndSettle();
+        verify(() => mockRouter.go(const TermsOfServicePageRoute().location))
+            .called(1);
+      });
       testWidgets('to MagicLinkPromptPage when submission is success',
           (tester) async {
         whenListen(

@@ -3,8 +3,9 @@ version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.5.0 <4.0.0"
   flutter: {{flutter_version}}
+
 dependencies:
   analytics_repository:
     path: packages/analytics_repository
@@ -12,61 +13,66 @@ dependencies:
     path: packages/app_ui
   authentication_client:
     path: packages/authentication_client/authentication_client
-  bloc: ^8.1.0
+  bloc: ^8.1.4
   deep_link_client:
-    path: packages/deep_link_client
+    path: packages/deep_link_client/deep_link_client
   email_launcher:
     path: packages/email_launcher
   equatable: ^2.0.3
-  firebase_analytics: ^10.5.1
-  firebase_auth_platform_interface: ^7.1.8
+  firebase_analytics: ^11.3.1
   firebase_authentication_client:
     path: packages/authentication_client/firebase_authentication_client
-  firebase_core: ^2.26.0
-  firebase_crashlytics: ^3.3.7
-  firebase_dynamic_links: ^5.3.7
-  firebase_messaging: ^14.6.9
-  flow_builder: ^0.0.7
+  firebase_core: ^3.4.1
+  firebase_crashlytics: ^4.1.1
+  firebase_deep_link_client:
+    path: packages/deep_link_client/firebase_deep_link_client
+  firebase_dynamic_links: ^6.0.6
+  firebase_messaging: ^15.1.1
+  firebase_notifications_client:
+    path: packages/notifications_client/firebase_notifications_client
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.0.1
+  flutter_bloc: ^8.1.5
   flutter_localizations:
     sdk: flutter
-  flutter_svg: ^2.0.5
+  flutter_svg: ^2.0.10+1
   form_inputs:
     path: packages/form_inputs
-  hydrated_bloc: ^9.0.0
+  go_router: ^14.2.8
+  hydrated_bloc: ^9.1.5
   intl: ^0.19.0
-  json_annotation: ^4.7.0
-  mockingjay: ^0.5.0
+  json_annotation: ^4.9.0
+  mockingjay: ^0.6.0
   package_info_client:
     path: packages/package_info_client
-  path_provider: ^2.0.2
+  path_provider: ^2.1.4
   persistent_storage:
     path: packages/storage/persistent_storage
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.2.3
   test: ^1.21.4
   token_storage:
     path: packages/authentication_client/token_storage
-  url_launcher: ^6.0.9
+  url_launcher: ^6.2.6
   user_repository:
     path: packages/user_repository
-  very_good_analysis: ^5.1.0
 
 dev_dependencies:
-  bloc_test: ^9.0.3
-  build_runner: ^2.0.3
-  build_verify: ^3.0.0
-  build_version: ^2.0.3
-  fake_async: ^1.3.0
+  bloc_test: ^9.1.7
+  build_runner: ^2.4.10
+  build_verify: ^3.1.0
+  build_version: ^2.1.1
+  fake_async: ^1.3.1
   flutter_test:
     sdk: flutter
-  json_serializable: ^6.3.1
+  go_router_builder: ^2.7.1
+  json_serializable: ^6.8.0
   mocktail: ^1.0.2
   mocktail_image_network: ^1.0.0
+  very_good_analysis: ^6.0.0
 
 dependency_overrides:
   intl: ^0.19.0
+  win32: ^5.5.4
 
 flutter:
   generate: true

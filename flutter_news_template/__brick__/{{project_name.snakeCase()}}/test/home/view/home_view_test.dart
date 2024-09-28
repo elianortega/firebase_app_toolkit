@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:{{project_name.snakeCase()}}/home/home.dart';
-import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:{{project_name.snakeCase()}}/navigation/navigation.dart';
 import 'package:{{project_name.snakeCase()}}/user_profile/user_profile.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -86,23 +85,35 @@ void main() {
       expect(find.byType(NavDrawer), findsOneWidget);
     });
 
-    testWidgets('shows LoginOverlay when showLoginOverlay is true',
-        (tester) async {
+    testWidgets('verify hasFocus after HomeState changes',
+        (widgetTester) async {
+      when(() => cubit.state).thenReturn(HomeState.topStories);
       whenListen(
-        appBloc,
+        cubit,
         Stream.fromIterable([
-          AppState(status: AppStatus.unauthenticated, showLoginOverlay: false),
-          AppState(status: AppStatus.unauthenticated, showLoginOverlay: true),
+          HomeState.topStories,
+          HomeState.search,
         ]),
       );
+      await pumpHomeView(
+        tester: widgetTester,
+        cubit: cubit,
+      );
+      await widgetTester.pumpAndSettle();
+      expect(FocusManager.instance.primaryFocus, isNotNull);
+    });
 
+    testWidgets('tapping on BottomNavBar changes tab', (tester) async {
+      final button = find.byKey(const Key('bottomNavBar_topStories'));
+      when(() => cubit.state).thenReturn(HomeState.topStories);
+      when(() => cubit.setTab(0)).thenReturn(null);
       await pumpHomeView(
         tester: tester,
         cubit: cubit,
-        appBloc: appBloc,
       );
-
-      expect(find.byType(LoginModal), findsOneWidget);
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+      verify(() => cubit.setTab(0)).called(1);
     });
   });
 }

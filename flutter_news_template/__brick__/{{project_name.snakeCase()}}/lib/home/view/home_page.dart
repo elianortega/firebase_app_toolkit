@@ -5,8 +5,6 @@ import 'package:{{project_name.snakeCase()}}/home/home.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static Page<void> page() => const MaterialPage<void>(child: HomePage());
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

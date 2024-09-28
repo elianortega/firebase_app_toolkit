@@ -2,10 +2,10 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:{{project_name.snakeCase()}}/l10n/l10n.dart';
 import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:{{project_name.snakeCase()}}/magic_link_prompt/magic_link_prompt.dart';
-import 'package:{{project_name.snakeCase()}}/terms_of_service/terms_of_service.dart';
 import 'package:form_inputs/form_inputs.dart';
 
 class LoginWithEmailForm extends StatelessWidget {
@@ -134,10 +134,7 @@ class _TermsAndPrivacyPolicyLinkTexts extends StatelessWidget {
                 color: AppColors.darkAqua,
               ),
               recognizer: TapGestureRecognizer()
-                ..onTap = () => showAppModal<void>(
-                      context: context,
-                      builder: (context) => const TermsOfServiceModal(),
-                    ),
+                ..onTap = () => const TermsOfServicePageRoute().go(context),
             ),
             TextSpan(
               text: '.',

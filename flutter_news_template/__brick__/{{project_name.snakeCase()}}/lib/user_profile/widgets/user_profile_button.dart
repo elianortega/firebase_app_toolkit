@@ -1,10 +1,8 @@
-import 'package:app_ui/app_ui.dart' show AppSpacing, Assets, showAppModal;
+import 'package:app_ui/app_ui.dart' show AppSpacing, Assets;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:{{project_name.snakeCase()}}/l10n/l10n.dart';
-import 'package:{{project_name.snakeCase()}}/login/login.dart';
-import 'package:{{project_name.snakeCase()}}/user_profile/user_profile.dart';
 
 /// A user profile button which displays a [LoginButton]
 /// for the unauthenticated user or an [OpenProfileButton]
@@ -35,11 +33,7 @@ class LoginButton extends StatelessWidget {
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),
-      onPressed: () => showAppModal<void>(
-        context: context,
-        builder: (context) => const LoginModal(),
-        routeSettings: const RouteSettings(name: LoginModal.name),
-      ),
+      onPressed: () {},
       tooltip: context.l10n.loginTooltip,
     );
   }
@@ -58,7 +52,7 @@ class OpenProfileButton extends StatelessWidget {
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),
-      onPressed: () => Navigator.of(context).push(UserProfilePage.route()),
+      onPressed: () => const UserProfilePageRoute().go(context),
       tooltip: context.l10n.openProfileTooltip,
     );
   }

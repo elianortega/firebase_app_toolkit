@@ -1,6 +1,5 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:{{project_name.snakeCase()}}/magic_link_prompt/magic_link_prompt.dart';
 
 class MagicLinkPromptPage extends StatelessWidget {
@@ -19,14 +18,6 @@ class MagicLinkPromptPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const AppBackButton(),
-        actions: [
-          IconButton(
-            key: const Key('magicLinkPrompt_closeIcon'),
-            icon: const Icon(Icons.close),
-            onPressed: () => Navigator.of(context)
-                .popUntil((route) => route.settings.name == LoginModal.name),
-          ),
-        ],
       ),
       body: MagicLinkPromptView(
         email: email,

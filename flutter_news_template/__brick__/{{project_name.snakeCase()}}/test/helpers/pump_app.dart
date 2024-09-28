@@ -7,10 +7,12 @@ import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:{{project_name.snakeCase()}}/l10n/l10n.dart';
 import 'package:{{project_name.snakeCase()}}/theme_selector/theme_selector.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mockingjay/mockingjay.dart'
     show MockNavigator, MockNavigatorProvider;
 import 'package:mocktail/mocktail.dart';
 import 'package:user_repository/user_repository.dart';
+import 'helpers.dart';
 
 class MockAppBloc extends MockBloc<AppEvent, AppState> implements AppBloc {
   @override
@@ -44,7 +46,13 @@ extension AppTester on WidgetTester {
     ThemeModeBloc? themeModeBloc,
     NavigatorObserver? navigatorObserver,
     MockNavigator? navigator,
+    MockGoRouter? router,
   }) async {
+    assert(
+      navigator == null || router == null,
+      'Cannot provide both navigator and router',
+    );
+    final widget = Scaffold(body: widgetUnderTest);
     await pumpWidget(
       MultiRepositoryProvider(
         providers: [
@@ -68,15 +76,61 @@ extension AppTester on WidgetTester {
             ],
             home: Theme(
               data: ThemeData(platform: platform),
-              child: navigator == null
-                  ? Scaffold(body: widgetUnderTest)
-                  : MockNavigatorProvider(
+              child: Builder(
+                builder: (context) {
+                  if (router != null) {
+                    return MockGoRouterProvider(
+                      goRouter: router,
+                      child: widget,
+                    );
+                  } else if (navigator != null) {
+                    return MockNavigatorProvider(
                       navigator: navigator,
-                      child: Scaffold(body: widgetUnderTest),
-                    ),
+                      child: widget,
+                    );
+                  }
+                  return widget;
+                },
+              ),
             ),
             navigatorObservers: [
               if (navigatorObserver != null) navigatorObserver,
+            ],
+          ),
+        ),
+      ),
+    );
+    await pump();
+  }
+
+  Future<void> pumpAppRouter({
+    AppBloc? appBloc,
+    AnalyticsBloc? analyticsBloc,
+    UserRepository? userRepository,
+    ThemeModeBloc? themeModeBloc,
+    GoRouter? router,
+  }) async {
+    await pumpWidget(
+      MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider.value(
+            value: userRepository ?? MockUserRepository(),
+          ),
+        ],
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: appBloc ?? MockAppBloc()),
+            BlocProvider.value(value: analyticsBloc ?? MockAnalyticsBloc()),
+            BlocProvider.value(value: themeModeBloc ?? MockThemeModeBloc()),
+          ],
+          child: MaterialApp.router(
+            routerConfig: router,
+            title: '{{app_name}}',
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
           ),
         ),
