@@ -1,6 +1,5 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_news_example/app/app.dart';
+import 'package:flutter_news_example/home/home.dart';
 import 'package:flutter_news_example/landing/landing.dart';
 import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_news_example/terms_of_service/terms_of_service.dart';
@@ -16,21 +15,19 @@ class MockAppBloc extends Mock implements AppBloc {}
 class MockAppBlocListenable extends Mock implements AppBlocListenable {}
 
 void main() {
-  setUpAll(() {
-    setFirebaseUiIsTestMode(true);
-  });
   group('AppRouter', () {
     GoRouter buildRouter(String initialLocation) => GoRouter(
           initialLocation: initialLocation,
-          routes: AppRouter.routes,
+          routes: $appRoutes,
         );
 
     final pages = {
-      LandingPage.path: LandingPage,
-      LoginPage.path: SignInScreen,
-      LoginWithEmailPage.path: LoginWithEmailPage,
-      TermsOfServicePage.path: TermsOfServicePage,
-      UserProfilePage.path: UserProfilePage,
+      const LandingPageRoute().location: LandingPage,
+      const LoginPageRoute().location: LoginPage,
+      const LoginWithEmailPageRoute().location: LoginWithEmailPage,
+      const HomePageRoute().location: HomePage,
+      const UserProfilePageRoute().location: UserProfilePage,
+      const TermsOfServicePageRoute().location: TermsOfServicePage,
     };
     final keys = pages.keys.toList();
     for (final path in keys) {
@@ -47,10 +44,4 @@ void main() {
       );
     }
   });
-}
-
-Widget buildTestableWidget(Widget widget) {
-  return MaterialApp(
-    home: widget,
-  );
 }

@@ -33,7 +33,7 @@ Future<void> bootstrap(AppBuilder builder) async {
   final blocObserver = AppBlocObserver(
     analyticsRepository: analyticsRepository,
   );
-  // Bloc.observer = blocObserver;
+  Bloc.observer = blocObserver;
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationSupportDirectory(),
   );

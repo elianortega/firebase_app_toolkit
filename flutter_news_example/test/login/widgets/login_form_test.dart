@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:form_inputs/form_inputs.dart';
@@ -162,7 +163,8 @@ void main() {
         );
         await tester.ensureVisible(find.byKey(loginButtonKey));
         await tester.tap(find.byKey(loginButtonKey));
-        verify(() => mockRouter.push<void>(LoginWithEmailPage.path)).called(1);
+        verify(() => mockRouter.go(LoginWithEmailPageRoute().location))
+            .called(1);
       });
     });
   });

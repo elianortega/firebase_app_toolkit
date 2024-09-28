@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/analytics/analytics.dart';
 import 'package:flutter_news_example/app/app.dart';
-import 'package:flutter_news_example/terms_of_service/terms_of_service.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockingjay/mockingjay.dart';
@@ -241,7 +240,7 @@ void main() {
           await tester.ensureVisible(termsOfService);
           await tester.tap(termsOfService);
           verify(
-            () => mockRouter.push<void>(TermsOfServicePage.path),
+            () => mockRouter.go(TermsOfServicePageRoute().location),
           ).called(1);
         });
       });

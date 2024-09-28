@@ -89,7 +89,7 @@ void main() {
 
       await tester.tap(find.byType(OpenProfileButton));
       await tester.pump();
-      verify(() => mockRouter.push<void>(UserProfilePage.path)).called(1);
+      verify(() => mockRouter.go(UserProfilePageRoute().location)).called(1);
     });
 
     testWidgets(
