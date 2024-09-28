@@ -7,6 +7,7 @@ import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:{{project_name.snakeCase()}}/magic_link_prompt/magic_link_prompt.dart';
 import 'package:{{project_name.snakeCase()}}/terms_of_service/terms_of_service.dart';
 import 'package:form_inputs/form_inputs.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginWithEmailForm extends StatelessWidget {
   const LoginWithEmailForm({super.key});
@@ -134,10 +135,7 @@ class _TermsAndPrivacyPolicyLinkTexts extends StatelessWidget {
                 color: AppColors.darkAqua,
               ),
               recognizer: TapGestureRecognizer()
-                ..onTap = () => showAppModal<void>(
-                      context: context,
-                      builder: (context) => const TermsOfServiceModal(),
-                    ),
+                ..onTap = () => context.push<void>(TermsOfServicePage.path),
             ),
             TextSpan(
               text: '.',

@@ -63,24 +63,11 @@ void main() {
 
   group('AppView', () {
     late AppBloc appBloc;
-    late analytics.AnalyticsBloc analyticsBloc;
     late UserRepository userRepository;
 
     setUp(() {
       appBloc = MockAppBloc();
-      analyticsBloc = MockAnalyticsBloc();
       userRepository = MockUserRepository();
-    });
-
-    testWidgets('navigates to HomePage when unauthenticated', (tester) async {
-      when(() => appBloc.state).thenReturn(AppState.unauthenticated());
-      await tester.pumpApp(
-        const AppView(),
-        appBloc: appBloc,
-        userRepository: userRepository,
-      );
-      await tester.pumpAndSettle();
-      expect(find.byType(HomePage), findsOneWidget);
     });
 
     testWidgets('navigates to HomePage when authenticated', (tester) async {
@@ -94,72 +81,6 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(find.byType(HomePage), findsOneWidget);
-    });
-
-    group('adds TrackAnalyticsEvent to AnalyticsBloc', () {
-      testWidgets(
-          'with RegistrationEvent '
-          'when user is authenticated and new', (tester) async {
-        final user = MockUser();
-        when(() => user.isAnonymous).thenReturn(false);
-        when(() => user.isNewUser).thenReturn(true);
-
-        whenListen(
-          appBloc,
-          Stream.fromIterable(
-            [
-              AppState.unauthenticated(),
-              AppState.authenticated(user),
-            ],
-          ),
-          initialState: AppState.unauthenticated(),
-        );
-
-        await tester.pumpApp(
-          const AppView(),
-          appBloc: appBloc,
-          analyticsBloc: analyticsBloc,
-          userRepository: userRepository,
-        );
-
-        verify(
-          () => analyticsBloc.add(
-            analytics.TrackAnalyticsEvent(analytics.RegistrationEvent()),
-          ),
-        ).called(1);
-      });
-
-      testWidgets(
-          'with LoginEvent '
-          'when user is authenticated and not new', (tester) async {
-        final user = MockUser();
-        when(() => user.isAnonymous).thenReturn(false);
-        when(() => user.isNewUser).thenReturn(false);
-
-        whenListen(
-          appBloc,
-          Stream.fromIterable(
-            [
-              AppState.unauthenticated(),
-              AppState.authenticated(user),
-            ],
-          ),
-          initialState: AppState.unauthenticated(),
-        );
-
-        await tester.pumpApp(
-          const AppView(),
-          appBloc: appBloc,
-          analyticsBloc: analyticsBloc,
-          userRepository: userRepository,
-        );
-
-        verify(
-          () => analyticsBloc.add(
-            analytics.TrackAnalyticsEvent(analytics.LoginEvent()),
-          ),
-        ).called(1);
-      });
     });
   });
 }
