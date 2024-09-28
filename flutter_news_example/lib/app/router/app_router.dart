@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart' as fba;
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/home/home.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_news_example/terms_of_service/view/view.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mockingjay/mockingjay.dart';
 
 part 'app_router.g.dart';
 
@@ -62,13 +59,6 @@ class AppRouter {
       routes: $appRoutes,
     );
   }
-}
-
-class MockFirebaseApp extends Mock implements FirebaseApp {}
-
-class MockAuth extends Mock implements fba.FirebaseAuth {
-  @override
-  FirebaseApp get app => MockFirebaseApp();
 }
 
 @TypedGoRoute<LandingPageRoute>(
