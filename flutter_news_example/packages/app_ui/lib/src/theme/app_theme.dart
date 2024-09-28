@@ -220,7 +220,14 @@ class AppTheme {
         if (states.contains(WidgetState.selected)) {
           return AppColors.primaryContainer;
         }
-        return AppColors.paleSky;
+        return AppColors.grey;
+      }),
+      trackOutlineColor:
+          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return AppColors.primaryContainer;
+        }
+        return AppColors.grey;
       }),
     );
   }
