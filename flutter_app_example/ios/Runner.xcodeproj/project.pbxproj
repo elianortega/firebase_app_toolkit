@@ -563,7 +563,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.somnio.app.example;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.elianortega.flutterapp.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REVERSED_CLIENT_ID = "com.googleusercontent.apps.880844987625-8rlodfd6un679oeo52f5eecqd1holqje";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -603,7 +603,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.somnio.app.example;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.elianortega.flutterapp.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REVERSED_CLIENT_ID = "com.googleusercontent.apps.880844987625-8rlodfd6un679oeo52f5eecqd1holqje";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -700,7 +700,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.somnio.app.example.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.elianortega.flutterapp.example.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REVERSED_CLIENT_ID = "com.googleusercontent.apps.880844987625-8rlodfd6un679oeo52f5eecqd1holqje";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -740,7 +740,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.somnio.app.example.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.elianortega.flutterapp.example.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REVERSED_CLIENT_ID = "com.googleusercontent.apps.880844987625-8rlodfd6un679oeo52f5eecqd1holqje";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";

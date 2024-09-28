@@ -15,7 +15,7 @@
 		<key>PLIST_VERSION</key>
 		<string>1</string>
 		<key>BUNDLE_ID</key>
-		<string>com.somnio.app.example.dev</string>
+		<string>dev.elianortega.flutterapp.example.dev</string>
 		<key>PROJECT_ID</key>
 		<string>somnio-app-example</string>
 		<key>STORAGE_BUCKET</key>

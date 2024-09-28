@@ -50,7 +50,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.somnio.app.example"
+        applicationId "dev.elianortega.flutterapp.example"
         minSdkVersion 24
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
