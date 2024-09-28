@@ -14,10 +14,9 @@ part 'app_router.g.dart';
 class AppRouter {
   AppRouter({
     required AppBloc appBloc,
+    String? initialLocation,
   }) {
-    _goRouter = _routes(
-      appBloc: appBloc,
-    );
+    _goRouter = _routes(appBloc: appBloc, initialLocation: initialLocation);
   }
 
   late final GoRouter _goRouter;
@@ -39,10 +38,11 @@ class AppRouter {
 
   GoRouter _routes({
     required AppBloc appBloc,
+    String? initialLocation,
   }) {
     final appBlocListenable = AppBlocListenable(appBloc: appBloc);
     return GoRouter(
-      initialLocation: const LandingPageRoute().location,
+      initialLocation: initialLocation ?? const LandingPageRoute().location,
       refreshListenable: appBlocListenable,
       redirect: (context, state) {
         final path = state.uri.path;

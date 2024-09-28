@@ -126,30 +126,6 @@ class UserProfileTitle extends StatelessWidget {
 }
 
 @visibleForTesting
-class UserProfileSubtitle extends StatelessWidget {
-  const UserProfileSubtitle({required this.subtitle, super.key});
-
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.lg,
-        AppSpacing.sm,
-        AppSpacing.lg,
-        AppSpacing.md,
-      ),
-      child: Text(
-        subtitle,
-        style: theme.textTheme.titleSmall,
-      ),
-    );
-  }
-}
-
-@visibleForTesting
 class UserProfileItem extends StatelessWidget {
   const UserProfileItem({
     required this.title,
