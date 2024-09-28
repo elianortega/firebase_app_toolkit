@@ -1,5 +1,5 @@
 import 'package:analytics_repository/analytics_repository.dart' as analytics;
-import 'package:flutter_news_example/analytics/analytics.dart';
+import 'package:flutter_app_example/analytics/analytics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:user_repository/user_repository.dart';

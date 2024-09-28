@@ -1,9 +1,9 @@
 import 'package:deep_link_client/deep_link_client.dart';
 import 'package:firebase_authentication_client/firebase_authentication_client.dart';
 import 'package:firebase_deep_link_client/firebase_deep_link_client.dart';
-import 'package:flutter_news_example/app/app.dart';
-import 'package:flutter_news_example/main/bootstrap/bootstrap.dart';
-import 'package:flutter_news_example/src/version.dart';
+import 'package:flutter_app_example/app/app.dart';
+import 'package:flutter_app_example/main/bootstrap/bootstrap.dart';
+import 'package:flutter_app_example/src/version.dart';
 import 'package:package_info_client/package_info_client.dart';
 import 'package:persistent_storage/persistent_storage.dart';
 import 'package:token_storage/token_storage.dart';

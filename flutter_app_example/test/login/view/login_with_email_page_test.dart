@@ -1,5 +1,5 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:flutter_news_example/login/login.dart';
+import 'package:flutter_app_example/login/login.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockingjay/mockingjay.dart';
 

@@ -1,7 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news_example/l10n/l10n.dart';
-import 'package:flutter_news_example/terms_of_service/widgets/terms_of_service_body.dart';
+import 'package:flutter_app_example/l10n/l10n.dart';
+import 'package:flutter_app_example/terms_of_service/widgets/terms_of_service_body.dart';
 
 class TermsOfServiceModal extends StatelessWidget {
   const TermsOfServiceModal({super.key});

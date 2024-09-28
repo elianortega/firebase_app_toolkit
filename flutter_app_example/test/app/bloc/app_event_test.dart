@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable
-import 'package:flutter_news_example/app/app.dart';
+import 'package:flutter_app_example/app/app.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:user_repository/user_repository.dart';

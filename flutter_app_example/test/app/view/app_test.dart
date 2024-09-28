@@ -2,9 +2,9 @@
 
 import 'package:analytics_repository/analytics_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_news_example/analytics/analytics.dart' as analytics;
-import 'package:flutter_news_example/app/app.dart';
-import 'package:flutter_news_example/home/home.dart';
+import 'package:flutter_app_example/analytics/analytics.dart' as analytics;
+import 'package:flutter_app_example/app/app.dart';
+import 'package:flutter_app_example/home/home.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:user_repository/user_repository.dart';

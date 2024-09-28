@@ -2,10 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_news_example/analytics/analytics.dart';
-import 'package:flutter_news_example/app/app.dart';
-import 'package:flutter_news_example/l10n/l10n.dart';
-import 'package:flutter_news_example/theme_selector/theme_selector.dart';
+import 'package:flutter_app_example/analytics/analytics.dart';
+import 'package:flutter_app_example/app/app.dart';
+import 'package:flutter_app_example/l10n/l10n.dart';
+import 'package:flutter_app_example/theme_selector/theme_selector.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockingjay/mockingjay.dart'

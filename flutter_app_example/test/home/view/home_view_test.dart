@@ -7,10 +7,10 @@ import 'package:app_ui/app_ui.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_news_example/app/app.dart';
-import 'package:flutter_news_example/home/home.dart';
-import 'package:flutter_news_example/navigation/navigation.dart';
-import 'package:flutter_news_example/user_profile/user_profile.dart';
+import 'package:flutter_app_example/app/app.dart';
+import 'package:flutter_app_example/home/home.dart';
+import 'package:flutter_app_example/navigation/navigation.dart';
+import 'package:flutter_app_example/user_profile/user_profile.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

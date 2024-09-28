@@ -1,4 +1,4 @@
-import 'package:flutter_news_example/main/build_number.dart';
+import 'package:flutter_app_example/main/build_number.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

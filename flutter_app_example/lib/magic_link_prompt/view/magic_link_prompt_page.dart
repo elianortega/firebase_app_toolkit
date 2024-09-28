@@ -1,6 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news_example/magic_link_prompt/magic_link_prompt.dart';
+import 'package:flutter_app_example/magic_link_prompt/magic_link_prompt.dart';
 
 class MagicLinkPromptPage extends StatelessWidget {
   const MagicLinkPromptPage({required this.email, super.key});

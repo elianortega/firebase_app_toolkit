@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_news_example/app/app.dart';
+import 'package:flutter_app_example/app/app.dart';
 
 class AppBlocListenable extends ChangeNotifier {
   AppBlocListenable({

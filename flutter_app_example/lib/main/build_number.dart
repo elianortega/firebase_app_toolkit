@@ -1,4 +1,4 @@
-import 'package:flutter_news_example/src/version.dart';
+import 'package:flutter_app_example/src/version.dart';
 
 int buildNumber([String version = packageVersion]) {
   final versionSegments = version.split('+');
