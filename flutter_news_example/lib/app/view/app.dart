@@ -7,7 +7,6 @@ import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/l10n/l10n.dart';
 import 'package:flutter_news_example/login/login.dart' hide LoginEvent;
 import 'package:flutter_news_example/theme_selector/theme_selector.dart';
-import 'package:go_router/go_router.dart';
 import 'package:user_repository/user_repository.dart';
 
 class App extends StatelessWidget {
@@ -68,11 +67,11 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-  late final GoRouter router;
+  late final AppRouter router;
 
   @override
   void initState() {
-    router = AppRouter.router(
+    router = AppRouter(
       appBloc: context.read<AppBloc>(),
     );
     super.initState();
@@ -86,7 +85,7 @@ class _AppViewState extends State<AppView> {
       darkTheme: const AppDarkTheme().themeData,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      routerConfig: router,
+      routerConfig: router.goRouter,
     );
   }
 }

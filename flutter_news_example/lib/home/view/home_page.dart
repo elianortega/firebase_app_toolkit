@@ -5,8 +5,6 @@ import 'package:flutter_news_example/home/home.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static const path = '/home';
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

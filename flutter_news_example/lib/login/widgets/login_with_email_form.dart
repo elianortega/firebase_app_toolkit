@@ -130,13 +130,13 @@ class _TermsAndPrivacyPolicyLinkTexts extends StatelessWidget {
               style: theme.textTheme.bodyLarge,
             ),
             TextSpan(
-              text: context.l10n.loginWithEmailTermsAndPrivacyPolicyText,
-              style: theme.textTheme.bodyLarge?.apply(
-                color: AppColors.darkAqua,
-              ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () => context.push<void>(TermsOfServicePage.path),
-            ),
+                text: context.l10n.loginWithEmailTermsAndPrivacyPolicyText,
+                style: theme.textTheme.bodyLarge?.apply(
+                  color: AppColors.darkAqua,
+                ),
+                recognizer: TapGestureRecognizer()
+                // ..onTap = () => context.push<void>(TermsOfServicePage.path),
+                ),
             TextSpan(
               text: '.',
               style: theme.textTheme.bodyLarge,

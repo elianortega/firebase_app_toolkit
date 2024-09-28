@@ -1,9 +1,7 @@
-import 'dart:io';
+import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/home/home.dart';
@@ -14,82 +12,54 @@ import 'package:flutter_news_example/user_profile/user_profile.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockingjay/mockingjay.dart';
 
+part 'app_router.g.dart';
+
 class AppRouter {
+  AppRouter({
+    required AppBloc appBloc,
+  }) {
+    _goRouter = _routes(
+      appBloc: appBloc,
+    );
+  }
+
+  late final GoRouter _goRouter;
+
+  GoRouter get goRouter => _goRouter;
+
   /// Only routes that are accessible to unauthenticated users
-  static const onlyUnauthenticatedUserRoutes = <String>[
-    LandingPage.path,
-    LoginPage.path,
-    LoginWithEmailPage.path,
+  final onlyUnauthenticatedUserRoutes = <String>[
+    const LandingPageRoute().location,
+    const LoginPageRoute().location,
+    const LoginWithEmailPageRoute().location,
   ];
 
-  /// Only routes that are accessible for authenticated users
-  static const onlyAuthenticatedUserRoutes = <String>[
-    HomePage.path,
-    UserProfilePage.path,
+  // / Only routes that are accessible for authenticated users
+  final onlyAuthenticatedUserRoutes = <String>[
+    const HomePageRoute().location,
+    const UserProfilePageRoute().location,
   ];
 
-  @visibleForTesting
-  static final routes = [
-    GoRoute(
-      path: LandingPage.path,
-      name: LandingPage.path,
-      builder: (context, state) => const LandingPage(),
-    ),
-    GoRoute(
-      path: LoginPage.path,
-      name: LoginPage.path,
-      builder: (context, state) => SignInScreen(
-        auth: Platform.environment.containsKey('FLUTTER_TEST')
-            ? MockAuth()
-            : null,
-        providers: [
-          EmailAuthProvider(),
-          // TODO(any): add client id to enable desktop login
-          GoogleProvider(clientId: ''),
-        ],
-      ),
-    ),
-    GoRoute(
-      path: LoginWithEmailPage.path,
-      name: LoginWithEmailPage.path,
-      builder: (context, state) => const LoginWithEmailPage(),
-    ),
-    GoRoute(
-      path: HomePage.path,
-      name: HomePage.path,
-      builder: (context, state) => const HomePage(),
-    ),
-    GoRoute(
-      path: TermsOfServicePage.path,
-      name: TermsOfServicePage.path,
-      builder: (context, state) => const TermsOfServicePage(),
-    ),
-    GoRoute(
-      path: UserProfilePage.path,
-      name: UserProfilePage.path,
-      builder: (context, state) => const UserProfilePage(),
-    ),
-  ];
-
-  static GoRouter router({
+  GoRouter _routes({
     required AppBloc appBloc,
   }) {
     final appBlocListenable = AppBlocListenable(appBloc: appBloc);
     return GoRouter(
-      initialLocation: LandingPage.path,
+      initialLocation: const LandingPageRoute().location,
       refreshListenable: appBlocListenable,
       redirect: (context, state) {
         final path = state.uri.path;
         final isAuthenticated = appBloc.state.isAuthenticated;
+        log('Going to path: $path, isAuthenticated: $isAuthenticated');
         if (onlyUnauthenticatedUserRoutes.contains(path) && isAuthenticated) {
-          return HomePage.path;
+          return const HomePageRoute().location;
         }
         if (onlyAuthenticatedUserRoutes.contains(path) && !isAuthenticated) {
-          return LandingPage.path;
+          return const LandingPageRoute().location;
         }
         return null;
       },
-      routes: routes,
+      routes: $appRoutes,
     );
   }
 }
@@ -99,4 +69,95 @@ class MockFirebaseApp extends Mock implements FirebaseApp {}
 class MockAuth extends Mock implements fba.FirebaseAuth {
   @override
   FirebaseApp get app => MockFirebaseApp();
+}
+
+@TypedGoRoute<LandingPageRoute>(
+  name: 'landing',
+  path: '/',
+  routes: [
+    TypedGoRoute<LoginPageRoute>(
+      name: 'login',
+      path: 'login',
+      routes: [
+        TypedGoRoute<LoginWithEmailPageRoute>(
+          name: 'login-with-email',
+          path: 'login-with-email',
+        ),
+      ],
+    ),
+  ],
+)
+class LandingPageRoute extends GoRouteData {
+  const LandingPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LandingPage();
+  }
+}
+
+@immutable
+class LoginPageRoute extends GoRouteData {
+  const LoginPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginPage();
+  }
+}
+
+@immutable
+class LoginWithEmailPageRoute extends GoRouteData {
+  const LoginWithEmailPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginWithEmailPage();
+  }
+}
+
+@TypedGoRoute<HomePageRoute>(
+  name: 'home',
+  path: '/home',
+  routes: [
+    TypedGoRoute<UserProfilePageRoute>(
+      name: 'user-profile',
+      path: 'user-profile',
+      routes: [
+        TypedGoRoute<TermsOfServicePageRoute>(
+          name: 'terms-of-service',
+          path: 'terms-of-service',
+        ),
+      ],
+    ),
+  ],
+)
+@immutable
+class HomePageRoute extends GoRouteData {
+  const HomePageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const HomePage();
+  }
+}
+
+@immutable
+class UserProfilePageRoute extends GoRouteData {
+  const UserProfilePageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const UserProfilePage();
+  }
+}
+
+@immutable
+class TermsOfServicePageRoute extends GoRouteData {
+  const TermsOfServicePageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const TermsOfServicePage();
+  }
 }

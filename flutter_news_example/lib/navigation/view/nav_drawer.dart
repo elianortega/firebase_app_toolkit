@@ -30,7 +30,6 @@ class NavDrawer extends StatelessWidget {
                 horizontal: _contentPadding,
               ),
               child: Align(
-                alignment: Alignment.centerLeft,
                 child: AppLogo.light(),
               ),
             ),

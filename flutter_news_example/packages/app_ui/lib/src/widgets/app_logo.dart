@@ -22,7 +22,7 @@ class AppLogo extends StatelessWidget {
     return _logo.image(
       fit: BoxFit.contain,
       width: 172,
-      height: 24,
+      height: 32,
     );
   }
 }

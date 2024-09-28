@@ -78,7 +78,7 @@ abstract class AppColors {
   static const Color background = Color(0xFFFFFFFF);
 
   /// The dark background color.
-  static const Color darkBackground = Color(0xFF001F28);
+  static const Color darkBackground = Color(0xFF001438);
 
   /// The on-background color.
   static const Color onBackground = Color(0xFF1A1A1A);

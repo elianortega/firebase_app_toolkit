@@ -1,34 +1,40 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news_example/login/login.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_news_example/app/router/app_router.dart';
+import 'package:flutter_news_example/l10n/l10n.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
-  static const path = '/';
-
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Assets.images.logoDark.image(
+              height: 64,
+            ),
+            const SizedBox(height: AppSpacing.xxlg),
             AppButton.black(
               key: const Key('landingPage_login_button'),
               onPressed: () {
-                context.push<void>(LoginPage.path);
+                const LoginPageRoute().go(context);
               },
-              child: const Text('Login'),
+              child: Text(l10n.loginButtonText),
             ),
             const SizedBox(height: AppSpacing.md),
             AppButton.black(
               key: const Key('landingPage_signUp_button'),
               onPressed: () {
-                context.push<void>(LoginPage.path);
+                const LoginPageRoute().go(context);
               },
-              child: const Text('Sign Up'),
+              child: Text(l10n.signUpButtonText),
             ),
           ],
         ),

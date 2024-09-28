@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/l10n/l10n.dart';
-import 'package:flutter_news_example/user_profile/user_profile.dart';
-import 'package:go_router/go_router.dart';
 
 /// A user profile button which displays a [LoginButton]
 /// for the unauthenticated user or an [OpenProfileButton]
@@ -54,7 +52,7 @@ class OpenProfileButton extends StatelessWidget {
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),
-      onPressed: () => context.push<void>(UserProfilePage.path),
+      onPressed: () => const UserProfilePageRoute().go(context),
       tooltip: context.l10n.openProfileTooltip,
     );
   }
