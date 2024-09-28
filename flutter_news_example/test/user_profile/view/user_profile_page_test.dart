@@ -219,7 +219,7 @@ void main() {
         testWidgets('when tapped on Terms of User & Privacy Policy',
             (tester) async {
           final mockRouter = MockGoRouter();
-          when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
+          when(() => mockRouter.go(any())).thenAnswer((_) async {});
           await tester.pumpApp(
             BlocProvider.value(
               value: userProfileBloc,
