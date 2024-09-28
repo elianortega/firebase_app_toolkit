@@ -1,4 +1,4 @@
-name: Verify Flutter News Template
+name: Verify Flutter App Template
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -7,7 +7,7 @@ concurrency:
 on:
   pull_request:
     paths:
-      - "flutter_news_template/**"
+      - "flutter_app_template/**"
       - ".github/workflows/main.yaml"
     branches:
       - templates
@@ -16,7 +16,7 @@ jobs:
   build:
     defaults:
       run:
-        working-directory: flutter_news_template
+        working-directory: flutter_app_template
 
     runs-on: ubuntu-latest
 
@@ -34,13 +34,13 @@ jobs:
           flutter pub global activate very_good_cli
 
       - name: Install Brick
-        run: mason add -g flutter_news_template --path .
+        run: mason add -g flutter_app_template --path .
 
       - name: Generate Project
-        run: mason make flutter_news_template -c ./template.json -o tmp
+        run: mason make flutter_app_template -c ./template.json -o tmp
 
       - name: Install Dependencies
-        run: very_good packages get -r tmp/flutter_news_template
+        run: very_good packages get -r tmp/flutter_app_template
 
       - name: Run Tests
-        run: cd tmp/flutter_news_template && very_good test -x presubmit-only && cd -
+        run: cd tmp/flutter_app_template && very_good test -x presubmit-only && cd -
