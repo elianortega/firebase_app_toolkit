@@ -293,14 +293,14 @@ void main() async {
               '{{project_name.snakeCase()}}',
             )
             .replaceAll(
-              'FlutterNewsExample',
+              'FlutterAppExample',
               '{{project_name.pascalCase()}}',
             )
             .replaceAll(
-              'flutter-news-example',
+              'flutter-app-example',
               '{{project_name.paramCase()}}',
             )
-            .replaceAll('Flutter News Example', '{{app_name}}')
+            .replaceAll('Flutter App Example', '{{app_name}}')
             .replaceAll('com.somnio.app.example', '{{reverse_domain}}'));
       } on Exception {}
 

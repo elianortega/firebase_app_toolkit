@@ -1,12 +1,8 @@
 {
   "hosting": {
-    "site": "flutter-news-example-gallery",
+    "site": "flutter-app-example-gallery",
     "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
