@@ -10,7 +10,7 @@ Future<void> run(HookContext context) async {
   context.logger
     ..info('\n')
     ..info(lightCyan.wrap(
-      'Congrats! You generated a new app with the Flutter News Toolkit!',
+      'Congrats! You generated a new app with the Flutter App Template!',
     ))
     ..info('\n')
     ..info(
