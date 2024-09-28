@@ -13,6 +13,3 @@ key.properties
 **/*.jks
 
 **/.idea/*
-
-# Unignore debug.keystore
-!debug.keystore
