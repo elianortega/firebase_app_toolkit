@@ -1,10 +1,10 @@
 import 'package:app_ui/app_ui.dart'
     show AppBackButton, AppButton, AppColors, AppSpacing, Assets;
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app_example/app/app.dart';
 import 'package:flutter_app_example/l10n/l10n.dart';
 import 'package:flutter_app_example/user_profile/user_profile.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_repository/user_repository.dart';
 
 class UserProfilePage extends StatelessWidget {

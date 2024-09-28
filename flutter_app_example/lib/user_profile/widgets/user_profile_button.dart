@@ -1,8 +1,8 @@
 import 'package:app_ui/app_ui.dart' show AppSpacing, Assets;
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app_example/app/app.dart';
 import 'package:flutter_app_example/l10n/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// A user profile button which displays a [LoginButton]
 /// for the unauthenticated user or an [OpenProfileButton]
