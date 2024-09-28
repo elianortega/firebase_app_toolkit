@@ -4,15 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/l10n/l10n.dart';
-import 'package:flutter_news_example/terms_of_service/view/terms_of_service_page.dart';
 import 'package:flutter_news_example/user_profile/user_profile.dart';
-import 'package:go_router/go_router.dart';
 import 'package:user_repository/user_repository.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
-
-  static const String path = '/user-profile';
 
   @override
   Widget build(BuildContext context) {
@@ -75,23 +71,12 @@ class _UserProfileViewState extends State<UserProfileView>
                 ],
                 const SizedBox(height: AppSpacing.lg),
                 const _UserProfileDivider(),
-                UserProfileSubtitle(
-                  subtitle: l10n.userProfileSubscriptionDetailsSubtitle,
-                ),
-                const _UserProfileDivider(),
-                UserProfileSubtitle(
-                  subtitle: l10n.userProfileSettingsSubtitle,
-                ),
-                const _UserProfileDivider(),
-                UserProfileSubtitle(
-                  subtitle: l10n.userProfileLegalSubtitle,
-                ),
                 UserProfileItem(
                   key: const Key('userProfilePage_termsOfServiceItem'),
                   leading: Assets.icons.termsOfUseIcon.svg(),
                   title: l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
                   onTap: () {
-                    context.push<void>(TermsOfServicePage.path);
+                    const TermsOfServicePageRoute().go(context);
                   },
                 ),
                 UserProfileItem(
@@ -135,30 +120,6 @@ class UserProfileTitle extends StatelessWidget {
       child: Text(
         context.l10n.userProfileTitle,
         style: theme.textTheme.displaySmall,
-      ),
-    );
-  }
-}
-
-@visibleForTesting
-class UserProfileSubtitle extends StatelessWidget {
-  const UserProfileSubtitle({required this.subtitle, super.key});
-
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.lg,
-        AppSpacing.sm,
-        AppSpacing.lg,
-        AppSpacing.md,
-      ),
-      child: Text(
-        subtitle,
-        style: theme.textTheme.titleSmall,
       ),
     );
   }

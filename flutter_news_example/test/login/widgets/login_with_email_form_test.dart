@@ -5,9 +5,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news_example/app/app.dart';
 import 'package:flutter_news_example/login/login.dart';
 import 'package:flutter_news_example/magic_link_prompt/magic_link_prompt.dart';
-import 'package:flutter_news_example/terms_of_service/terms_of_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:mockingjay/mockingjay.dart';
@@ -201,7 +201,7 @@ void main() {
           'to TermsOfServicePage when tapped on '
           'Terms of Use and Privacy Policy text', (tester) async {
         final mockRouter = MockGoRouter();
-        when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
+        when(() => mockRouter.go(any())).thenAnswer((_) async {});
         await tester.pumpApp(
           BlocProvider.value(
             value: loginBloc,
@@ -219,7 +219,8 @@ void main() {
         );
 
         await tester.pumpAndSettle();
-        verify(() => mockRouter.push<void>(TermsOfServicePage.path)).called(1);
+        verify(() => mockRouter.go(const TermsOfServicePageRoute().location))
+            .called(1);
       });
       testWidgets('to MagicLinkPromptPage when submission is success',
           (tester) async {

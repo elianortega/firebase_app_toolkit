@@ -74,7 +74,7 @@ void main() {
         'navigates to UserProfilePage '
         'when tapped on OpenProfileButton', (tester) async {
       final mockRouter = MockGoRouter();
-      when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
+      when(() => mockRouter.go(any())).thenAnswer((_) async {});
       whenListen(
         appBloc,
         Stream.value(AppState.authenticated(user)),
@@ -89,7 +89,7 @@ void main() {
 
       await tester.tap(find.byType(OpenProfileButton));
       await tester.pump();
-      verify(() => mockRouter.push<void>(UserProfilePage.path)).called(1);
+      verify(() => mockRouter.go(UserProfilePageRoute().location)).called(1);
     });
 
     testWidgets(

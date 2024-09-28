@@ -6,8 +6,6 @@ import 'package:flutter_news_example/terms_of_service/terms_of_service.dart';
 class TermsOfServicePage extends StatelessWidget {
   const TermsOfServicePage({super.key});
 
-  static const String path = '/terms-of-service';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

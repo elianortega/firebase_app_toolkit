@@ -7,7 +7,6 @@ import 'package:user_repository/user_repository.dart';
 class LoginWithEmailPage extends StatelessWidget {
   const LoginWithEmailPage({super.key});
 
-  static const String path = '/login-with-email';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
