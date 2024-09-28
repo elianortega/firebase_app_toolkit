@@ -1,0 +1,35 @@
+name: flutter_app_template
+description: A flutter application template built in Flutter, inspired by the Flutter News Toolkit.
+repository: https://github.com/elianortega/firebase_app_toolkit
+version: 1.0.0
+
+environment:
+  mason: ">=0.1.0-dev.40 <0.1.0"
+
+vars:
+  app_name:
+    type: string
+    description: The name of your application as displayed on the device for end users.
+    default: Flutter App
+    prompt: What is the user-facing application name?
+  reverse_domain:
+    type: string
+    description: The application identifier also known as the bundle identifier.
+    default: com.flutter.app.template
+    prompt: What is the application bundle identifier?
+  code_owners:
+    type: string
+    description: A list of GitHub usernames who will be code owners on the repository.
+    prompt: Who are the code owners? (e.g. @user1 @user2)
+  flavors:
+    type: array
+    description: The flavors which you want the generated application to include.
+    defaults:
+      - development
+      - production
+    values:
+      - development
+      - integration
+      - staging
+      - production
+    prompt: What flavors do you want your application to include?

@@ -1,7 +1,0 @@
-{
-  "app_name": "Flutter News Template",
-  "project_name": "flutter_news_template",
-  "reverse_domain": "com.google.news.template",
-  "code_owners": "@githubUser",
-  "flavors": ["development", "production"]
-}

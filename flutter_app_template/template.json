@@ -1,0 +1,7 @@
+{
+  "app_name": "Flutter App Template",
+  "project_name": "flutter_app_template",
+  "reverse_domain": "com.flutter.app.template",
+  "code_owners": "@githubUser",
+  "flavors": ["development", "production"]
+}
