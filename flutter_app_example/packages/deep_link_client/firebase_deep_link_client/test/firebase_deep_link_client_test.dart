@@ -46,8 +46,8 @@ void main() {
 
     group('deepLinkStream', () {
       test('publishes values received through onLink stream', () {
-        final expectedUri1 = Uri.https('news.app.test', '/test/1');
-        final expectedUri2 = Uri.https('news.app.test', '/test/2');
+        final expectedUri1 = Uri.https('flutter.app.test', '/test/1');
+        final expectedUri2 = Uri.https('flutter.app.test', '/test/2');
 
         final client =
             FirebaseDeepLinkClient(firebaseDynamicLinks: dynamicLinks);

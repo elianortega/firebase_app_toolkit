@@ -87,12 +87,12 @@ android {
         development {
             dimension "default"
             applicationIdSuffix "dev"
-            manifestPlaceholders = [appName: "Flutter News Example [DEV]"]
+            manifestPlaceholders = [appName: "Flutter App Example [DEV]"]
         } 
         production {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Flutter News Example"]
+            manifestPlaceholders = [appName: "Flutter App Example"]
         } 
     }
 

@@ -68,7 +68,7 @@ extension AppTester on WidgetTester {
             BlocProvider.value(value: themeModeBloc ?? MockThemeModeBloc()),
           ],
           child: MaterialApp(
-            title: 'Flutter News Example',
+            title: 'Flutter App Example',
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -126,7 +126,7 @@ extension AppTester on WidgetTester {
           ],
           child: MaterialApp.router(
             routerConfig: router,
-            title: 'Flutter News Example',
+            title: 'Flutter App Example',
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

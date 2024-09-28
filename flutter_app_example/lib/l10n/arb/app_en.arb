@@ -1,5 +1,5 @@
 {
-  "appName": "Flutter News Example",
+  "appName": "Flutter App Example",
   "@appName": {
     "description": "The name of this application",
     "type": "String",

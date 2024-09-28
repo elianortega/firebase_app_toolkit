@@ -24,7 +24,7 @@ void main() {
       );
 
       final packageInfoClient = PackageInfoClient(
-        appName: 'Flutter News Example',
+        appName: 'Flutter App Example',
         packageName: 'com.somnio.app.example',
         packageVersion: packageVersion,
       );

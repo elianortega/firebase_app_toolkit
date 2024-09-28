@@ -41,7 +41,7 @@ jobs:
       - name: Clean Up Current Template
         # Delete the current version of the template using git to keep
         # track of all changes afterwards.
-        run: git rm -r --ignore-unmatch flutter_news_template/__brick__
+        run: git rm -r --ignore-unmatch flutter_app_template/__brick__
 
       - name: Unstash New Template Version
         # Pop the new version of the template previously saved to compare it with

@@ -1,3 +1,3 @@
-# Flutter News Example UI
+# Flutter App Example UI
 
-A UI Toolkit for Flutter News
+A UI Toolkit for Flutter App

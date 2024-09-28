@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Modal which is styled for the Flutter News Example app.
+/// Modal which is styled for the Flutter App Example app.
 Future<T?> showAppModal<T>({
   required BuildContext context,
   required WidgetBuilder builder,
