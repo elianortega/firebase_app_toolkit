@@ -14,7 +14,7 @@ class MockAuthenticationClient extends Mock implements AuthenticationClient {}
 
 class MockPackageInfoClient extends Mock implements PackageInfoClient {}
 
-class MockDeepLinkClient extends Mock implements DeepLinkClient {}
+class MockDeepLinkService extends Mock implements DeepLinkService {}
 
 class MockUserStorage extends Mock implements UserStorage {}
 
@@ -54,7 +54,7 @@ void main() {
   group('UserRepository', () {
     late AuthenticationClient authenticationClient;
     late PackageInfoClient packageInfoClient;
-    late DeepLinkClient deepLinkClient;
+    late DeepLinkService deepLinkService;
     late UserStorage storage;
     late StreamController<Uri> deepLinkClientController;
     late UserRepository userRepository;
@@ -62,17 +62,17 @@ void main() {
     setUp(() {
       authenticationClient = MockAuthenticationClient();
       packageInfoClient = MockPackageInfoClient();
-      deepLinkClient = MockDeepLinkClient();
+      deepLinkService = MockDeepLinkService();
       storage = MockUserStorage();
       deepLinkClientController = StreamController<Uri>.broadcast();
 
-      when(() => deepLinkClient.deepLinkStream)
+      when(() => deepLinkService.deepLinkStream)
           .thenAnswer((_) => deepLinkClientController.stream);
 
       userRepository = UserRepository(
         authenticationClient: authenticationClient,
         packageInfoClient: packageInfoClient,
-        deepLinkClient: deepLinkClient,
+        deepLinkService: deepLinkService,
         storage: storage,
       );
     });
@@ -459,7 +459,7 @@ void main() {
         final result = await UserRepository(
           authenticationClient: authenticationClient,
           packageInfoClient: packageInfoClient,
-          deepLinkClient: deepLinkClient,
+          deepLinkService: deepLinkService,
           storage: storage,
         ).fetchAppOpenedCount();
         expect(result, 1);
@@ -474,7 +474,7 @@ void main() {
           UserRepository(
             authenticationClient: authenticationClient,
             packageInfoClient: packageInfoClient,
-            deepLinkClient: deepLinkClient,
+            deepLinkService: deepLinkService,
             storage: storage,
           ).fetchAppOpenedCount(),
           throwsA(isA<FetchAppOpenedCountFailure>()),
@@ -494,7 +494,7 @@ void main() {
           UserRepository(
             authenticationClient: authenticationClient,
             packageInfoClient: packageInfoClient,
-            deepLinkClient: deepLinkClient,
+            deepLinkService: deepLinkService,
             storage: storage,
           ).incrementAppOpenedCount(),
           completes,
@@ -512,7 +512,7 @@ void main() {
           UserRepository(
             authenticationClient: authenticationClient,
             packageInfoClient: packageInfoClient,
-            deepLinkClient: deepLinkClient,
+            deepLinkService: deepLinkService,
             storage: storage,
           ).incrementAppOpenedCount(),
           throwsA(isA<IncrementAppOpenedCountFailure>()),
