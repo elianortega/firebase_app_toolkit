@@ -14,62 +14,62 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/permission_client"
+    directory: "/flutter_app_example/packages/permission_client"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/app_ui/gallery"
+    directory: "/flutter_app_example/packages/app_ui/gallery"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/app_ui"
+    directory: "/flutter_app_example/packages/app_ui"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/authentication_client/authentication_client"
+    directory: "/flutter_app_example/packages/authentication_client/authentication_client"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/authentication_client/firebase_authentication_client"
+    directory: "/flutter_app_example/packages/authentication_client/firebase_authentication_client"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/authentication_client/token_storage"
+    directory: "/flutter_app_example/packages/authentication_client/token_storage"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/form_inputs"
+    directory: "/flutter_app_example/packages/form_inputs"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/storage/storage"
+    directory: "/flutter_app_example/packages/storage/storage"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/storage/secure_storage"
+    directory: "/flutter_app_example/packages/storage/secure_storage"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/storage/persistent_storage"
+    directory: "/flutter_app_example/packages/storage/persistent_storage"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/package_info_client"
+    directory: "/flutter_app_example/packages/package_info_client"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/email_launcher"
+    directory: "/flutter_app_example/packages/email_launcher"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/user_repository"
+    directory: "/flutter_app_example/packages/user_repository"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/deep_link_client"
+    directory: "/flutter_app_example/packages/deep_link_client"
     schedule:
       interval: "daily"
   - package-ecosystem: "pub"
-    directory: "/flutter_news_example/packages/analytics_repository"
+    directory: "/flutter_app_example/packages/analytics_repository"
     schedule:
       interval: "daily"
