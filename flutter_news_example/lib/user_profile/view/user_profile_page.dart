@@ -75,17 +75,6 @@ class _UserProfileViewState extends State<UserProfileView>
                 ],
                 const SizedBox(height: AppSpacing.lg),
                 const _UserProfileDivider(),
-                UserProfileSubtitle(
-                  subtitle: l10n.userProfileSubscriptionDetailsSubtitle,
-                ),
-                const _UserProfileDivider(),
-                UserProfileSubtitle(
-                  subtitle: l10n.userProfileSettingsSubtitle,
-                ),
-                const _UserProfileDivider(),
-                UserProfileSubtitle(
-                  subtitle: l10n.userProfileLegalSubtitle,
-                ),
                 UserProfileItem(
                   key: const Key('userProfilePage_termsOfServiceItem'),
                   leading: Assets.icons.termsOfUseIcon.svg(),

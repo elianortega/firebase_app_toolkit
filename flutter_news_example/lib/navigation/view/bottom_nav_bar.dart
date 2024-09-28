@@ -19,14 +19,14 @@ class BottomNavBar extends StatelessWidget {
         BottomNavigationBarItem(
           key: const Key('bottomNavBar_topStories'),
           icon: const Icon(Icons.home_outlined),
-          label: context.l10n.bottomNavBarTopStories,
+          label: context.l10n.bottomNavBarOption1,
         ),
         BottomNavigationBarItem(
           icon: const Icon(
             Icons.search,
             key: Key('bottomNavBar_search'),
           ),
-          label: context.l10n.bottomNavBarSearch,
+          label: context.l10n.bottomNavBarOption2,
         ),
       ],
       currentIndex: currentIndex,

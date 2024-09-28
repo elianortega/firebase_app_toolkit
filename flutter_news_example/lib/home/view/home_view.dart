@@ -30,8 +30,8 @@ class HomeView extends StatelessWidget {
         body: IndexedStack(
           index: selectedTab,
           children: const [
-            Center(child: Text('Feed')),
-            Center(child: Text('Search')),
+            Center(child: Text('Option 1')),
+            Center(child: Text('Option 2')),
           ],
         ),
         bottomNavigationBar: BottomNavBar(

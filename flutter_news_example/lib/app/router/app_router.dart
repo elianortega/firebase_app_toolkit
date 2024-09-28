@@ -38,6 +38,7 @@ class AppRouter {
     GoRoute(
       path: LoginPage.path,
       name: LoginPage.path,
+      // builder: (context, state) => const LoginPage(),
       builder: (context, state) => SignInScreen(
         auth: Platform.environment.containsKey('FLUTTER_TEST')
             ? MockAuth()

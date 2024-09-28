@@ -11,28 +11,56 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AppButton.black(
-              key: const Key('landingPage_login_button'),
-              onPressed: () {
-                context.push<void>(LoginPage.path);
-              },
-              child: const Text('Login'),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            AppButton.black(
-              key: const Key('landingPage_signUp_button'),
-              onPressed: () {
-                context.push<void>(LoginPage.path);
-              },
-              child: const Text('Sign Up'),
-            ),
-          ],
-        ),
+      // backgroundColor: Colors.red,
+      appBar: AppBar(
+        title: const Text('Tu Estudio'),
       ),
+      body: Column(),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// return Scaffold(
+    //   body: Padding(
+    //     padding: const EdgeInsets.symmetric(
+    //       horizontal: AppSpacing.lg,
+    //     ),
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: [
+    //         Assets.images.logoDark.image(
+    //           height: 64,
+    //         ),
+    //         const SizedBox(height: AppSpacing.xxlg),
+    //         AppButton.black(
+    //           key: const Key('landingPage_login_button'),
+    //           onPressed: () {
+    //             context.push<void>(LoginPage.path);
+    //           },
+    //           child: const Text('Login'),
+    //         ),
+    //         const SizedBox(height: AppSpacing.md),
+    //         AppButton.black(
+    //           key: const Key('landingPage_signUp_button'),
+    //           onPressed: () {
+    //             context.push<void>(LoginPage.path);
+    //           },
+    //           child: const Text('Sign Up'),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
