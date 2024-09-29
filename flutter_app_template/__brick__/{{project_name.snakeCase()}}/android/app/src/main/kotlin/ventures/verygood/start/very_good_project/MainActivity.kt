@@ -1,4 +1,4 @@
-package {{reverse_domain}}
+package dev.elianortega.flutterapp.example
 
 import io.flutter.embedding.android.FlutterActivity
 
