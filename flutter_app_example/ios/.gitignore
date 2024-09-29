@@ -32,3 +32,6 @@ Runner/GeneratedPluginRegistrant.*
 !default.pbxuser
 !default.perspectivev3
 !Podfile.lock
+
+# If you wish to add your firebase GoogleService-Info.plist file to version control, remove the following line
+GoogleService-Info.plist
