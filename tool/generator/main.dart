@@ -102,11 +102,26 @@ final _blackList = <String>[
   ),
   path.join(
     _targetPath,
+    'ios',
+    'Runner',
+    'development',
+    'GoogleService-Info_TEMPLATE.plist',
+  ),
+  path.join(
+    _targetPath,
     'android',
     'app',
     'src',
     'development',
     'google-services.json',
+  ),
+  path.join(
+    _targetPath,
+    'android',
+    'app',
+    'src',
+    'development',
+    'google-services_TEMPLATE.json',
   ),
   path.join(
     _targetPath,
