@@ -266,7 +266,8 @@ void main() async {
 
         file.writeAsStringSync(
           file.readAsStringSync().replaceAll(
-              RegExp('com.somnio.app.example'), '{{reverse_domain}}'),
+              RegExp('dev.elianortega.flutterapp.example'),
+              '{{reverse_domain}}'),
         );
 
         file.writeAsStringSync(
@@ -316,7 +317,8 @@ void main() async {
               '{{project_name.paramCase()}}',
             )
             .replaceAll('Flutter App Example', '{{app_name}}')
-            .replaceAll('com.somnio.app.example', '{{reverse_domain}}'));
+            .replaceAll(
+                'dev.elianortega.flutterapp.example', '{{reverse_domain}}'));
       } on Exception {}
 
       if (path.basename(file.path).contains('flutter_app_example')) {
