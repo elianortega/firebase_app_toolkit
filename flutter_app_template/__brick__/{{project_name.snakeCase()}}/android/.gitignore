@@ -9,10 +9,11 @@ GeneratedPluginRegistrant.java
 # Remember to never publicly share your keystore.
 # See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
 key.properties
+debugkey.properties
 **/*.keystore
 **/*.jks
 
 **/.idea/*
 
-# Unignore debug.keystore
-!debug.keystore
+# If you wish to add your firebase google-services.json file to version control, remove the following line
+google-services.json
