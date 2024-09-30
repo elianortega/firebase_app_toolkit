@@ -10,12 +10,6 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: Montserrat
-  static const String montserrat = 'Montserrat';
-
-  /// Font family: NotoSansDisplay
-  static const String notoSansDisplay = 'NotoSansDisplay';
-
-  /// Font family: NotoSerif
-  static const String notoSerif = 'NotoSerif';
+  /// Font family: Roboto
+  static const String roboto = 'Roboto';
 }

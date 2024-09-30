@@ -25,26 +25,20 @@ flutter:
     - assets/icons/
     - assets/images/
   fonts:
-    - family: NotoSerif
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/NotoSerif-Bold.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
           weight: 700
-        - asset: assets/fonts/NotoSerif-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/NotoSerif-Medium.ttf
+        - asset: assets/fonts/Roboto-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Roboto-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Roboto-Medium.ttf
           weight: 500
-        - asset: assets/fonts/NotoSerif-Regular.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
           weight: 400
-    - family: NotoSansDisplay
-      fonts:
-        - asset: assets/fonts/NotoSansDisplay-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/NotoSansDisplay-SemiBold.ttf
-          weight: 600
-    - family: Montserrat
-      fonts:
-        - asset: assets/fonts/Montserrat-Medium.ttf
-          weight: 500
+        - asset: assets/fonts/Roboto-Thin.ttf
+          weight: 100
 
 flutter_gen:
   assets:
