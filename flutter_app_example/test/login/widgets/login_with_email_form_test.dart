@@ -56,8 +56,7 @@ void main() {
             .called(1);
       });
 
-      testWidgets('SendEmailLinkSubmitted when next button is pressed',
-          (tester) async {
+      testWidgets('LoginSubmitted when next button is pressed', (tester) async {
         when(() => loginBloc.state).thenReturn(
           const LoginState(valid: true),
         );
@@ -68,7 +67,7 @@ void main() {
           ),
         );
         await tester.tap(find.byKey(nextButtonKey));
-        verify(() => loginBloc.add(SendEmailLinkSubmitted())).called(1);
+        verify(() => loginBloc.add(const LoginSubmitted())).called(1);
       });
 
       testWidgets('LoginEmailChanged when pressed on suffixIcon',

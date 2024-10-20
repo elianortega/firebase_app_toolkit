@@ -15,7 +15,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   })  : _userRepository = userRepository,
         super(const LoginState()) {
     on<LoginEmailChanged>(_onEmailChanged);
-    on<SendEmailLinkSubmitted>(_onSendEmailLinkSubmitted);
+    on<LoginPasswordChanged>(_onPasswordChanged);
+    on<LoginSubmitted>(_onSubmitted);
     on<LoginGoogleSubmitted>(_onGoogleSubmitted);
     on<LoginAppleSubmitted>(_onAppleSubmitted);
     on<LoginTwitterSubmitted>(_onTwitterSubmitted);
@@ -29,25 +30,40 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(
       state.copyWith(
         email: email,
-        valid: Formz.validate([email]),
+        valid: Formz.validate([email, state.password]),
       ),
     );
   }
 
-  Future<void> _onSendEmailLinkSubmitted(
-    SendEmailLinkSubmitted event,
+  void _onPasswordChanged(
+    LoginPasswordChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    final password = Password.dirty(event.password);
+    emit(
+      state.copyWith(
+        password: password,
+        valid: Formz.validate([state.email, password]),
+      ),
+    );
+  }
+
+  Future<void> _onSubmitted(
+    LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    if (!state.valid) return;
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    try {
-      await _userRepository.sendLoginEmailLink(
-        email: state.email.value,
-      );
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } catch (error, stackTrace) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-      addError(error, stackTrace);
+    if (state.valid) {
+      emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      try {
+        await _userRepository.logInWithEmailAndPassword(
+          email: state.email.value,
+          password: state.password.value,
+        );
+        emit(state.copyWith(status: FormzSubmissionStatus.success));
+      } catch (error, stackTrace) {
+        emit(state.copyWith(status: FormzSubmissionStatus.failure));
+        addError(error, stackTrace);
+      }
     }
   }
 

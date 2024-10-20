@@ -158,7 +158,9 @@ class _NextButton extends StatelessWidget {
     return AppButton.darkAqua(
       key: const Key('loginWithEmailForm_nextButton'),
       onPressed: state.valid
-          ? () => context.read<LoginBloc>().add(SendEmailLinkSubmitted())
+          ? () {
+              context.read<LoginBloc>().add(const LoginSubmitted());
+            }
           : null,
       child: state.status.isInProgress
           ? const SizedBox.square(
