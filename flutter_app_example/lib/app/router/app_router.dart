@@ -27,7 +27,6 @@ class AppRouter {
   final onlyUnauthenticatedUserRoutes = <String>[
     const LandingPageRoute().location,
     const LoginPageRoute().location,
-    const LoginWithEmailPageRoute().location,
   ];
 
   // / Only routes that are accessible for authenticated users
@@ -68,12 +67,6 @@ class AppRouter {
     TypedGoRoute<LoginPageRoute>(
       name: 'login',
       path: 'login',
-      routes: [
-        TypedGoRoute<LoginWithEmailPageRoute>(
-          name: 'login-with-email',
-          path: 'login-with-email',
-        ),
-      ],
     ),
   ],
 )
@@ -93,16 +86,6 @@ class LoginPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const LoginPage();
-  }
-}
-
-@immutable
-class LoginWithEmailPageRoute extends GoRouteData {
-  const LoginWithEmailPageRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const LoginWithEmailPage();
   }
 }
 

@@ -27,7 +27,6 @@ void main() {
       final pages = {
         const LandingPageRoute().location: LandingPage,
         const LoginPageRoute().location: LoginPage,
-        const LoginWithEmailPageRoute().location: LoginWithEmailPage,
         const HomePageRoute().location: HomePage,
         const UserProfilePageRoute().location: UserProfilePage,
         const TermsOfServicePageRoute().location: TermsOfServicePage,

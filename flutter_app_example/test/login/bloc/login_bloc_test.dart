@@ -65,9 +65,14 @@ void main() {
       blocTest<LoginBloc, LoginState>(
         'emits [valid] when email is valid',
         build: () => LoginBloc(userRepository: userRepository),
+        seed: () => LoginState(password: validPassword),
         act: (bloc) => bloc.add(LoginEmailChanged(validEmailString)),
         expect: () => const <LoginState>[
-          LoginState(email: validEmail, valid: true),
+          LoginState(
+            email: validEmail,
+            password: validPassword,
+            valid: true,
+          ),
         ],
       );
     });
@@ -85,9 +90,14 @@ void main() {
       blocTest<LoginBloc, LoginState>(
         'emits [valid] when password is valid',
         build: () => LoginBloc(userRepository: userRepository),
+        seed: () => LoginState(email: validEmail),
         act: (bloc) => bloc.add(LoginPasswordChanged(validPasswordString)),
         expect: () => const <LoginState>[
-          LoginState(password: validPassword, valid: true),
+          LoginState(
+            email: validEmail,
+            password: validPassword,
+            valid: true,
+          ),
         ],
       );
     });

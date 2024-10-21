@@ -24,6 +24,7 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.onTap,
+    this.obscureText = false,
   });
 
   /// A value to initialize the field to.
@@ -75,6 +76,9 @@ class AppTextField extends StatelessWidget {
   /// Called when the text field has been tapped.
   final VoidCallback? onTap;
 
+  /// Whether the text should be obscured.
+  final bool obscureText;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -91,6 +95,7 @@ class AppTextField extends StatelessWidget {
             keyboardType: keyboardType,
             autocorrect: autocorrect,
             readOnly: readOnly,
+            obscureText: obscureText,
             autofillHints: autoFillHints,
             cursorColor: AppColors.darkAqua,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(

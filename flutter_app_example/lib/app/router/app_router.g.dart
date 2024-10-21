@@ -20,13 +20,6 @@ RouteBase get $landingPageRoute => GoRouteData.$route(
           path: 'login',
           name: 'login',
           factory: $LoginPageRouteExtension._fromState,
-          routes: [
-            GoRouteData.$route(
-              path: 'login-with-email',
-              name: 'login-with-email',
-              factory: $LoginWithEmailPageRouteExtension._fromState,
-            ),
-          ],
         ),
       ],
     );
@@ -55,24 +48,6 @@ extension $LoginPageRouteExtension on LoginPageRoute {
 
   String get location => GoRouteData.$location(
         '/login',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $LoginWithEmailPageRouteExtension on LoginWithEmailPageRoute {
-  static LoginWithEmailPageRoute _fromState(GoRouterState state) =>
-      const LoginWithEmailPageRoute();
-
-  String get location => GoRouteData.$location(
-        '/login/login-with-email',
       );
 
   void go(BuildContext context) => context.go(location);
