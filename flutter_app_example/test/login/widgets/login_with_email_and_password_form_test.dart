@@ -168,7 +168,7 @@ void main() {
           'to TermsOfServicePage when tapped on '
           'Terms of Use and Privacy Policy text', (tester) async {
         final mockRouter = MockGoRouter();
-        when(() => mockRouter.go(any())).thenAnswer((_) async {});
+        when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
         await tester.pumpApp(
           BlocProvider.value(
             value: loginBloc,
@@ -186,8 +186,9 @@ void main() {
         );
 
         await tester.pumpAndSettle();
-        verify(() => mockRouter.go(const TermsOfServicePageRoute().location))
-            .called(1);
+        verify(
+          () => mockRouter.push<void>(const TermsOfServicePageRoute().location),
+        ).called(1);
       });
     });
 

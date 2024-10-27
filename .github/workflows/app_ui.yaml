@@ -19,3 +19,4 @@ jobs:
       flutter_version: 3.24.2
       working_directory: flutter_app_example/packages/app_ui
       coverage_excludes: "lib/src/generated/*.dart"
+      min_coverage: 90
