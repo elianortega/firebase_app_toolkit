@@ -61,6 +61,8 @@ jobs:
         with:
           exclude: "**/*.g.dart **/*.gen.dart **/l10n/*.dart **/l10n/**/*.dart **/main/bootstrap.dart"
           path: flutter_app_example/coverage/lcov.info
+          # TODO(elian): increase coverage again
+          min_coverage: 98
 
       - name: Generate Visual Architecture
         env:
