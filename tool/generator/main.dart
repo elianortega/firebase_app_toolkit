@@ -3,14 +3,8 @@ import 'package:path/path.dart' as path;
 
 final _staticDir = path.join('tool', 'generator', 'static');
 final _sourcePath = path.join('flutter_app_example${path.separator}');
-final _templatePath = path.join(
-  'flutter_app_template',
-  '__brick__',
-);
-final _targetPath = path.join(
-  _templatePath,
-  '{{project_name.snakeCase()}}',
-);
+final _templatePath = path.join('flutter_app_template', '__brick__');
+final _targetPath = path.join(_templatePath);
 final _targetProjectWorkflow = path.join(
   _targetPath,
   '.github',
@@ -60,86 +54,7 @@ final xcConfigurationListRegExp = RegExp(
 
 final _blackList = <String>[
   path.join(
-    _targetPath,
-    '.github',
-    'workflows',
-    'verify_flutter_app_template.yaml',
-  ),
-  path.join(
-    _targetPath,
-    '.github',
-    'workflows',
-    'generate_flutter_app_template.yaml',
-  ),
-  path.join(
-    _targetPath,
-    '.github',
-    'workflows',
-    'deploy_api.yaml',
-  ),
-  path.join(
-    _targetPath,
-    '.github',
-    'workflows',
-    'docs.yaml',
-  ),
-  path.join(_targetPath, 'lib', 'main', 'main_production.dart'),
-  path.join(_targetPath, '.idea', 'runConfigurations', 'development.xml'),
-  path.join(_targetPath, '.idea', 'runConfigurations', 'production.xml'),
-  path.join(
-    _targetPath,
-    'ios',
-    'Runner.xcodeproj',
-    'xcshareddata',
-    'xcschemes',
-  ),
-  path.join(
-    _targetPath,
-    'ios',
-    'Runner',
-    'development',
-    'GoogleService-Info.plist',
-  ),
-  path.join(
-    _targetPath,
-    'ios',
-    'Runner',
-    'development',
-    'GoogleService-Info_TEMPLATE.plist',
-  ),
-  path.join(
-    _targetPath,
-    'android',
-    'app',
-    'src',
-    'development',
-    'google-services.json',
-  ),
-  path.join(
-    _targetPath,
-    'android',
-    'app',
-    'src',
-    'development',
-    'google-services_TEMPLATE.json',
-  ),
-  path.join(
-    _targetPath,
-    'android',
-    'app',
-    'src',
-    'development',
-    'res',
-    'values',
-    'strings.xml',
-  ),
-  path.join(
-    _targetPath,
-    'ios',
-    'Runner',
-    'production',
-    'GoogleService-Info.plist',
-  ),
+      _targetPath, 'ios', 'Runner', 'production', 'GoogleService-Info.plist'),
   path.join(
     _targetPath,
     'android',
@@ -147,20 +62,6 @@ final _blackList = <String>[
     'src',
     'production',
     'google-services.json',
-  ),
-  path.join(
-    _targetPath,
-    'packages',
-    'app_ui',
-    'gallery',
-    '.firebaserc',
-  ),
-  path.join(
-    _targetPath,
-    'packages',
-    'app_ui',
-    'gallery',
-    '.firebase.json',
   ),
 ];
 
@@ -204,6 +105,19 @@ void main() async {
         .whereType<File>()
         .map((_) async {
       var file = _;
+      final _targetProjectWorkflow = path.join(
+        _targetPath,
+        '.github',
+        'workflows',
+        'flutter_app_example.yaml',
+      );
+      file.writeAsStringSync(
+        contents.replaceFirst(
+          _workflowFlutterVersionRegExp,
+          'flutter-version: {{flutter_version}}',
+        ),
+      );
+
       if (path.isWithin(
         path.join(_targetPath, '.github', 'workflows'),
         file.path,
@@ -266,8 +180,9 @@ void main() async {
 
         file.writeAsStringSync(
           file.readAsStringSync().replaceAll(
-              RegExp('dev.elianortega.flutterapp.example'),
-              '{{reverse_domain}}'),
+                RegExp('dev.elianortega.flutterapp.example'),
+                '{{reverse_domain}}',
+              ),
         );
 
         file.writeAsStringSync(

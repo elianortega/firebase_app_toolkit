@@ -8,6 +8,7 @@ part of 'app_router.dart';
 
 List<RouteBase> get $appRoutes => [
       $landingPageRoute,
+      $termsOfServicePageRoute,
       $homePageRoute,
     ];
 
@@ -60,6 +61,30 @@ extension $LoginPageRouteExtension on LoginPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $termsOfServicePageRoute => GoRouteData.$route(
+      path: '/terms-of-service',
+      name: 'terms-of-service',
+      factory: $TermsOfServicePageRouteExtension._fromState,
+    );
+
+extension $TermsOfServicePageRouteExtension on TermsOfServicePageRoute {
+  static TermsOfServicePageRoute _fromState(GoRouterState state) =>
+      const TermsOfServicePageRoute();
+
+  String get location => GoRouteData.$location(
+        '/terms-of-service',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $homePageRoute => GoRouteData.$route(
       path: '/home',
       name: 'home',
@@ -69,13 +94,6 @@ RouteBase get $homePageRoute => GoRouteData.$route(
           path: 'user-profile',
           name: 'user-profile',
           factory: $UserProfilePageRouteExtension._fromState,
-          routes: [
-            GoRouteData.$route(
-              path: 'terms-of-service',
-              name: 'terms-of-service',
-              factory: $TermsOfServicePageRouteExtension._fromState,
-            ),
-          ],
         ),
       ],
     );
@@ -103,24 +121,6 @@ extension $UserProfilePageRouteExtension on UserProfilePageRoute {
 
   String get location => GoRouteData.$location(
         '/home/user-profile',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $TermsOfServicePageRouteExtension on TermsOfServicePageRoute {
-  static TermsOfServicePageRoute _fromState(GoRouterState state) =>
-      const TermsOfServicePageRoute();
-
-  String get location => GoRouteData.$location(
-        '/home/user-profile/terms-of-service',
       );
 
   void go(BuildContext context) => context.go(location);

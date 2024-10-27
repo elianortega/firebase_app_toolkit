@@ -89,6 +89,20 @@ class LoginPageRoute extends GoRouteData {
   }
 }
 
+@TypedGoRoute<TermsOfServicePageRoute>(
+  name: 'terms-of-service',
+  path: '/terms-of-service',
+)
+@immutable
+class TermsOfServicePageRoute extends GoRouteData {
+  const TermsOfServicePageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const TermsOfServicePage();
+  }
+}
+
 @TypedGoRoute<HomePageRoute>(
   name: 'home',
   path: '/home',
@@ -96,12 +110,6 @@ class LoginPageRoute extends GoRouteData {
     TypedGoRoute<UserProfilePageRoute>(
       name: 'user-profile',
       path: 'user-profile',
-      routes: [
-        TypedGoRoute<TermsOfServicePageRoute>(
-          name: 'terms-of-service',
-          path: 'terms-of-service',
-        ),
-      ],
     ),
   ],
 )
@@ -122,15 +130,5 @@ class UserProfilePageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const UserProfilePage();
-  }
-}
-
-@immutable
-class TermsOfServicePageRoute extends GoRouteData {
-  const TermsOfServicePageRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const TermsOfServicePage();
   }
 }

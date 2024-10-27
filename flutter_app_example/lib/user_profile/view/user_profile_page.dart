@@ -76,7 +76,7 @@ class _UserProfileViewState extends State<UserProfileView>
                   leading: Assets.icons.termsOfUseIcon.svg(),
                   title: l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
                   onTap: () {
-                    const TermsOfServicePageRoute().go(context);
+                    const TermsOfServicePageRoute().push<void>(context);
                   },
                 ),
                 UserProfileItem(
