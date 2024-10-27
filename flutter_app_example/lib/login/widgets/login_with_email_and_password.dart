@@ -118,7 +118,8 @@ class _TermsAndPrivacyPolicyLinkTexts extends StatelessWidget {
                 color: AppColors.darkAqua,
               ),
               recognizer: TapGestureRecognizer()
-                ..onTap = () => const TermsOfServicePageRoute().go(context),
+                ..onTap =
+                    () => const TermsOfServicePageRoute().push<void>(context),
             ),
             TextSpan(
               text: '.',
