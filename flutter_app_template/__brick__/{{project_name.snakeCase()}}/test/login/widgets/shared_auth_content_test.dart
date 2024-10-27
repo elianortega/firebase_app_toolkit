@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
-import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:{{project_name.snakeCase()}}/login/login.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,14 +16,12 @@ class MockLoginBloc extends MockBloc<LoginEvent, LoginState>
     implements LoginBloc {}
 
 void main() {
-  const loginFormCloseIconButton = Key('loginForm_closeModal_iconButton');
-  const loginButtonKey = Key('loginForm_emailLogin_appButton');
   const signInWithGoogleButtonKey = Key('loginForm_googleLogin_appButton');
   const signInWithAppleButtonKey = Key('loginForm_appleLogin_appButton');
   const signInWithFacebookButtonKey = Key('loginForm_facebookLogin_appButton');
   const signInWithTwitterButtonKey = Key('loginForm_twitterLogin_appButton');
 
-  group('LoginForm', () {
+  group('SharedAuthContent', () {
     late LoginBloc loginBloc;
 
     setUp(() {
@@ -33,13 +30,18 @@ void main() {
       when(() => loginBloc.state).thenReturn(const LoginState());
     });
 
+    Widget buildSubject() {
+      return BlocProvider.value(
+        value: loginBloc,
+        child: SharedAuthContent(child: SizedBox()),
+      );
+    }
+
     group('adds', () {
       testWidgets(
           'LoginGoogleSubmitted to LoginBloc '
           'when sign in with google button is pressed', (tester) async {
-        await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
-        );
+        await tester.pumpApp(buildSubject());
         await tester.ensureVisible(find.byKey(signInWithGoogleButtonKey));
         await tester.tap(find.byKey(signInWithGoogleButtonKey));
         verify(() => loginBloc.add(LoginGoogleSubmitted())).called(1);
@@ -48,9 +50,7 @@ void main() {
       testWidgets(
           'LoginTwitterSubmitted to LoginBloc '
           'when sign in with Twitter button is pressed', (tester) async {
-        await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
-        );
+        await tester.pumpApp(buildSubject());
         await tester.ensureVisible(find.byKey(signInWithTwitterButtonKey));
         await tester.tap(find.byKey(signInWithTwitterButtonKey));
         verify(() => loginBloc.add(LoginTwitterSubmitted())).called(1);
@@ -59,9 +59,7 @@ void main() {
       testWidgets(
           'LoginFacebookSubmitted to LoginBloc '
           'when sign in with Facebook button is pressed', (tester) async {
-        await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
-        );
+        await tester.pumpApp(buildSubject());
         await tester.ensureVisible(find.byKey(signInWithFacebookButtonKey));
         await tester.tap(find.byKey(signInWithFacebookButtonKey));
         verify(() => loginBloc.add(LoginFacebookSubmitted())).called(1);
@@ -71,28 +69,12 @@ void main() {
           'LoginAppleSubmitted to LoginBloc '
           'when sign in with apple button is pressed', (tester) async {
         await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
+          buildSubject(),
           platform: TargetPlatform.iOS,
         );
         await tester.ensureVisible(find.byKey(signInWithAppleButtonKey));
         await tester.tap(find.byKey(signInWithAppleButtonKey));
         verify(() => loginBloc.add(LoginAppleSubmitted())).called(1);
-      });
-
-      testWidgets('AuthenticationFailure SnackBar when submission fails',
-          (tester) async {
-        whenListen(
-          loginBloc,
-          Stream.fromIterable(const <LoginState>[
-            LoginState(status: FormzSubmissionStatus.inProgress),
-            LoginState(status: FormzSubmissionStatus.failure),
-          ]),
-        );
-        await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
-        );
-        await tester.pump();
-        expect(find.byType(SnackBar), findsOneWidget);
       });
 
       testWidgets('nothing when login is canceled', (tester) async {
@@ -109,7 +91,7 @@ void main() {
     group('renders', () {
       testWidgets('Sign in with Google and Apple on iOS', (tester) async {
         await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
+          buildSubject(),
           platform: TargetPlatform.iOS,
         );
         expect(find.byKey(signInWithAppleButtonKey), findsOneWidget);
@@ -118,7 +100,7 @@ void main() {
 
       testWidgets('only Sign in with Google on Android', (tester) async {
         await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
+          buildSubject(),
           platform: TargetPlatform.android,
         );
         expect(find.byKey(signInWithAppleButtonKey), findsNothing);
@@ -126,45 +108,13 @@ void main() {
       });
 
       testWidgets('Sign in with Facebook', (tester) async {
-        await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
-        );
+        await tester.pumpApp(buildSubject());
         expect(find.byKey(signInWithFacebookButtonKey), findsOneWidget);
       });
 
       testWidgets('Sign in with Twitter', (tester) async {
-        await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
-        );
+        await tester.pumpApp(buildSubject());
         expect(find.byKey(signInWithTwitterButtonKey), findsOneWidget);
-      });
-    });
-
-    group('navigates', () {
-      testWidgets('pop when close icon is pressed', (tester) async {
-        final mockRouter = MockGoRouter();
-        when(() => mockRouter.pop<void>(any())).thenAnswer((_) async {});
-        await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
-          router: mockRouter,
-        );
-        await tester.ensureVisible(find.byKey(loginFormCloseIconButton));
-        await tester.tap(find.byKey(loginFormCloseIconButton));
-        verify(() => mockRouter.pop<void>()).called(1);
-      });
-
-      testWidgets('to LoginWithEmailPage when Continue with email is pressed',
-          (tester) async {
-        final mockRouter = MockGoRouter();
-        when(() => mockRouter.go(any())).thenAnswer((_) async {});
-        await tester.pumpApp(
-          BlocProvider.value(value: loginBloc, child: const LoginForm()),
-          router: mockRouter,
-        );
-        await tester.ensureVisible(find.byKey(loginButtonKey));
-        await tester.tap(find.byKey(loginButtonKey));
-        verify(() => mockRouter.go(LoginWithEmailPageRoute().location))
-            .called(1);
       });
     });
   });

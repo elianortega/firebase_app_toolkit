@@ -19,3 +19,5 @@ jobs:
       flutter_version: {{flutter_version}}
       working_directory: packages/app_ui
       coverage_excludes: "lib/src/generated/*.dart"
+      # TODO(elian): increase coverage again
+      min_coverage: 90

@@ -17,9 +17,16 @@ void main() {
       });
     });
 
-    group('SendEmailLinkSubmitted', () {
+    group('LoginPasswordChanged', () {
       test('supports value comparisons', () {
-        expect(SendEmailLinkSubmitted(), SendEmailLinkSubmitted());
+        expect(
+          LoginPasswordChanged('p@ssw0rd1234'),
+          LoginPasswordChanged('p@ssw0rd1234'),
+        );
+        expect(
+          LoginPasswordChanged(''),
+          isNot(LoginPasswordChanged('p@ssw0rd1234')),
+        );
       });
     });
 
