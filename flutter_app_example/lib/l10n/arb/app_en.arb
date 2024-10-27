@@ -65,14 +65,14 @@
     "type": "String",
     "placeholders": {}
   },
-  "loginModalSubtitle": "Log in to access articles and save\nyour preferences.",
-  "@loginModalSubtitle": {
+  "loginPageSubtitle": "Log in to access the app and save your preferences.",
+  "@loginPageSubtitle": {
     "description": "Log in modal subtitle",
     "type": "String",
     "placeholders": {}
   },
-  "loginModalTitle": "Log In",
-  "@loginModalTitle": {
+  "loginPageTitle": "Log In",
+  "@loginPageTitle": {
     "description": "Log in modal title",
     "type": "String",
     "placeholders": {}
@@ -116,6 +116,18 @@
   "loginWithEmailTextFieldHint": "Your email address",
   "@loginWithEmailTextFieldHint": {
     "description": "Hint text shown on the email text field on Login with email form",
+    "type": "String",
+    "placeholders": {}
+  },
+  "loginWithEmailPasswordTextFieldHint": "Your password",
+  "@loginWithEmailPasswordTextFieldHint": {
+    "description": "Hint text shown on the password text field on Login with email form",
+    "type": "String",
+    "placeholders": {}
+  },
+  "orContinueWith": "or",
+  "@orContinueWith": {
+    "description": "Text shown between email/password login and social login options",
     "type": "String",
     "placeholders": {}
   },

@@ -4,71 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_example/app/app.dart';
 import 'package:flutter_app_example/l10n/l10n.dart';
 import 'package:flutter_app_example/login/login.dart';
-import 'package:flutter_app_example/magic_link_prompt/magic_link_prompt.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_inputs/form_inputs.dart';
 
-class LoginWithEmailForm extends StatelessWidget {
-  const LoginWithEmailForm({super.key});
+class LoginWithEmailAndPasswordForm extends StatelessWidget {
+  const LoginWithEmailAndPasswordForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final email = context.select((LoginBloc bloc) => bloc.state.email.value);
-    return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if (state.status.isSuccess) {
-          Navigator.of(context).push<void>(
-            MagicLinkPromptPage.route(email: email),
-          );
-        } else if (state.status.isFailure) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(context.l10n.loginWithEmailFailure)),
-            );
-        }
-      },
-      child: const CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                AppSpacing.xlg,
-                AppSpacing.lg,
-                AppSpacing.xlg,
-                AppSpacing.xxlg,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _HeaderTitle(),
-                  SizedBox(height: AppSpacing.xxxlg),
-                  _EmailInput(),
-                  _TermsAndPrivacyPolicyLinkTexts(),
-                  Spacer(),
-                  _NextButton(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _HeaderTitle extends StatelessWidget {
-  const _HeaderTitle();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Text(
-      context.l10n.loginWithEmailHeaderText,
-      key: const Key('loginWithEmailForm_header_title'),
-      style: theme.textTheme.displaySmall,
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _EmailInput(),
+        _PasswordInput(),
+        _TermsAndPrivacyPolicyLinkTexts(),
+        SizedBox(height: AppSpacing.lg),
+        _NextButton(),
+      ],
     );
   }
 }
@@ -85,23 +38,54 @@ class _EmailInputState extends State<_EmailInput> {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<LoginBloc>().state;
+    final status = context.select((LoginBloc bloc) => bloc.state.status);
 
     return AppEmailTextField(
       key: const Key('loginWithEmailForm_emailInput_textField'),
       controller: _controller,
-      readOnly: state.status.isInProgress,
+      readOnly: status.isInProgress,
       hintText: context.l10n.loginWithEmailTextFieldHint,
       onChanged: (email) =>
           context.read<LoginBloc>().add(LoginEmailChanged(email)),
       suffix: ClearIconButton(
-        onPressed: !state.status.isInProgress
+        onPressed: !status.isInProgress
             ? () {
                 _controller.clear();
                 context.read<LoginBloc>().add(const LoginEmailChanged(''));
               }
             : null,
       ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+class _PasswordInput extends StatefulWidget {
+  const _PasswordInput();
+
+  @override
+  State<_PasswordInput> createState() => _PasswordInputState();
+}
+
+class _PasswordInputState extends State<_PasswordInput> {
+  final _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final status = context.select((LoginBloc bloc) => bloc.state.status);
+
+    return AppPasswordTextField(
+      key: const Key('loginWithEmailForm_passwordInput_textField'),
+      controller: _controller,
+      readOnly: status.isInProgress,
+      hintText: context.l10n.loginWithEmailPasswordTextFieldHint,
+      onChanged: (password) =>
+          context.read<LoginBloc>().add(LoginPasswordChanged(password)),
     );
   }
 
@@ -134,7 +118,8 @@ class _TermsAndPrivacyPolicyLinkTexts extends StatelessWidget {
                 color: AppColors.darkAqua,
               ),
               recognizer: TapGestureRecognizer()
-                ..onTap = () => const TermsOfServicePageRoute().go(context),
+                ..onTap =
+                    () => const TermsOfServicePageRoute().push<void>(context),
             ),
             TextSpan(
               text: '.',
@@ -158,7 +143,9 @@ class _NextButton extends StatelessWidget {
     return AppButton.darkAqua(
       key: const Key('loginWithEmailForm_nextButton'),
       onPressed: state.valid
-          ? () => context.read<LoginBloc>().add(SendEmailLinkSubmitted())
+          ? () {
+              context.read<LoginBloc>().add(const LoginSubmitted());
+            }
           : null,
       child: state.status.isInProgress
           ? const SizedBox.square(
@@ -191,7 +178,7 @@ class ClearIconButton extends StatelessWidget {
         visible: suffixVisible,
         child: GestureDetector(
           onTap: onPressed,
-          child: Assets.icons.closeCircle.svg(),
+          child: const Icon(Icons.clear),
         ),
       ),
     );

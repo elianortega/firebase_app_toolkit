@@ -13,9 +13,20 @@ class LoginEmailChanged extends LoginEvent {
   List<Object> get props => [email];
 }
 
-class SendEmailLinkSubmitted extends LoginEvent with AnalyticsEventMixin {
+class LoginPasswordChanged extends LoginEvent {
+  const LoginPasswordChanged(this.password);
+
+  final String password;
+
   @override
-  AnalyticsEvent get event => const AnalyticsEvent('SendEmailLinkSubmitted');
+  List<Object> get props => [password];
+}
+
+final class LoginSubmitted extends LoginEvent {
+  const LoginSubmitted();
+
+  @override
+  List<Object> get props => [];
 }
 
 class LoginGoogleSubmitted extends LoginEvent with AnalyticsEventMixin {
