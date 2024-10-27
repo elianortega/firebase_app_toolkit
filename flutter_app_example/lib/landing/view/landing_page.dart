@@ -17,8 +17,15 @@ class LandingPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Assets.images.logoDark.image(
-              height: 64,
+            Image.network(
+              'https://storage.googleapis.com/cms-storage-bucket/0dbfcc7a59cd1cf16282.png',
+              width: 128,
+              height: 128,
+            ),
+            const SizedBox(height: AppSpacing.xxlg),
+            Text(
+              'Flutter App Example',
+              style: Theme.of(context).textTheme.displayLarge,
             ),
             const SizedBox(height: AppSpacing.xxlg),
             AppButton.black(
