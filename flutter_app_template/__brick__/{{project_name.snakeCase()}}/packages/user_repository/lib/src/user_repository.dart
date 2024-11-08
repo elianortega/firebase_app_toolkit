@@ -76,6 +76,26 @@ class UserRepository {
         ),
       );
 
+  /// Starts the Sing In with Email and Password Flow.
+  Future<void> logInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _authenticationClient.logInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on LogInWithEmailAndPasswordFailure {
+      rethrow;
+    } catch (error, stackTrace) {
+      Error.throwWithStackTrace(
+        LogInWithEmailAndPasswordFailure(error),
+        stackTrace,
+      );
+    }
+  }
+
   /// Starts the Sign In with Apple Flow.
   ///
   /// Throws a [LogInWithAppleFailure] if an exception occurs.

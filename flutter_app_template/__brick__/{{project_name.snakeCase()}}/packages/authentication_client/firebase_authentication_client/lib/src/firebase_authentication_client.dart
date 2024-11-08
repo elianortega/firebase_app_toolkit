@@ -61,6 +61,27 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
     });
   }
 
+  /// Starts the Sign In with Email and Password Flow.
+  ///
+  /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
+  @override
+  Future<void> logInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (error, stackTrace) {
+      Error.throwWithStackTrace(
+        LogInWithEmailAndPasswordFailure(error),
+        stackTrace,
+      );
+    }
+  }
+
   /// Starts the Sign In with Apple Flow.
   ///
   /// Throws a [LogInWithAppleFailure] if an exception occurs.

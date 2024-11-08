@@ -219,7 +219,7 @@ void main() {
         testWidgets('when tapped on Terms of User & Privacy Policy',
             (tester) async {
           final mockRouter = MockGoRouter();
-          when(() => mockRouter.go(any())).thenAnswer((_) async {});
+          when(() => mockRouter.push<void>(any())).thenAnswer((_) async {});
           await tester.pumpApp(
             BlocProvider.value(
               value: userProfileBloc,
@@ -240,7 +240,7 @@ void main() {
           await tester.ensureVisible(termsOfService);
           await tester.tap(termsOfService);
           verify(
-            () => mockRouter.go(TermsOfServicePageRoute().location),
+            () => mockRouter.push<void>(TermsOfServicePageRoute().location),
           ).called(1);
         });
       });

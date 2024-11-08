@@ -36,6 +36,13 @@ void main() {
     );
   });
 
+  test('exports LogInWithEmailAndPasswordFailure', () {
+    expect(
+      () => LogInWithEmailAndPasswordFailure('oops'),
+      returnsNormally,
+    );
+  });
+
   test('exports LogInWithAppleFailure', () {
     expect(
       () => LogInWithAppleFailure('oops'),

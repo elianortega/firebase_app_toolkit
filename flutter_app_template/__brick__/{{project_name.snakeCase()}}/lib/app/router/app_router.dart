@@ -27,7 +27,6 @@ class AppRouter {
   final onlyUnauthenticatedUserRoutes = <String>[
     const LandingPageRoute().location,
     const LoginPageRoute().location,
-    const LoginWithEmailPageRoute().location,
   ];
 
   // / Only routes that are accessible for authenticated users
@@ -68,12 +67,6 @@ class AppRouter {
     TypedGoRoute<LoginPageRoute>(
       name: 'login',
       path: 'login',
-      routes: [
-        TypedGoRoute<LoginWithEmailPageRoute>(
-          name: 'login-with-email',
-          path: 'login-with-email',
-        ),
-      ],
     ),
   ],
 )
@@ -96,13 +89,17 @@ class LoginPageRoute extends GoRouteData {
   }
 }
 
+@TypedGoRoute<TermsOfServicePageRoute>(
+  name: 'terms-of-service',
+  path: '/terms-of-service',
+)
 @immutable
-class LoginWithEmailPageRoute extends GoRouteData {
-  const LoginWithEmailPageRoute();
+class TermsOfServicePageRoute extends GoRouteData {
+  const TermsOfServicePageRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const LoginWithEmailPage();
+    return const TermsOfServicePage();
   }
 }
 
@@ -113,12 +110,6 @@ class LoginWithEmailPageRoute extends GoRouteData {
     TypedGoRoute<UserProfilePageRoute>(
       name: 'user-profile',
       path: 'user-profile',
-      routes: [
-        TypedGoRoute<TermsOfServicePageRoute>(
-          name: 'terms-of-service',
-          path: 'terms-of-service',
-        ),
-      ],
     ),
   ],
 )
@@ -139,15 +130,5 @@ class UserProfilePageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const UserProfilePage();
-  }
-}
-
-@immutable
-class TermsOfServicePageRoute extends GoRouteData {
-  const TermsOfServicePageRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const TermsOfServicePage();
   }
 }

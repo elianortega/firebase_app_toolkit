@@ -37,6 +37,15 @@ class LogInWithEmailLinkFailure extends AuthenticationException {
   const LogInWithEmailLinkFailure(super.error);
 }
 
+/// {@template log_in_with_email_and_password_failure}
+/// Thrown during the sign in with email and password process if
+/// a failure occurs.
+/// {@endtemplate}
+class LogInWithEmailAndPasswordFailure extends AuthenticationException {
+  /// {@macro log_in_with_email_and_password_failure}
+  const LogInWithEmailAndPasswordFailure(super.error);
+}
+
 /// {@template log_in_with_apple_failure}
 /// Thrown during the sign in with apple process if a failure occurs.
 /// {@endtemplate}
@@ -116,6 +125,14 @@ abstract class AuthenticationClient {
   ///
   /// Emits [AuthenticationUser.anonymous] if the user is not authenticated.
   Stream<AuthenticationUser> get user;
+
+  /// Starts the Sign In with Email and Password Flow.
+  ///
+  /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
+  Future<void> logInWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
 
   /// Starts the Sign In with Apple Flow.
   ///

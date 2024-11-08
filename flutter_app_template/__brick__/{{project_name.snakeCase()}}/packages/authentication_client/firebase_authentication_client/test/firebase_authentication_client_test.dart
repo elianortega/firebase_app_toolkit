@@ -79,6 +79,7 @@ void main() {
   );
 
   const email = 'test@gmail.com';
+  const password = 'p@ssw0rd1234';
   const emailLink = 'https://email.page.link';
   const appPackageName = 'app.package.name';
 
@@ -170,6 +171,50 @@ void main() {
         );
       },
     );
+
+    group('logInWithEmailAndPassword', () {
+      setUp(() {
+        when(
+          () => firebaseAuth.signInWithEmailAndPassword(
+            email: any(named: 'email'),
+            password: any(named: 'password'),
+          ),
+        ).thenAnswer((_) => Future.value(MockUserCredential()));
+      });
+
+      test('calls signInWithEmailAndPassword with correct values', () async {
+        await firebaseAuthenticationClient.logInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        verify(
+          () => firebaseAuth.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          ),
+        ).called(1);
+      });
+
+      test(
+        'throws LogInWithEmailAndPasswordFailure when exception occurs',
+        () async {
+          when(
+            () => firebaseAuth.signInWithEmailAndPassword(
+              email: any(named: 'email'),
+              password: any(named: 'password'),
+            ),
+          ).thenThrow(Exception());
+          expect(
+            () => firebaseAuthenticationClient.logInWithEmailAndPassword(
+              email: email,
+              password: password,
+            ),
+            throwsA(isA<LogInWithEmailAndPasswordFailure>()),
+          );
+        },
+      );
+    });
 
     group('logInWithApple', () {
       setUp(() {

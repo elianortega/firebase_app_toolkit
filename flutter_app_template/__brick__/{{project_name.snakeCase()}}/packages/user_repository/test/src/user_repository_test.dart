@@ -20,6 +20,9 @@ class MockUserStorage extends Mock implements UserStorage {}
 
 class MockUser extends Mock implements AuthenticationUser {}
 
+class FakeLogInWithEmailAndPasswordFailure extends Fake
+    implements LogInWithEmailAndPasswordFailure {}
+
 class FakeLogInWithAppleFailure extends Fake implements LogInWithAppleFailure {}
 
 class FakeLogInWithGoogleFailure extends Fake
@@ -137,6 +140,63 @@ void main() {
           ..add(validEmailLink)
           ..add(invalidEmailLink)
           ..add(validEmailLink2);
+      });
+    });
+
+    group('logInWithEmailAndPassword', () {
+      const email = 'email@example.com';
+      const password = 'p@ssw0rd1234';
+
+      test('calls logInWithEmailAndPassword on AuthenticationClient', () async {
+        when(
+          () => authenticationClient.logInWithEmailAndPassword(
+            email: any(named: 'email'),
+            password: any(named: 'password'),
+          ),
+        ).thenAnswer((_) async {});
+        await userRepository.logInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        verify(
+          () => authenticationClient.logInWithEmailAndPassword(
+            email: email,
+            password: password,
+          ),
+        ).called(1);
+      });
+
+      test('rethrows LogInWithEmailAndPasswordFailure', () async {
+        final exception = FakeLogInWithEmailAndPasswordFailure();
+        when(
+          () => authenticationClient.logInWithEmailAndPassword(
+            email: any(named: 'email'),
+            password: any(named: 'password'),
+          ),
+        ).thenThrow(exception);
+        expect(
+          () => userRepository.logInWithEmailAndPassword(
+            email: email,
+            password: password,
+          ),
+          throwsA(exception),
+        );
+      });
+
+      test('throws  on generic exception', () async {
+        when(
+          () => authenticationClient.logInWithEmailAndPassword(
+            email: any(named: 'email'),
+            password: any(named: 'password'),
+          ),
+        ).thenThrow(Exception());
+        expect(
+          () => userRepository.logInWithEmailAndPassword(
+            email: email,
+            password: password,
+          ),
+          throwsA(isA<LogInWithEmailAndPasswordFailure>()),
+        );
       });
     });
 
